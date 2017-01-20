@@ -28,6 +28,7 @@ import java.util.List;
 
 public class CustomSharingDialogFragment extends DialogFragment {
 
+    public int a = 0;
     public static final String TAG = CustomSharingDialogFragment.class.getName();
     private AppAdapter adapter;
     private String mContent;

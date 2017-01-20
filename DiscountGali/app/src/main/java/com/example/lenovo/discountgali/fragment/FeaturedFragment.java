@@ -18,6 +18,7 @@ import com.example.lenovo.discountgali.model.FeaturedModel;
  * Created by Dushyant Singh on 11/24/2016.
  */
 public class FeaturedFragment extends Fragment implements View.OnClickListener {
+    public int a = 0;
 
     private FeaturedModel featuredModel;
 
