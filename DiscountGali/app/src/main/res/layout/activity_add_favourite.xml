@@ -1,0 +1,83 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include
+        android:id="@+id/tb_register"
+        layout="@layout/register_toolbar" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:paddingBottom="@dimen/twenty_dp"
+            android:paddingLeft="@dimen/thirty_dp"
+            android:paddingRight="@dimen/thirty_dp"
+            android:paddingTop="@dimen/twenty_dp">
+
+            <com.securedcommunications.securedcomm.utility.MyEditText
+                android:id="@+id/et_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/hint_name"
+                android:maxLength="50"
+                android:singleLine="true"
+                android:textSize="?attr/fifteen_sp"
+                android:visibility="gone"/>
+
+            <com.securedcommunications.securedcomm.utility.MyEditText
+                android:id="@+id/et_email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/hint_email"
+                android:layout_marginTop="15dp"
+                android:maxLength="50"
+                android:singleLine="true"
+                android:inputType="textEmailAddress"
+                android:textSize="?attr/fifteen_sp" />
+
+
+            <com.securedcommunications.securedcomm.utility.MyTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/size_20dp"
+                android:text="@string/add_fav_enter_the_name"
+                android:textColor="@color/app_black"
+                android:textSize="?attr/fourteen_sp"
+                app:fontType="italic" />
+
+            <com.securedcommunications.securedcomm.utility.MyTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/size_20dp"
+                android:text="@string/add_fav_this_new_contact"
+                android:textColor="@color/app_black"
+                android:textSize="?attr/fourteen_sp"
+                app:fontType="italic" />
+
+            <com.securedcommunications.securedcomm.utility.MyTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/size_20dp"
+                android:text="@string/add_fav_new_user"
+                android:textColor="@color/app_black"
+                android:textSize="?attr/fourteen_sp"
+                app:fontType="italic" />
+
+            <Button
+                android:id="@+id/btn_done"
+                style="@style/Register_Button"
+                android:layout_width="@dimen/two_hundered_dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="40dp"
+                android:text="@string/btn_done" />
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

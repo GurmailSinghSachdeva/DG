@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="MyTextView">
+        <attr name="fontType" format="string" />
+    </declare-styleable>
+
+    <declare-styleable name="FontStyle">
+        <attr name="font_small" format="dimension" />
+        <attr name="font_medium" format="dimension" />
+        <attr name="font_large" format="dimension" />
+        <attr name="font_xlarge" format="dimension" />
+
+        <attr name="ten_sp" format="dimension" />
+        <attr name="twelve_sp" format="dimension" />
+        <attr name="fourteen_sp" format="dimension" />
+        <attr name="fifteen_sp" format="dimension" />
+        <attr name="sixteen_sp" format="dimension" />
+        <attr name="eighteen_sp" format="dimension" />
+        <attr name="twenty_sp" format="dimension" />
+        <attr name="twenty_five_sp" format="dimension" />
+        <attr name="thirty_sp" format="dimension" />
+        <attr name="fourty_sp" format="dimension" />
+        <attr name="text_size_small" format="dimension" />
+        <attr name="text_size_medium" format="dimension" />
+        <attr name="text_size_large" format="dimension" />
+    </declare-styleable>
+</resources>

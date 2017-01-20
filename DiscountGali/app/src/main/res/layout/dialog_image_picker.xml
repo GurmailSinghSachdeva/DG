@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <com.securedcommunications.securedcomm.utility.MyTextView
+        android:id="@+id/tv_take_photo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="@dimen/margin_medium"
+        android:layout_marginLeft="@dimen/ten_dp"
+        android:gravity="center"
+        android:text="@string/take_photo"
+        android:textColor="@color/app_black"
+        android:textSize="?attr/sixteen_sp"
+        app:fontType="regular" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/gray" />
+
+    <com.securedcommunications.securedcomm.utility.MyTextView
+        android:id="@+id/tv_choose_photo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="@dimen/margin_medium"
+        android:layout_marginLeft="@dimen/ten_dp"
+        android:gravity="center"
+        android:text="@string/choose_photo"
+        android:textColor="@color/app_black"
+        android:textSize="?attr/sixteen_sp"
+        app:fontType="regular" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/gray" />
+
+    <com.securedcommunications.securedcomm.utility.MyTextView
+        android:id="@+id/tv_remove_photo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="@dimen/margin_medium"
+        android:layout_marginLeft="@dimen/ten_dp"
+        android:gravity="center"
+        android:text="@string/remove_photo"
+        android:textColor="@color/app_black"
+        android:textSize="?attr/sixteen_sp"
+        app:fontType="regular" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/gray" />
+
+    <com.securedcommunications.securedcomm.utility.MyTextView
+        android:id="@+id/tv_cancel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="@dimen/margin_medium"
+        android:layout_marginLeft="@dimen/ten_dp"
+        android:gravity="center"
+        android:text="@string/dialog_cancel"
+        android:textColor="@color/app_black"
+        android:textSize="?attr/sixteen_sp"
+        app:fontType="regular" />
+
+
+</LinearLayout>

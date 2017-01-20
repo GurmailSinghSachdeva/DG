@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/linear_secured_first_child"
+    android:layout_width="match_parent"
+    android:layout_height="70dp"
+    android:background="?android:attr/selectableItemBackground"
+    android:orientation="horizontal"
+    android:visibility="visible">
+
+    <RelativeLayout
+        android:layout_width="80dp"
+        android:layout_height="70dp">
+
+        <ImageView
+            android:id="@+id/img_participants_icon"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="5dp"
+            android:src="@drawable/group_profile_icon" />
+
+        <View
+            android:id="@+id/view_status"
+            android:layout_width="10dp"
+            android:layout_height="10dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginBottom="10dp"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/shape_online" />
+
+    </RelativeLayout>
+
+    <com.securedcommunications.securedcomm.utility.MyTextView
+        android:id="@+id/txt_participants_title"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="10dp"
+        android:layout_weight="1"
+        android:gravity="center_vertical"
+        android:padding="10dp"
+        android:singleLine="true"
+        android:text="Mike Anderson"
+        android:textSize="?attr/twenty_sp" />
+
+    <com.securedcommunications.securedcomm.utility.MyTextView
+        android:id="@+id/txt_group_admin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginBottom="5dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="5dp"
+        android:background="@drawable/button_border"
+        android:padding="5dp"
+        android:singleLine="true"
+        android:text="Group Admin"
+        android:layout_marginRight="10dp"
+        android:textSize="?attr/fifteen_sp" />
+
+</LinearLayout>

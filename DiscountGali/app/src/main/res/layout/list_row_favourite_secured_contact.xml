@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+
+    <LinearLayout
+        android:id="@+id/linear_secured_first_child"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?android:attr/selectableItemBackground"
+        android:orientation="horizontal"
+        android:visibility="visible">
+
+        <RelativeLayout
+            android:layout_width="80dp"
+            android:layout_height="80dp">
+
+            <ImageView
+                android:id="@+id/iconImage"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="5dp"
+                android:src="@drawable/group_profile_icon" />
+
+            <View
+                android:id="@+id/view_status"
+                android:layout_width="10dp"
+                android:layout_height="10dp"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginBottom="11dp"
+                android:layout_marginRight="11dp"
+                android:background="@drawable/shape_online" />
+
+            <View
+                android:id="@+id/view_fav_status"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginLeft="1dp"
+                android:layout_marginTop="1dp"
+                android:background="@drawable/ic_unselect_favorites_popup" />
+            <View
+                android:id="@+id/view_block_status"
+                android:layout_width="15dp"
+                android:layout_height="15dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginBottom="10dp"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentLeft="true"
+                android:background="@drawable/ic_secured_block"
+                android:visibility="gone"/>
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="10dp"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:orientation="vertical">
+
+            <com.securedcommunications.securedcomm.utility.MyTextView
+                android:id="@+id/textTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="?attr/twenty_sp"
+                android:text="Mike Anderson" />
+            <com.securedcommunications.securedcomm.utility.MyTextView
+                android:id="@+id/tvSubTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="?attr/twelve_sp"
+                android:singleLine="true"
+                android:ellipsize="end"
+                android:text="Mike Anderson" />
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/img_secured_list_menu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:paddingBottom="@dimen/twenty_dp"
+            android:paddingLeft="@dimen/thirty_dp"
+            android:paddingRight="@dimen/ten_dp"
+            android:paddingTop="@dimen/twenty_dp"
+            android:src="@drawable/chat121_ic_sidemenu" />
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@+id/linear_secured_first_child"
+        android:background="@color/dark_gray" />
+    <!-- <LinearLayout
+         android:id="@+id/linear_secured_second_child"
+         android:layout_width="match_parent"
+         android:layout_height="80dp"
+         android:background="@android:color/darker_gray"
+         android:orientation="horizontal"
+         android:paddingLeft="5dp"
+         android:paddingRight="10dp"
+         android:visibility="invisible">
+
+         <ImageView
+             android:id="@+id/img_secured_list_back"
+             android:layout_width="0dp"
+             android:layout_height="match_parent"
+             android:layout_weight="0.2"
+             android:padding="20dp"
+             android:src="@drawable/ic_back" />
+
+         <ImageView
+             android:id="@+id/img_secured_list_block"
+             android:layout_width="0dp"
+             android:layout_height="match_parent"
+             android:layout_weight="0.2"
+             android:padding="20dp"
+             android:src="@drawable/favorites_list_ic_block" />
+
+         <ImageView
+             android:id="@+id/img_secured_list_video"
+             android:layout_width="0dp"
+             android:layout_height="match_parent"
+             android:layout_weight="0.2"
+             android:padding="20dp"
+             android:src="@drawable/favorites_list_ic_vedio" />
+
+         <ImageView
+             android:id="@+id/img_secured_list_call"
+             android:layout_width="0dp"
+             android:layout_height="match_parent"
+             android:layout_weight="0.2"
+             android:padding="20dp"
+             android:src="@drawable/favorites_list_ic_call" />
+
+         <ImageView
+             android:id="@+id/img_secured_list_message"
+             android:layout_width="0dp"
+             android:layout_height="match_parent"
+             android:layout_weight="0.2"
+             android:padding="20dp"
+             android:src="@drawable/favorites_list_ic_mess" />
+
+     </LinearLayout>-->
+</RelativeLayout>

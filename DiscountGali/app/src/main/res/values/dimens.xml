@@ -1,0 +1,67 @@
+<resources>
+    <!-- Default screen margins, per the Android Design guidelines.
+    <dimen name="activity_horizontal_margin">30dp</dimen>
+    <dimen name="activity_vertical_margin">20dp</dimen>
+    <dimen name="activity_top_logo_margin">40dp</dimen>
+    <dimen name="login_button_padding">10dp</dimen>
+    <dimen name="margin_right_recyclerview">10dp</dimen>
+    <dimen name="margin_left_recyclerview">10dp</dimen>
+    <dimen name="margin_top_recyclerview">10dp</dimen>
+    <dimen name="margin_bottom_recyclerview">10dp</dimen>
+    <dimen name="margin_bottom_list_row">5dp</dimen>-->
+
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="zero_dp">0dp</dimen>
+    <dimen name="one_dp">1dp</dimen>
+    <dimen name="two_dp">2dp</dimen>
+    <dimen name="five_dp">5dp</dimen>
+    <dimen name="ten_dp">10dp</dimen>
+    <dimen name="fourteen_dp">12dp</dimen>
+    <dimen name="twenty_dp">20dp</dimen>
+    <dimen name="thirty_dp">30dp</dimen>
+    <dimen name="fourty_dp">40dp</dimen>
+    <dimen name="fifty_dp">50dp</dimen>
+    <dimen name="sixty_dp">60dp</dimen>
+    <dimen name="seventy_dp">70dp</dimen>
+    <dimen name="one_fifty_dp">150dp</dimen>
+    <dimen name="two_hundered_dp">200dp</dimen>
+    <dimen name="two_fifty_dp">250dp</dimen>
+
+    <dimen name="size_10dp">10dp</dimen>
+    <dimen name="size_15dp">15dp</dimen>
+    <dimen name="size_20dp">20dp</dimen>
+
+
+    <!-- dimensions in sp-->
+    <dimen name="ten_sp">10sp</dimen>
+    <dimen name="twelve_sp">12sp</dimen>
+    <dimen name="fourteen_sp">14sp</dimen>
+    <dimen name="fifteen_sp">15sp</dimen>
+    <dimen name="sixteen_sp">16sp</dimen>
+    <dimen name="eighteen_sp">18sp</dimen>
+    <dimen name="twenty_sp">20sp</dimen>
+    <dimen name="twenty_five_sp">25sp</dimen>
+    <dimen name="thirty_sp">30sp</dimen>
+    <dimen name="fourty_sp">40sp</dimen>
+    <dimen name="text_size_small">14sp</dimen>
+    <dimen name="text_size_medium">18sp</dimen>
+    <dimen name="text_size_large">22sp</dimen>
+
+    <!-- dimensions in pixel-->
+    <dimen name="zero_pixel">0px</dimen>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+    <dimen name="size_5dp">5dp</dimen>
+    <dimen name="margin_medium">10dp</dimen>
+    <dimen name="chat_image_size">200dp</dimen>
+    <dimen name="tab_height">50dp</dimen>
+    <dimen name="fab_margin">20dp</dimen>
+    <dimen name="header_size">50dp</dimen>
+    <dimen name="corners_rect_share">10dp</dimen>
+    <dimen name="margin_large">15dp</dimen>
+    <dimen name="img_size_nav_drawer">60dp</dimen>
+    <dimen name="nav_header_height">160dp</dimen>
+
+
+</resources>

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.securedcommunications.securedcomm.activity.HelpContactActivity">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/tb_favourites"
+        android:layout_width="match_parent"
+        android:layout_height="?actionBarSize"
+        android:background="@drawable/signup_action_bar"
+        android:minHeight="?android:attr/actionBarSize"
+        app:popupTheme="@style/AppTheme.PopupOverlay">
+
+        <com.securedcommunications.securedcomm.utility.MyTextView
+            android:id="@+id/toolbar_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text=""
+            android:textColor="@color/register_red"
+            android:textSize="?attr/sixteen_sp"/>
+
+        <!--<com.securedcommunications.securedcomm.utility.MyTextView-->
+        <!--android:id="@+id/profile_status"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_gravity="right"-->
+        <!--android:layout_marginRight="@dimen/ten_dp"-->
+        <!--android:drawableLeft="@drawable/ic_green_dot"-->
+        <!--android:drawablePadding="@dimen/ten_dp"-->
+        <!--android:drawableRight="@drawable/profile_online_ic"-->
+        <!--android:text="Online"-->
+        <!--android:textColor="@color/black"-->
+        <!--android:textSize="14sp"-->
+        <!--android:visibility="gone"/>-->
+
+    </android.support.v7.widget.Toolbar>
+
+    <WebView
+        android:id="@+id/wv_help_contact"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tb_favourites"></WebView>
+</RelativeLayout>

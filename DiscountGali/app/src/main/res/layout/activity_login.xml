@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/login_bg">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:scrollbars="none"
+        android:fillViewport="true"
+        android:paddingBottom="@dimen/twenty_dp"
+        android:paddingLeft="@dimen/thirty_dp"
+        android:paddingRight="@dimen/thirty_dp"
+        android:paddingTop="@dimen/twenty_dp">
+
+        <ImageView
+            android:id="@+id/img_back_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/ten_dp"
+            android:layout_gravity="left"
+            android:src="@drawable/ic_back_button"
+            android:visibility="visible"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/zero_pixel"
+            android:layout_weight="0.40"
+            android:orientation="vertical"
+            android:paddingTop="@dimen/thirty_dp">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:src="@drawable/login_logo" />
+
+            <com.securedcommunications.securedcomm.utility.MyTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="@dimen/ten_dp"
+                android:text="@string/title_secured_comm"
+                android:textColor="@color/white"
+                android:textSize="?attr/thirty_sp"
+                android:textStyle="bold" />
+
+            <com.securedcommunications.securedcomm.utility.MyTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@string/title_secured_like"
+                android:textColor="@color/title_secured_like"
+                android:textSize="?attr/twenty_sp"
+                app:fontType="italic" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/email_layout"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/zero_pixel"
+            android:layout_marginTop="@dimen/thirty_dp"
+            android:layout_weight="0.50"
+            android:orientation="vertical">
+
+            <com.securedcommunications.securedcomm.utility.MyEditText
+                android:id="@+id/edit_email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/thirty_dp"
+                android:background="@android:color/transparent"
+                android:hint="@string/hint_enter_your_email"
+                android:inputType="textEmailAddress"
+                android:singleLine="true"
+                android:textColor="@color/white"
+                android:textColorHint="@color/white"
+                android:textSize="?attr/sixteen_sp" />
+
+            <View
+                android:id="@+id/email_field_view"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/two_dp"
+                android:layout_marginBottom="@dimen/ten_dp"
+                android:layout_marginTop="@dimen/zero_dp"
+                android:background="@color/view_edit_line" />
+
+            <com.securedcommunications.securedcomm.utility.MyEditText
+                android:id="@+id/et_register_password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/ten_dp"
+                android:background="@android:color/transparent"
+                android:hint="@string/hint_enter_password"
+                android:inputType="textPassword"
+                android:singleLine="true"
+                android:textColor="@color/white"
+                android:textColorHint="@color/white"
+                android:textSize="?attr/sixteen_sp" />
+
+            <View
+                android:id="@+id/password_field_view"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/two_dp"
+                android:layout_marginBottom="@dimen/ten_dp"
+                android:layout_marginTop="@dimen/zero_dp"
+                android:background="@color/view_edit_line" />
+
+            <Button
+                android:id="@+id/btn_get_in"
+                style="@style/Login_Button"
+                android:layout_width="@dimen/two_fifty_dp"
+                android:layout_height="wrap_content"
+                android:text="@string/btn_next" />
+
+            <com.securedcommunications.securedcomm.utility.MyTextView
+                android:id="@+id/forgot_pass"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="@dimen/thirty_dp"
+                android:gravity="center"
+                android:clickable="true"
+                android:text="@string/title_forgot_password"
+                android:textColor="@color/white"
+                android:textSize="?attr/fifteen_sp"
+                android:visibility="gone" />
+
+            <LinearLayout
+                android:id="@+id/why_do_we_need_this_layout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="@dimen/thirty_dp"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:src="@drawable/login_ic" />
+
+                <com.securedcommunications.securedcomm.utility.MyTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="@dimen/ten_dp"
+                    android:text="@string/title_why_do"
+                    android:textColor="@color/white"
+                    android:textSize="?attr/fifteen_sp"
+                    app:fontType="regular" />
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+</ScrollView>

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="tabUnSelectedTextColor">#000000</color>
+    <color name="tabSelectedTextColor">#FF0000</color>
+    <color name="red">#FF0000</color>
+    <color name="gray">#D3D3D3</color>
+    <color name="register_red">#FE0000</color>
+    <color name="light_gray">#D6D6D6</color>
+    <color name="yellow">#FFFF00</color>
+
+
+    <!-- Titles-->
+    <color name="title_secured_like">#BAB809</color>
+    <color name="color_great">#1cc081</color>
+    <color name="dark_gray">#767676</color>
+    <color name="app_black">#4b4b4b</color>
+    <color name="app_orange">#ff4d4d</color>
+
+
+    <!-- BUTTONS -->
+
+
+    <!-- View -->
+    <color name="view_edit_line">#9B9A9A</color>
+    <color name="dialog_text_color">#363636</color>
+
+    <color name="progress_bar_color">#CECDD0</color>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#f20c0957</color>
+    <color name="colorAccent">#FF4081</color>
+    <color name="white">#FFFFFF</color>
+    <color name="dimWhite">#BBFFFFFF</color>
+
+    <color name="grayLight">#B9B9B9</color>
+    <color name="grayLightSearch">#f1f1f1</color>
+    <color name="textNormal">#B9B9B9</color>
+    <color name="interestHeading">#545454</color>
+    <color name="interestSubHead">#979797</color>
+    <color name="colorFB">#2155A0</color>
+    <color name="colorGoogle">#E63B29</color>
+    <color name="colorTwitter">#00ABE3</color>
+    <color name="black">#000000</color>
+    <color name="lightBlack">#99000000</color>
+    <color name="bgFragmentBackground">#f8f8f8</color>
+
+
+</resources>

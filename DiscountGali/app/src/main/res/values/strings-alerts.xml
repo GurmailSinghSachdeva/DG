@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="alert_invalid_response">Something went wrong, please try again</string>
+    <string name="alert_no_internet">No internet connection. Please check your internet settings to verify network connectivity.</string>
+    <string name="alert_no_internet2">SC app not able to reach secured servers as there is no internet connection. Please check your Wi-Fi, internet connection and try again.</string>
+    <string name="alert_no_internet_old">We are unable to reach the secured servers. Please check your internet connection and try again.</string>
+    <string name="alert_not_connected_with_server">Internet connection is available but Text is experiencing delay connecting to SC server. If this issue persists, please contact support@securedcommunications.com.</string>
+    <string name="alert_empty_email">Please enter email address</string>
+    <string name="alert_invalid_email">Please enter valid email address</string>
+    <string name="alert_empty_password">Please enter password</string>
+    <string name="alert_empty_confirm_password">Please confirm your password</string>
+    <string name="alert_invalid_password">Please enter minimum 7 char password</string>
+
+    <string name="alert_empty_group_id">Please enter Group ID</string>
+    <string name="alert_empty_group_password">Please enter valid group id and password</string>
+    <string name="alert_empty_your_name">Please enter your name</string>
+    <string name="alert_empty_phone_number">Please enter phone number</string>
+    <string name="alert_invalid_phone_number">Please enter valid phone number</string>
+    <string name="alert_password_mismatch">Password do not match</string>
+    <string name="alert_password_length">Password length should be a minimum of 7 characters</string>
+    <string name="alert_password_not_match_re_enter">Passwords do not match</string>
+    <string name="alert_old_and_new_password_match">New and old password should be different</string>
+    <string name="alert_password_fields_are_empty">Please enter your current password</string>
+    <string name="alert_new_password_fields_is_empty">Please enter your new password</string>
+    <string name="alert_confirm_password_fields_is_empty">Please confirm the password</string>
+
+    <string name="alert_empty_name">Please enter name</string>
+    <string name="alert_empty_country_code">Please select country code</string>
+
+    <string name="alert_under_development">Under Development.</string>
+    <string name="alert_unblock_the_user">Please unblock the user</string>
+
+    <string name="alert_image_upload_error">Error uploading profile photo. Please try again.</string>
+    <string name="alert_empty_audio">Please record audio first</string>
+    <string name="alert_time_over">Time over</string>
+    <string name="alert_issue_in_audio">Some issue occurred in audio record, please try again</string>
+    <string name="alert_permission_read_contact">You must allow permission read contact to sync contacts</string>
+    <string name="alert_permission_record_audio">You must allow permission record audio to your mobile device</string>
+
+    <string name="alert_permission_record_video">Provide permission to record video</string>
+    <string name="alert_video_size_exceed">Please select file less than 3mb</string>
+    <string name="alert_own_email">You can\'t add to yourself</string>
+    <string name="alert_permission_open_gallery">Provide permission to open gallery</string>
+    <string name="alert_permission_open_camera">Provide permission to open camera</string>
+    <string name="alert_permission_open_audio">Provide permission to open audio</string>
+    <string name="alert_empty_title">Please enter title</string>
+    <string name="alert_phone_no_not_exists">The Contact has no phone number.</string>
+</resources>

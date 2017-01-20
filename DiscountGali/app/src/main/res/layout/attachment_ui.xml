@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/dialog_arrow"
+        android:layout_gravity="right"
+        android:layout_marginRight="50dp"></ImageView>
+
+    <TableLayout
+        android:id="@+id/attachment_table"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/dialog_shape">
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp">
+
+            <TextView
+                style="@style/Attachement_Dialog_TextView"
+                android:drawableLeft="@drawable/group_chat1_popup_camera"
+                android:text="Camera"
+                android:textSize="?attr/thirty_sp" />
+
+            <TextView
+                style="@style/Attachement_Dialog_TextView"
+                android:drawableLeft="@drawable/group_chat1_popup_gallary"
+                android:text="Gallery"
+                android:textSize="?attr/thirty_sp" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp">
+
+            <TextView
+                style="@style/Attachement_Dialog_TextView"
+                android:drawableLeft="@drawable/group_chat1_popup_audio"
+                android:text="Audio"
+                android:textSize="?attr/thirty_sp" />
+
+            <TextView
+                style="@style/Attachement_Dialog_TextView"
+                android:drawableLeft="@drawable/group_chat1_popup_vedio"
+                android:text="Video"
+                android:textSize="?attr/thirty_sp" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp">
+
+            <TextView
+                style="@style/Attachement_Dialog_TextView"
+                android:drawableLeft="@drawable/group_chat1_popup_location"
+                android:text="Location"
+                android:textSize="?attr/thirty_sp" />
+
+            <TextView
+                style="@style/Attachement_Dialog_TextView"
+                android:drawableLeft="@drawable/group_chat1_popup_files"
+                android:text="Files"
+                android:textSize="?attr/thirty_sp" />
+        </TableRow>
+
+    </TableLayout>
+
+</LinearLayout>

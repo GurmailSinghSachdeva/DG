@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.securedcommunications.securedcomm.activity.JoinAgencyActivity">
+
+    <include
+        android:id="@+id/tb_register"
+        layout="@layout/register_toolbar" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white">
+
+        <LinearLayout
+            android:id="@+id/upper_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentTop="true"
+            android:layout_gravity="top"
+            android:orientation="vertical"
+            android:paddingBottom="@dimen/twenty_dp"
+            android:paddingLeft="@dimen/thirty_dp"
+            android:paddingRight="@dimen/thirty_dp"
+            android:paddingTop="@dimen/twenty_dp">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:src="@drawable/login_logo" />
+
+            <com.securedcommunications.securedcomm.utility.MyTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@string/title_secured_comm"
+                android:textColor="@color/black"
+                android:textSize="?attr/fifteen_sp"
+                android:textStyle="bold" />
+
+            <com.securedcommunications.securedcomm.utility.MyEditText
+                android:id="@+id/et_group_id"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/fourty_dp"
+                android:background="@android:color/transparent"
+                android:hint="@string/hint_group_id"
+                android:inputType="text"
+                android:singleLine="true"
+                android:textColor="@color/app_black"
+                android:textColorHint="@color/app_black"
+                android:textSize="?attr/eighteen_sp" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/two_dp"
+                android:layout_marginBottom="@dimen/ten_dp"
+                android:layout_marginTop="@dimen/zero_dp"
+                android:background="@color/view_edit_line" />
+
+            <com.securedcommunications.securedcomm.utility.MyEditText
+                android:id="@+id/et_password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/ten_dp"
+                android:background="@android:color/transparent"
+                android:hint="@string/hint_password"
+                android:inputType="textPassword"
+                android:singleLine="true"
+                android:textColor="@color/app_black"
+                android:textColorHint="@color/app_black"
+                android:textSize="?attr/eighteen_sp" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/two_dp"
+                android:layout_marginBottom="@dimen/ten_dp"
+                android:layout_marginTop="@dimen/zero_dp"
+                android:background="@color/view_edit_line" />
+
+            <Button
+                android:id="@+id/btn_submit"
+                style="@style/Register_Button"
+                android:layout_width="@dimen/one_fifty_dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/twenty_dp"
+                android:text="@string/btn_send_request" />
+
+            <com.securedcommunications.securedcomm.utility.MyTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="@dimen/thirty_dp"
+                android:text="@string/join_agency_desc"
+                android:textColor="@color/black"
+                android:textSize="?attr/fifteen_sp"
+                android:textStyle="normal" />
+
+            <com.securedcommunications.securedcomm.utility.MyTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/ten_dp"
+                android:text="@string/securedCommLink"
+                android:textColor="@color/colorPrimary"
+                android:textSize="?attr/fifteen_sp"
+                android:textStyle="normal" />
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

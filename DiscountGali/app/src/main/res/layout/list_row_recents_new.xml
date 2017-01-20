@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="90dp"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <FrameLayout
+        android:id="@+id/imageFrame"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true">
+
+        <ImageView
+            android:id="@+id/leftImageView"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:src="@drawable/group_profile_icon" />
+
+        <View
+            android:id="@+id/view_status"
+            android:layout_width="10dp"
+            android:layout_height="10dp"
+            android:layout_gravity="right|bottom"
+            android:layout_marginBottom="8dp"
+            android:layout_marginRight="8dp"
+            android:background="@drawable/shape_online"
+            android:visibility="visible" />
+    </FrameLayout>
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_toRightOf="@+id/imageFrame"
+        android:gravity="center_vertical">
+
+        <com.securedcommunications.securedcomm.utility.MyTextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_toLeftOf="@+id/datetime"
+            android:layout_alignParentLeft="true"
+            android:ellipsize="end"
+            android:singleLine="true"
+            android:text="Title whdgsadgsuf dsiufd gdspg dsgdsiyg fdgfdsgp fdgfdsgy fdsgpodsyg dsgpiofdy"
+            android:textSize="?attr/twenty_sp" />
+
+        <com.securedcommunications.securedcomm.utility.MyTextView
+            android:id="@+id/subtitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/title"
+            android:layout_toLeftOf="@+id/tv_unread_count"
+            android:layout_below="@+id/title"
+            android:ellipsize="end"
+            android:singleLine="true"
+            android:text="Hellooooo fids fdsyg dgy9reyt8 retypre8 re89ty9re tre89tgy retre98ty re89tg re"
+            android:textSize="?attr/twelve_sp" />
+
+        <com.securedcommunications.securedcomm.utility.MyTextView
+            android:id="@+id/datetime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:singleLine="true"
+            android:text="12 JUly"
+            android:textSize="?attr/fifteen_sp" />
+
+        <com.securedcommunications.securedcomm.utility.MyTextView
+            android:id="@+id/tv_unread_count"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_alignRight="@+id/datetime"
+            android:layout_below="@+id/datetime"
+            android:gravity="center"
+            android:text="999"
+            android:textColor="@color/white"
+            android:background="@drawable/notification_circle"
+            android:textSize="?attr/ten_sp" />
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_alignParentBottom="true"
+        android:background="@color/gray" />
+</RelativeLayout>

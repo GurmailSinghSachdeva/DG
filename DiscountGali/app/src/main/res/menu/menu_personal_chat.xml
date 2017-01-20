@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/menu_burn"
+        android:title="@string/menu_burn" />
+    <item
+        android:id="@+id/menu_call"
+        android:title="@string/menu_call" />
+    <item
+        android:id="@+id/menu_video_call"
+        android:title="@string/menu_video_call" />
+
+    <item
+        android:id="@+id/menu_favorite"
+        android:title="@string/menu_favorite" />
+    <item
+        android:id="@+id/menu_block"
+        android:title="@string/menu_block" />
+
+    <item
+        android:id="@+id/menu_leave_group"
+        android:title="@string/menu_leave_group" />
+    <item
+        android:id="@+id/menu_add_member"
+        android:title="@string/menu_add_member" />
+    <item
+        android:id="@+id/menu_delete_group"
+        android:title="@string/menu_delete_group" />
+
+    <item
+        android:id="@+id/menu_view_profile"
+        android:title="@string/menu_view_profile" />
+
+
+</menu>

@@ -1,0 +1,39 @@
+<RelativeLayout
+    android:id="@+id/layout_featured_deals"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="160dp"
+    android:clickable="true">
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/vp_tutorial"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/ll_bottom_bar"/>
+
+    <LinearLayout
+        android:id="@+id/ll_bottom_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true">
+        <com.example.lenovo.discountgali.widget.pageindicator.CirclePageIndicator
+            android:id="@+id/vp_indicator"
+            android:layout_width="150dip"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dip"
+            app:centered="true"
+            app:fillColor="@color/white"
+            app:pageColor="#88cccccc"
+            app:radius="5dp"
+            app:snap="false"
+            app:strokeColor="@android:color/white"
+            app:strokeWidth="0dp"
+            android:layout_gravity="center_horizontal"/>
+
+
+    </LinearLayout>
+
+</RelativeLayout>

@@ -1,0 +1,217 @@
+<resources>
+    <string name="app_name">DiscountGali</string>
+    <string name="register_email">simonjoe21@gmail.com</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment1">Hello Favorites fragment</string>
+    <string name="hello_blank_fragment2">Hello Group fragment</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <!-- TEXTVIEW  -->
+    <string name="title_secured_comm">Secured Comm</string>
+    <string name="title_secured_like">secured like never before</string>
+    <string name="title_why_do">Why do we need this?</string>
+    <string name="title_demo_email">danielsolovo@xsor.com</string>
+    <string name="title_regiser">Register</string>
+    <string name="title_groupid">Enter your Group ID</string>
+    <string name="title_group_id_desc">Group ID is required to verify your business or agency. If you do not have your Group ID, please contact your agency administrator for your Group ID.</string>
+    <string name="title_already_account">Already have account?</string>
+    <string name="title_login">LOGIN</string>
+    <string name="title_great">Great...!</string>
+    <string name="title_few_detail">Few more details.</string>
+    <string name="title_it_alias">It can be an alias or nickname</string>
+    <string name="title_this_phone_desc">This will be used to verify you control this device</string>
+    <string name="title_you_verified">Almost done…!</string>
+    <string name="title_please_protect">Please protect your app with a password.</string>
+    <string name="title_password_desc">For optimal security, use combination of characters, numbers and these symbols: ! * &amp; ? % ^.</string>
+    <string name="title_minimum_password">Minimum 7 characters.</string>
+    <string name="title_forgot_password">Forgot Password?</string>
+    <string name="title_unsecured">Unsecured</string>
+    <string name="number">Number</string>
+    <string name="title">Title</string>
+    <string name="media">Media</string>
+    <string name="tv_group">Groups</string>
+    <string name="mute">Mute</string>
+    <string name="tv_block_user">Block Contact</string>
+    <string name="tv_profile">Profile</string>
+    <string name="title_group_participants">Participants</string>
+    <string name="tv_final_step_Confirm">Final Step... Confirm!</string>
+    <string name="tv_email">Email : </string>
+    <string name="tv_name">Name : </string>
+    <string name="tv_group_id">Group Id : </string>
+    <string name="tv_confirmation_alert">Review your registration information for accuracy.  Go back to change your information. When done, tap REGISTER to create your account.</string>
+    <string name="tv_phone">Phone # : </string>
+    <string name="tv_password">Password : </string>
+    <string name="tv_recent">Recent</string>
+    <string name="tv_setting">Settings</string>
+    <string name="tv_favourite">Contacts</string>
+    <string name="tv_single_group">Groups</string>
+    <string name="tv_under_development">Under development</string>
+    <string name="tv_login_successfully">Login successfully</string>
+    <string name="tv_register_successfully">Register successfully</string>
+    <string name="tv_group_info">This app can only be used with an Agency account. You should have received this ID from your agency administrator. If you do not have this Group ID, please contact your administrator or email support@securedcommunications.com .</string>
+    <string name="tv_ok">OK</string>
+    <string name="tv_change_password_desc">For optimal security, password requirement is seven (7) character minimum. Use upper and lower case letters, numbers and symbols like ! * ? $ % ^ &amp; ) to make password stronger.</string>
+    <string name="tv_yes">Yes</string>
+    <string name="tv_cancel">Cancel</string>
+    <string name="title_do_you_change_email_id">Do you want to chagne your email id?</string>
+    <string name="tv_change_password">Change Password</string>
+    <string name="tv_update">Update</string>
+    <string name="tv_resend">Resend Email</string>
+    <string name="tv_join_agency">Join Agency</string>
+    <string name="tv_confirmation">Confirmation</string>
+    <string name="tv_message">Message</string>
+    <string name="tv_call">Call</string>
+    <string name="tv_video_call">Video Call</string>
+    <string name="tv_unblock_user">Unblock Contact</string>
+    <string name="tv_about">About</string>
+    <string name="tv_help_faq">Help/FAQ</string>
+    <string name="tv_contact_us">Contact us</string>
+    <string name="tv_optional_phone_number">Optional: Enter your phone number</string>
+    <string name="tv_add_favorite">Add Favorite</string>
+    <string name="tv_remove_favorite">Remove Favorite</string>
+    <string name="tv_new_group">New Group</string>
+    <string name="tv_participants">Participants</string>
+    <string name="tv_add_particpant">Add Participant</string>
+
+
+    <!-- Hints -->
+    <string name="hint_enter_your_email">Enter your email</string>
+    <string name="hint_enter_password">Enter password</string>
+    <string name="hint_group_id">Group ID</string>
+    <string name="hint_password">Password (if required)</string>
+    <string name="hint_your_name">Your name</string>
+    <string name="hint_phone_number">Phone Number</string>
+    <string name="hint_password_text">Password</string>
+    <string name="hint_retype_password">Retype password</string>
+    <string name="hint_type_message">Type your message</string>
+    <string name="hint_name">Name</string>
+    <string name="hint_current_password">Current password</string>
+    <string name="hint_new_password">New password</string>
+    <string name="hint_confirm_password">Confirm password</string>
+
+
+    <!-- Buttons -->
+    <string name="btn_get_in">GET IN</string>
+    <string name="btn_continue">CONTINUE</string>
+    <string name="btn_send">Send</string>
+    <string name="btn_next">NEXT</string>
+    <string name="btn_register">Register</string>
+    <string name="btn_done">DONE</string>
+    <string name="btn_submit">Submit</string>
+    <string name="btn_send_request">Send Request</string>
+    <string name="btn_save">Save</string>
+    <string name="btn_leave_group">Leave Group</string>
+
+
+    <!-- EDITTEXT -->
+
+
+    <!-- Menu -->
+    <string name="menu_phone">Phone</string>
+    <string name="menu_attachement">Attachement</string>
+    <string name="menu_view_profile">View Profile</string>
+    <string name="menu_media">Media</string>
+    <string name="menu_search">Search</string>
+    <string name="menu_mute_conversation">Mute Conversation</string>
+    <string name="menu_schedule_message">Schedule Message</string>
+    <string name="menu_block">Block</string>
+    <string name="menu_unblock">Unblock</string>
+    <string name="menu_burn">Burn</string>
+
+    <!-- PopUp Menu -->
+    <string name="menu_message">Message</string>
+    <string name="menu_unsecured_message">Unsecured Text</string>
+    <string name="menu_call">Call</string>
+    <string name="menu_unsecured_call">Unsecured Call</string>
+    <string name="menu_video">Video</string>
+    <string name="menu_video_call">Video Call</string>
+    <string name="menu_favorite">Favorite</string>
+    <string name="menu_blocked">Block</string>
+    <string name="menu_delete">Delete Contact</string>
+
+    <!-- DIALOG -->
+    <string name="dialog_cancel">Cancel</string>
+    <string name="dialog_send">Send</string>
+    <string name="dialog_audio_desc">Tap for recording</string>
+    <string name="dialog_why_do_we_need_this">This is the email associated with your agency account.This will allow us to secure your identity and join you to your business or agency.</string>
+    <string name="dialog_select_country_code">Select your country code</string>
+    <string name="dialog_email_sent_to_account">The email has sent to your account</string>
+    <string name="dialog_verify_email_title">Verify your email</string>
+    <string name="dialog_verify_email_message">Your email is not verified, Click on the link sent to your email to verify your email</string>
+    <string name="dialog_profile_status">Your Profile Status</string>
+    <string name="dialog_what_do_you_want_to_do">What do you want to do?</string>
+    <string name="dialog_join_agency_group">Join Agency Group</string>
+    <string name="dialog_create_private_group">Create Private Group</string>
+
+    <!--Add Favorites Screen Text-->
+    <string name="add_fav_title">Global Connect</string>
+    <string name="add_fav_enter_the_name">Enter the email of a new contact.</string>
+    <string name="add_fav_this_new_contact">This new contact will need to already have the app installed and have a registered account to be added to your Contacts list.</string>
+    <string name="add_fav_new_user">New users can only be invited through an approved agency.</string>
+
+    <!--Settings Screen-->
+    <string name="title_logout">Alert</string>
+    <string name="title_you_want_to_logout">Are you sure you want to logout?</string>
+    <string name="update">Update</string>
+    <string name="title_password_strength">Password Strength : </string>
+    <string name="hint_email">Email</string>
+    <string name="no_data_found">No Data Found</string>
+    <string name="loading_data">Loading, Please Wait...</string>
+    <string name="title_alert">Alert!</string>
+    <string name="take_photo">Take Photo</string>
+    <string name="choose_photo">Choose Photo</string>
+
+    <string name="join_agency_desc">A group code is required for group communications. \nIf you have been given acces to given group,the group code and password can be found in your email invitationer in your account on</string>
+    <string name="securedCommLink">www.securedcommunications.com</string>
+    <string name="about_desc">The World\'s Solution for Secured Communications and Privacy</string>
+
+    <string name="remove_photo">Remove Photo</string>
+
+    <string name="select_audio">Select Audio</string>
+    <string name="select_video">Select Video</string>
+    <string name="take_video">Take Video</string>
+    <string name="choose_from_gallery">Choose From gallery</string>
+    <string name="select_video_using">Select Video Using</string>
+
+
+    <!--Crypto test  -->
+    <string name="action_settings">Settings</string>
+    <string name="password_hint">Password</string>
+    <string name="message_hint">Message</string>
+    <string name="menu_encrypt_title">Encrypt</string>
+    <string name="menu_decrypt_title">Decrypt</string>
+    <string name="menu_encrypt_title_copied">Copied ✓</string>
+    <string name="helpButtonDescription">View help</string>
+    <string name="title_activity_help">Help</string>
+    <string name="view_drawing_menu_title">Drawing</string>
+    <string name="title_activity_drawing">Krypto and Koo</string>
+    <string name="drawing_description">Drawing: Crypto and Koo</string>
+    <string name="copy_button">Copy</string>
+    <string name="paste_button">Paste</string>
+    <string name="clear_button">Clear</string>
+    <string name="share_button_description">Share</string>
+    <string name="alert_low_memory">Memory is less, please close other apps.</string>
+    <string name="sms_invite_message">invited you to Text securely, download to Text: </string>
+
+    <string name="one_way_message">This is a broadcast group. Replies are not allowed.</string>
+    <string name="alert_not_logged_in">Please Log out and login again</string>
+    <string name="tv_create">Create</string>
+    <string name="change_font_size">Change Font Size</string>
+    <string name="text_small">Small</string>
+    <string name="text_medium">Medium</string>
+    <string name="text_large">Large</string>
+    <string name="text_extra_large">Extra Large</string>
+    <string name="menu_leave_group">Leave Group</string>
+    <string name="menu_add_member">Add Members</string>
+    <string name="menu_delete_group">Delete Group</string>
+    <string name="title_you_want_to_burn">Do you want to burn this conversation?</string>
+    <string name="alert">Alert!</string>
+    <string name="new_version_alert">New version is available at play store, please update.</string>
+    <string name="dialog_ok">Ok</string>
+    <string name="cancel">Cancel</string>
+    <string name="progress_dialog">Please wait...</string>
+    <string name="alert_no_network">No network connection available</string>
+</resources>
