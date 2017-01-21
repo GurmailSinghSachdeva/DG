@@ -5,42 +5,6 @@
     android:layout_height="match_parent"
     android:background="@color/white">
 
-    <android.support.design.widget.AppBarLayout
-        android:id="@+id/appbar"
-        android:layout_width="match_parent"
-        android:layout_height="190dp"
-        android:fitsSystemWindows="true"
-        >
-
-        <android.support.design.widget.CollapsingToolbarLayout
-            android:id="@+id/collapsing_toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="140dp"
-            android:background="@drawable/background"
-            android:fitsSystemWindows="true"
-            app:layout_scrollFlags="scroll|exitUntilCollapsed">
-
-            <include layout="@layout/layout_featured_deals"
-                android:layout_below="@+id/toolbar_con"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:layout_scrollFlags="scroll|exitUntilCollapsed|snap"
-                android:id="@+id/layout_featured_deals"/>
-        </android.support.design.widget.CollapsingToolbarLayout>
-
-        <android.support.design.widget.TabLayout
-            android:id="@+id/tabs"
-            android:background="@color/app_orange"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:fillViewport="false"
-            app:tabGravity="fill"
-            app:tabIndicatorColor="@color/white"
-            app:tabMode="fixed"
-            app:tabSelectedTextColor="@color/white"
-            app:tabTextColor="@color/dimWhite"/>
-    </android.support.design.widget.AppBarLayout>
-
 
     <android.support.v4.view.ViewPager
         android:id="@+id/viewpager"
@@ -66,6 +30,43 @@
         android:layout_gravity="bottom"
         app:tabIndicatorColor="@color/white"
         app:tabMode="fixed"
-        app:tabSelectedTextColor="@color/white"
+        app:tabSelectedTextColor="@color/black"
         app:tabTextColor="@color/white"/>
+
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/appbar"
+        android:layout_width="match_parent"
+        android:layout_height="190dp"
+        android:fitsSystemWindows="true"
+        >
+
+        <android.support.design.widget.CollapsingToolbarLayout
+            android:id="@+id/collapsing_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="140dp"
+            android:background="@drawable/background"
+            android:fitsSystemWindows="true"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed">
+
+            <include layout="@layout/layout_featured_deals"
+                android:layout_below="@+id/toolbar_con"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_scrollFlags="scroll|exitUntilCollapsed|snap"
+                android:id="@+id/layout_featured_deals"/>
+        </android.support.design.widget.CollapsingToolbarLayout>
+
+        <android.support.design.widget.TabLayout
+            android:id="@+id/tabs"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:fillViewport="false"
+            app:tabBackground="@color/white"
+            app:tabGravity="fill"
+            app:tabIndicatorColor="@color/app_orange"
+            app:tabMode="fixed"
+            app:tabSelectedTextColor="@color/app_orange"
+            app:tabTextColor="@color/black"
+            />
+    </android.support.design.widget.AppBarLayout>
 </android.support.design.widget.CoordinatorLayout>

@@ -3,6 +3,7 @@ package com.example.lenovo.discountgali.adapter;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Color;
+import android.support.v4.app.FragmentActivity;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,6 +23,7 @@ import java.util.ArrayList;
  */
 public class HomeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
+    private OnItemClickListener onItemClickListener;
     private final LayoutInflater inflater;
     private Context context;
     private ArrayList<TopOffers> topOfferslist = new ArrayList<>();
@@ -29,6 +31,7 @@ public class HomeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         this.context = context;
         this.topOfferslist = topOfferslist;
         inflater = LayoutInflater.from(context);
+        onItemClickListener = (OnItemClickListener) context;
     }
 
     @Override
@@ -80,6 +83,10 @@ TopOffers topOffers = topOfferslist.get(position);
 
         }
     }
+    public interface OnItemClickListener {
+        void onItemClicked(TopOffers topOffers);
+    }
+
 
 
 }

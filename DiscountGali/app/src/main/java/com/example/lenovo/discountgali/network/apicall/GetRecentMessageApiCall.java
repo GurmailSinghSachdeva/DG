@@ -13,7 +13,6 @@ import com.example.lenovo.discountgali.utils.JSONParsingUtils;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.ksoap2.serialization.SoapObject;
 
 import java.io.IOException;
 import java.io.StringReader;

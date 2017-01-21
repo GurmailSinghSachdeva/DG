@@ -97,11 +97,6 @@ public class HomeActivity extends BaseActivity implements NavigationView.OnNavig
         tabLout1.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
-                switch (tab.getPosition())
-                {
-                    case 0:invite();break;
-                    case 1:
-                }
             }
 
             @Override
@@ -111,7 +106,11 @@ public class HomeActivity extends BaseActivity implements NavigationView.OnNavig
 
             @Override
             public void onTabReselected(TabLayout.Tab tab) {
-
+                switch (tab.getPosition())
+                {
+                    case 0:invite();break;
+                    case 1:
+                }
             }
         });
         tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
@@ -181,11 +180,12 @@ public class HomeActivity extends BaseActivity implements NavigationView.OnNavig
         {
             for (int i = 0; i < home_tabs_name.size(); i++) {
                 TabLayout.Tab tab = tabLayout.newTab();
-                View view = getLayoutInflater().inflate(R.layout.layout_home_tab,null);
-                TextView tv = (TextView) view.findViewById(R.id.text_home_tab);
-                tv.setText(home_tabs_name.get(i));
+                tab.setText(home_tabs_name.get(i));
+//                View view = getLayoutInflater().inflate(R.layout.layout_home_tab,null);
+//                TextView tv = (TextView) view.findViewById(R.id.text_home_tab);
+//                tv.setText(home_tabs_name.get(i));
 //                ((TextView)(view.findViewById(R.id.text_home_tab))).setText(home_tabs_name.get(i));
-                tab.setCustomView(view);
+//                tab.setCustomView(view);
 //                tab.setCustomView(getLayoutInflater().inflate(R.layout.layout_home_tab, tabLayout, false));
 //                tab.setText(home_tabs_name.get(i));
                 tabLayout.addTab(tab);

@@ -3,9 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.securedcommunications.securedcomm.activity.SplashActivity">
+    >
     <ImageView
-        android:src="@drawable/splash"
+        android:src="@drawable/ic_audio_download"
         android:scaleType="fitXY"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />

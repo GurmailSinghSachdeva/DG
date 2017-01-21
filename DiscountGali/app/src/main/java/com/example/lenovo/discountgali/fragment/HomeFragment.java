@@ -1,6 +1,7 @@
 package com.example.lenovo.discountgali.fragment;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
@@ -19,6 +20,7 @@ import android.widget.Toast;
 import com.example.lenovo.discountgali.R;
 import com.example.lenovo.discountgali.activity.ChangePasswordActivity;
 import com.example.lenovo.discountgali.activity.HomeActivity;
+import com.example.lenovo.discountgali.activity.OfferDetailActivity;
 import com.example.lenovo.discountgali.adapter.HomeAdapter;
 import com.example.lenovo.discountgali.model.ServerResponse;
 import com.example.lenovo.discountgali.model.TopOffers;
@@ -35,7 +37,7 @@ import java.util.ArrayList;
 /**
  * Created by Dushyant Singh on 11/24/2016.
  */
-public class HomeFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
+public class HomeFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener, HomeAdapter.OnItemClickListener {
     protected ProgressDialog progressDialog;
 
     private String tab_name;
@@ -197,5 +199,12 @@ public class HomeFragment extends Fragment implements SwipeRefreshLayout.OnRefre
     @Override
     public void onRefresh() {
 swipeRefreshLayout.setRefreshing(false);
+    }
+
+    @Override
+    public void onItemClicked(TopOffers topOffers) {
+        Intent intent = new Intent(getActivity(), OfferDetailActivity.class);
+        intent.putExtra("offer", topOffers);
+        startActivity(intent);
     }
 }

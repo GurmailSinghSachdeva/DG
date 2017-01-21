@@ -62,6 +62,7 @@
     <dimen name="margin_large">15dp</dimen>
     <dimen name="img_size_nav_drawer">60dp</dimen>
     <dimen name="nav_header_height">160dp</dimen>
+    <dimen name="scrollmargin60dp">60dp</dimen>
 
 
 </resources>

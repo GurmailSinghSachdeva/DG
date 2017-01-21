@@ -12,13 +12,25 @@ android {
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
+    signingConfigs {
+        config {
+            keyAlias 'abc123'
+            keyPassword 'abc123'
+            storeFile file('keystores/keystore.jks')
+            storePassword 'abc123'
+        }
+    }
+
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
-        repositories {
-            maven { url 'https://oss.sonatype.org/content/repositories/ksoap2-android-releases' }
+
+        debug {
+            debuggable false // By default false
+            signingConfig signingConfigs.config
+
         }
     }
 }
@@ -35,7 +47,7 @@ dependencies {
     compile 'com.nostra13.universalimageloader:universal-image-loader:1.9.4'
     compile 'com.android.support:recyclerview-v7:23.4.0'
     compile 'com.android.support:cardview-v7:23.4.0'
-    compile 'com.google.code.ksoap2-android:ksoap2-android:3.6.0'
+//    compile 'com.google.code.ksoap2-android:ksoap2-android:3.6.0'
     compile 'com.makeramen:roundedimageview:2.2.1'
 
 

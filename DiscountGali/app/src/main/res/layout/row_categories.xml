@@ -1,53 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="60dp"
-    android:layout_height="60dp"
-    android:background="@color/grayLightSearch"
+    android:layout_width="80dp"
+    android:layout_height="80dp"
+    android:background="@color/white"
     android:id="@+id/container_categories"
     >
-<View
-    android:layout_width="match_parent"
-    android:layout_height="1dp"
-    android:layout_alignParentTop="true"
-    android:background="@color/app_orange"/>
-    <View
-        android:layout_width="1dp"
-        android:layout_height="80dp"
-        android:layout_alignParentLeft="true"
-        android:id="@+id/divider"
-        android:background="@color/app_orange"/>
-<ImageView
-    android:layout_width="20dp"
-    android:layout_height="20dp"
-    android:layout_margin="10dp"
-    android:visibility="gone"
-    android:layout_centerHorizontal="true"
-    android:src="@drawable/chat121_ic_bottom_smiley"
-    android:id="@+id/icon_category"/>
-    <TextView
+<!--<View-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="1dp"-->
+    <!--android:layout_alignParentTop="true"-->
+    <!--android:background="@color/app_orange"/>-->
+    <!--<View-->
+        <!--android:layout_width="1dp"-->
+        <!--android:layout_height="80dp"-->
+        <!--android:layout_alignParentLeft="true"-->
+        <!--android:id="@+id/divider"-->
+        <!--android:background="@color/app_orange"/>-->
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:textSize="8sp"
-        android:layout_height="wrap_content"
-        android:id="@+id/text_category"
-        android:layout_below="@+id/icon_category"
-        android:text="Automotive \u0026 aaaus"
-        android:layout_centerInParent="true"
-        android:maxLines="2"
-        android:textColor="@color/black"
-        android:paddingLeft="5dp"
-        android:gravity="center"
-        android:paddingRight="5dp"
-        android:ellipsize="end"
-        />
-    <View
-        android:layout_width="1dp"
-        android:layout_height="80dp"
-        android:layout_alignParentRight="true"
-        android:id="@+id/divider2"
-        android:background="@color/app_orange"/>
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="2dp"
-        android:layout_alignParentBottom="true"
-        android:background="@color/app_orange"/>
+        android:layout_margin="10dp"
+        android:layout_height="match_parent">
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+
+            android:layout_margin="10dp"
+            android:layout_centerHorizontal="true"
+            android:src="@drawable/food_fork_drink"
+            android:id="@+id/icon_category"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:textSize="8sp"
+            android:layout_height="wrap_content"
+            android:id="@+id/text_category"
+            android:layout_below="@+id/icon_category"
+            android:text="Automotive \u0026 aaaus"
+            android:layout_centerInParent="true"
+            android:maxLines="2"
+            android:textColor="@color/app_orange"
+            android:paddingLeft="5dp"
+            android:gravity="center"
+            android:paddingRight="5dp"
+            android:ellipsize="end"
+            />
+
+    </RelativeLayout>
+   <!--<View-->
+        <!--android:layout_width="1dp"-->
+        <!--android:layout_height="80dp"-->
+        <!--android:layout_alignParentRight="true"-->
+        <!--android:id="@+id/divider2"-->
+        <!--android:background="@color/app_orange"/>-->
+    <!--<View-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="2dp"-->
+        <!--android:layout_alignParentBottom="true"-->
+        <!--android:background="@color/app_orange"/>-->
 </RelativeLayout>

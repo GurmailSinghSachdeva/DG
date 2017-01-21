@@ -42,6 +42,9 @@
     <color name="black">#000000</color>
     <color name="lightBlack">#99000000</color>
     <color name="bgFragmentBackground">#f8f8f8</color>
+    <color name="colorBottomButtonDisableText">#646464</color>
+    <color name="actionBarTitle">#000000</color>
+    <color name="colorBottomBu1ttonDisableText">#646464</color>
 
 
 </resources>
