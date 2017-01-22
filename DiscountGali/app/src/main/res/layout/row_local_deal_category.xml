@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.example.lenovo.discountgali.widget.pageindicator.SquareLayout android:layout_height="wrap_content"
     android:layout_width="match_parent"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
 <LinearLayout android:layout_width="wrap_content"
     android:layout_height="wrap_content"
@@ -11,6 +12,7 @@
         android:id="@+id/card_View"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        app:cardElevation="0dp"
         android:layout_margin="5dp">
 
         <RelativeLayout

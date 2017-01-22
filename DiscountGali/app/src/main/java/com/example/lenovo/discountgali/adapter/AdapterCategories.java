@@ -23,11 +23,11 @@ import java.util.List;
 
 public class AdapterCategories extends RecyclerView.Adapter<AdapterCategories.MyViewHolder>{
 
-    private List<ModelCategories> listCategories;
+    private List<String> listCategories;
     private Activity context;
     private OnItemClickListener listener;
 
-    public AdapterCategories(Activity activity, List<ModelCategories> listCategories, TopStoresFragment context) {
+    public AdapterCategories(Activity activity, List<String> listCategories) {
         this.listCategories = listCategories;
         this.context = activity;
 //        this.listener= (OnItemClickListener) context;
@@ -46,10 +46,9 @@ public class AdapterCategories extends RecyclerView.Adapter<AdapterCategories.My
 
     @Override
     public void onBindViewHolder(AdapterCategories.MyViewHolder holder, int position) {
-        final ModelCategories modelCategories = listCategories.get(position);
+        final String modelCategories = listCategories.get(position);
 
-        Syso.print("------Adapter" + modelCategories.getCategoryName());
-        holder.categoryName.setText(modelCategories.getCategoryName());
+        holder.categoryName.setText(modelCategories);
 //        ImageLoaderUtils.loadImage(modelCategories.getCategoryLogo(), holder.categoryLogo);
     }
 

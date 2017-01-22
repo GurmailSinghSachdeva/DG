@@ -14,7 +14,7 @@
         android:textSize="20sp"
         android:layout_marginTop="5dp"
         android:textStyle="bold"
-        android:textColor="@color/white"
+        android:textColor="@color/black"
         android:text="Coupons by 500+ stores"
         android:id="@+id/tv_title"/>
         <TextView
@@ -23,7 +23,7 @@
             android:gravity="center"
             android:textSize="17sp"
             android:layout_margin="5dp"
-            android:textColor="@color/white"
+            android:textColor="@color/black"
             android:layout_below="@+id/tv_title"
             android:text="plus extra cashback"
             android:id="@+id/tv_text"/>

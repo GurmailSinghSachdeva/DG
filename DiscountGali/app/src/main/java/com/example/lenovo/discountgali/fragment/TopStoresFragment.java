@@ -39,19 +39,13 @@ import java.util.ArrayList;
 
 public class TopStoresFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
 
-    private RecyclerView recyclerCategories, recyclerTopStores;
-    private AdapterCategories adapterCategories;
+    private RecyclerView recyclerTopStores;
     private AdapterTopStores adapterTopStores;
     private ArrayList<ModelTopStores> storesList = new ArrayList<>();
-    private ArrayList<ModelCategories> categoriesList = new ArrayList<>();
     private SwipeRefreshLayout swipeRefreshLayout;
     private EndlessRecyclerOnScrollListenerGrid endlessScrollListenerGrid;
     private GridLayoutManager gridLayoutManager;
     private Handler handler = new Handler();
-
-
-    private boolean isCategoryApiRunning;
-    private boolean isStoresApiRunning;
     private boolean isTopStoresApiRunning;
     private boolean isLastStoreFound;
 
@@ -66,7 +60,7 @@ public class TopStoresFragment extends Fragment implements SwipeRefreshLayout.On
 
         setListeners();
 
-        getCategoriesApiCall();
+//        getCategoriesApiCall();
 
 //        getTopStoresApiCAll(null);
 
@@ -163,60 +157,59 @@ public class TopStoresFragment extends Fragment implements SwipeRefreshLayout.On
 
     }
 
-    private void getCategoriesApiCall() {
-        try {
-            if (isCategoryApiRunning) {
-
-                return;
-            }
-
-            isCategoryApiRunning = true;
-
-            final ProgressDialog progressDialog = DialogUtils.getProgressDialog(getActivity());
-            //progressDialog.show();
-            final GetCategoriesApiCall apiCall;
-
-            apiCall = new GetCategoriesApiCall(getActivity(), null, 1, 15);
-
-            HttpRequestHandler.getInstance(getActivity().getApplicationContext()).executeRequest(apiCall, new ApiCall.OnApiCallCompleteListener() {
-
-                @Override
-                public void onComplete(Exception e) {
-                    isCategoryApiRunning = false;
-//                    swipeRefreshLayout.setRefreshing(false);
-                    DialogUtils.hideProgressDialog(progressDialog);
-                    if (e == null) { // Success
-                        try {
-                            Syso.print("-----------Inside--------" + "onresponse category");
-                            categoriesList.clear();
-                            categoriesList.addAll(apiCall.getCategoriesList());
-                            Syso.print("-----------Inside" + categoriesList.size());
-//                            if(categoriesList!=null && !categoriesList.isEmpty())
+//    private void getCategoriesApiCall() {
+//        try {
+//            if (isCategoryApiRunning) {
+//
+//                return;
+//            }
+//
+//            isCategoryApiRunning = true;
+//
+//            final ProgressDialog progressDialog = DialogUtils.getProgressDialog(getActivity());
+//            //progressDialog.show();
+//            final GetCategoriesApiCall apiCall;
+//
+//            apiCall = new GetCategoriesApiCall(getActivity(), null, 1, 15);
+//
+//            HttpRequestHandler.getInstance(getActivity().getApplicationContext()).executeRequest(apiCall, new ApiCall.OnApiCallCompleteListener() {
+//
+//                @Override
+//                public void onComplete(Exception e) {
+//                    isCategoryApiRunning = false;
+////                    swipeRefreshLayout.setRefreshing(false);
+//                    DialogUtils.hideProgressDialog(progressDialog);
+//                    if (e == null) { // Success
+//                        try {
+//                            Syso.print("-----------Inside--------" + "onresponse category");
+//                            categoriesList.clear();
+//                            categoriesList.addAll(apiCall.getCategoriesList());
+//                            Syso.print("-----------Inside" + categoriesList.size());
+////                            if(categoriesList!=null && !categoriesList.isEmpty())
+////                            adapterCategories.notifyDataSetChanged();
+////                            else recyclerCategories.setVisibility(View.GONE);
+////                            setRecyclerViewCategories();
 //                            adapterCategories.notifyDataSetChanged();
-//                            else recyclerCategories.setVisibility(View.GONE);
-//                            setRecyclerViewCategories();
-                            adapterCategories.notifyDataSetChanged();
-
-
-                        } catch (Exception e1) {
-                            Utils.handleError(e1, getActivity());
-                        }
-                    } else { // Failure
-                        Utils.handleError(e, getActivity());
-                    }
-
-                }
-            }, false);
-        } catch (Exception e) {
-            Utils.handleError(e, getActivity());
-        }
-
-
-    }
+//
+//
+//                        } catch (Exception e1) {
+//                            Utils.handleError(e1, getActivity());
+//                        }
+//                    } else { // Failure
+//                        Utils.handleError(e, getActivity());
+//                    }
+//
+//                }
+//            }, false);
+//        } catch (Exception e) {
+//            Utils.handleError(e, getActivity());
+//        }
+//
+//
+//    }
 
 
     private void setRecyclerViews() {
-        setRecyclerViewCategories();
         setRecyclerViewStores();
 
     }
@@ -229,16 +222,9 @@ public class TopStoresFragment extends Fragment implements SwipeRefreshLayout.On
     }
 
 
-    private void setRecyclerViewCategories() {
-        adapterCategories = new AdapterCategories(getActivity(), categoriesList, this);
-        RecyclerView.LayoutManager manager = new LinearLayoutManager(getActivity(), RecyclerView.HORIZONTAL, false);
-        recyclerCategories.setLayoutManager(manager);
-        recyclerCategories.setHasFixedSize(true);
-        recyclerCategories.setAdapter(adapterCategories);
-    }
+
 
     private void initUi(View v) {
-        recyclerCategories = (RecyclerView) v.findViewById(R.id.recycler_categories);
         recyclerTopStores = (RecyclerView) v.findViewById(R.id.recycler_stores);
         swipeRefreshLayout = (SwipeRefreshLayout) v.findViewById(R.id.swipe_refresh_layout);
 

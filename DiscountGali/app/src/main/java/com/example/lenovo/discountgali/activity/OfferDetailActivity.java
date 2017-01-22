@@ -12,7 +12,7 @@ import com.example.lenovo.discountgali.R;
 import com.example.lenovo.discountgali.model.TopOffers;
 import com.example.lenovo.discountgali.utils.ImageLoaderUtils;
 
-public class OfferDetailActivity extends AppCompatActivity implements View.OnClickListener {
+public class OfferDetailActivity extends BaseActivity implements View.OnClickListener {
 
     Toolbar mToolBar;
 

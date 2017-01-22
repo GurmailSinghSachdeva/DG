@@ -214,4 +214,34 @@
     <string name="cancel">Cancel</string>
     <string name="progress_dialog">Please wait...</string>
     <string name="alert_no_network">No network connection available</string>
+
+    <string-array name="categories">
+        <item>All Categories</item>
+        <item>Automotive \u0026 Accessories</item>
+        <item>Bags \u0026 Accessories</item>
+        <item>Books \u0026 Stationary</item>
+        <item>Cameras \u0026 Accessories</item>
+        <item>Electronics \u0026 Personal Care</item>
+        <item>Eye Care</item>
+        <item>Flowers,Gifts \u0026 Jewellery</item>
+        <item>Food \u0026 Dining</item>
+        <item>Fun \u0026 Entertainment</item>
+        <item>Grocery</item>
+        <item>Health \u0026 Beauty</item>
+        <item>Home \u0026 Kitchen</item>
+        <item>Hotels \u0026 Travels</item>
+        <item>Kids Clothing, Footwear \u0026 Accessories</item>
+        <item>Kids toys \u0026 Games</item>
+        <item>laptop,Computer \u0026 Accessories</item>
+        <item>Lingerie</item>
+        <item>Medical</item>
+        <item>Men Clothing ,Footwear \u0026 Accessories</item>
+        <item>Mobiles,Tablets \u0026 Accessories</item>
+        <item>Others</item>
+        <item>Recharges and Bill Payment</item>
+        <item>Sports \u0026 Fitness</item>
+        <item>Watches n Sunglasses</item>
+        <item>Women Clothing ,Footwear \u0026 Accessories</item>
+
+    </string-array>
 </resources>

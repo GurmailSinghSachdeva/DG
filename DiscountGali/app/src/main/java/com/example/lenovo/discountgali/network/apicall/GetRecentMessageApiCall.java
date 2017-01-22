@@ -42,10 +42,7 @@ public class GetRecentMessageApiCall extends BaseApiCall {
         this.context = context;
     }
     public GetRecentMessageApiCall() {
-        this.pkAccount = pkAccount;
-        this.timeStamp = timeStamp;
-        this.newMessage = newMessage;
-        this.context = context;
+
     }
     @Override
     protected String getRequestUrl() {
@@ -65,7 +62,7 @@ public class GetRecentMessageApiCall extends BaseApiCall {
                 is.setCharacterStream(new StringReader(result));
                 Document doc = db.parse(is);
                 outputjson = doc.getDocumentElement().getTextContent();
-                System.out.println("HELLO " + outputjson);
+                System.out.println("================Response Offers " + outputjson);
                 parseData(outputjson.toString());
 
             } catch (SAXException e) {
@@ -148,6 +145,8 @@ public class GetRecentMessageApiCall extends BaseApiCall {
                 "    </GetOnlineTopOffers>\n" +
                 "  </soap12:Body>\n" +
                 "</soap12:Envelope>";
+        Syso.print("!!!!!!!!!!!!!!Request Get Offers!!!!" + requestBody);
+
         return requestBody;
     }
 }

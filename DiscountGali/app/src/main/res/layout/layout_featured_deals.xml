@@ -25,11 +25,11 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dip"
             app:centered="true"
-            app:fillColor="@color/white"
+            app:fillColor="@color/black"
             app:pageColor="#88cccccc"
             app:radius="5dp"
             app:snap="false"
-            app:strokeColor="@android:color/white"
+            app:strokeColor="@android:color/black"
             app:strokeWidth="0dp"
             android:layout_gravity="center_horizontal"/>
 

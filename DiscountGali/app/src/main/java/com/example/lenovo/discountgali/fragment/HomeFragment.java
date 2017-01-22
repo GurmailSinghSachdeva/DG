@@ -37,13 +37,14 @@ import java.util.ArrayList;
 /**
  * Created by Dushyant Singh on 11/24/2016.
  */
+
 public class HomeFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener, HomeAdapter.OnItemClickListener {
     protected ProgressDialog progressDialog;
 
     private String tab_name;
     private boolean isGrid;
     private int gridNumber;
-    private RecyclerView mRecyclerView;
+    private RecyclerView mRecyclerView, rv_categories;
     private LinearLayoutManager linearLayoutManager;
     private EndlessRecyclerOnScrollListener endlessScrollListener;
     private SwipeRefreshLayout swipeRefreshLayout;
@@ -88,6 +89,7 @@ public class HomeFragment extends Fragment implements SwipeRefreshLayout.OnRefre
         }catch (Exception e)
         {
 
+            Syso.print("EXCEPTION " + e.getMessage());
         }
         return view;
     }
@@ -168,14 +170,9 @@ public class HomeFragment extends Fragment implements SwipeRefreshLayout.OnRefre
 
     public void initUi(View view)
     {
+        rv_categories = (RecyclerView) view.findViewById(R.id.recycler_categories);
+        rv_categories.setVisibility(View.GONE);
         mRecyclerView = (RecyclerView) view.findViewById(R.id.recyclerView);
-        view.findViewById(R.id.incl).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-//                Utils.showWriteARoastActivity(getActivity());
-                Toast.makeText(v.getContext(),"Under Development",Toast.LENGTH_SHORT).show();
-            }
-        });
 
     }
     public static HomeFragment newInstance(String service_id) {
@@ -188,13 +185,17 @@ public class HomeFragment extends Fragment implements SwipeRefreshLayout.OnRefre
         return fragment;
     }
     private void parseArguments() {
-        if (getArguments() != null) {
-            tab_name = getArguments().getString("tab_name");
-            isGrid = getArguments().getBoolean("isGrid");
-            gridNumber = getArguments().getInt("gridNumber");
-        }
+//        if (getArguments() != null) {
+//            tab_name = getArguments().getString("tab_name");
+//            isGrid = getArguments().getBoolean("isGrid");
+//            gridNumber = getArguments().getInt("gridNumber");
+//        }
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+    }
 
     @Override
     public void onRefresh() {

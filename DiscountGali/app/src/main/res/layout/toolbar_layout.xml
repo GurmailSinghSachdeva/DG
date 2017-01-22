@@ -12,30 +12,37 @@
 
         <android.support.v7.widget.Toolbar
             android:id="@+id/toolbar"
-            android:background="@color/app_orange"
+            android:background="@drawable/border_edittext"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             >
              <ImageView
-                 android:id="@+id/icon"
+                 android:id="@+id/navDrawerIcon"
                  android:layout_width="wrap_content"
                  android:layout_height="wrap_content"
                  android:layout_alignParentLeft="true"
-                 android:layout_gravity="center"
-                 android:visibility="gone"
+                 android:layout_gravity="left"
+                 android:src="@drawable/view_sequential"
+                 android:visibility="visible"
                   />
 
-            <TextView
-                android:id="@+id/toolbar_title"
+            <ImageView
+                android:id="@+id/iv_header"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
                 android:layout_gravity="center"
-                android:text=""
-                android:textColor="@color/white"
-                android:textSize="16dp"
-                android:textStyle="normal" />
+                android:src="@drawable/header_icon"
+                />
 
+            <ImageView
+                android:id="@+id/search"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="10dp"
+                android:layout_gravity="center|right"
+                android:src="@drawable/ic_youtube_searched_for_black_24dp"
+                />
         </android.support.v7.widget.Toolbar>
     </android.support.design.widget.AppBarLayout>
 </LinearLayout>

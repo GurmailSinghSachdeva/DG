@@ -48,7 +48,7 @@ public class ServerRequests {
     public static final String REQUEST_GET_MESSAGE = SP_MESSAGE + "iaGetRecentMessages";
     public static final String REQUEST_DELETE_MESSAGE = SP_MESSAGE + "iaDeleteMessages";
 
-    public static final String REQUEST_GET_OFFERS = BASE_URL + "op=GetServiceGetTopOffers";
+    public static final String REQUEST_GET_OFFERS = BASE_URL + "op=GetOnlineTopOffers";
     public static final String REQUEST_TOP_STORES = BASE_URL + "op=GetOnlineBrand";
     public static final String REQUEST_CATEGORIES = BASE_URL + "op=GetCategories" ;
     public static final String REQUEST_LOCAL_DEAL_CATEGORIES = BASE_URL + "op=GetLocalDealCategories" ;

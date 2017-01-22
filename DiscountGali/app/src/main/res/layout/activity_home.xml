@@ -14,24 +14,7 @@
         android:fitsSystemWindows="true"
         android:layout_marginBottom="@dimen/tab_height"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
-    <include
-        layout="@layout/layout_write_something"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="50dp"
-        android:layout_gravity="end|bottom" />
-    <android.support.design.widget.TabLayout
-        android:id="@+id/tabs_bottom"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:fillViewport="false"
-        android:background="@color/app_orange"
-        app:tabGravity="fill"
-        android:layout_gravity="bottom"
-        app:tabIndicatorColor="@color/white"
-        app:tabMode="fixed"
-        app:tabSelectedTextColor="@color/black"
-        app:tabTextColor="@color/white"/>
+
 
     <android.support.design.widget.AppBarLayout
         android:id="@+id/appbar"
@@ -44,7 +27,7 @@
             android:id="@+id/collapsing_toolbar"
             android:layout_width="match_parent"
             android:layout_height="140dp"
-            android:background="@drawable/background"
+            android:background="@color/white"
             android:fitsSystemWindows="true"
             app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
@@ -60,13 +43,75 @@
             android:id="@+id/tabs"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:fillViewport="false"
-            app:tabBackground="@color/white"
-            app:tabGravity="fill"
+            android:fillViewport="true"
+            android:background="@color/app_orange"
+            app:tabBackground="@color/app_orange"
+            app:tabGravity="center"
             app:tabIndicatorColor="@color/app_orange"
-            app:tabMode="fixed"
-            app:tabSelectedTextColor="@color/app_orange"
-            app:tabTextColor="@color/black"
+            app:tabMode="scrollable"
+            app:tabSelectedTextColor="@color/white"
+            app:tabTextColor="@color/dimWhite"
             />
     </android.support.design.widget.AppBarLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_gravity="bottom"
+        android:layout_height="wrap_content">
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:gravity="center"
+            android:id="@+id/rl_invite"
+            android:background="@color/app_orange"
+            android:layout_weight="1">
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:src="@drawable/ic_person_add_black_24dp"
+                android:id="@+id/iv_invite_icon"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:layout_centerInParent="true"
+                android:layout_marginLeft="5dp"
+                android:text="Invite"
+                android:textStyle="bold"
+                android:textAllCaps="true"
+                android:layout_toRightOf="@+id/iv_invite_icon"
+                android:background="@color/app_orange"
+                android:id="@+id/btn_invite"/>
+
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:gravity="center"
+            android:id="@+id/rl_category"
+            android:background="@color/app_orange"
+            android:layout_weight="1">
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:src="@drawable/ic_view_module_black_24dp"
+                android:id="@+id/iv_category"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                android:text="Category"
+                android:layout_marginLeft="5dp"
+                android:textAllCaps="true"
+                android:layout_toRightOf="@+id/iv_category"
+                android:background="@color/app_orange"
+                android:id="@+id/btn_category"/>
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
 </android.support.design.widget.CoordinatorLayout>

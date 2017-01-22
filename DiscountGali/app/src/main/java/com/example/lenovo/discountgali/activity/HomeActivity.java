@@ -18,6 +18,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -25,6 +26,7 @@ import com.example.lenovo.discountgali.R;
 import com.example.lenovo.discountgali.adapter.FeaturedAdapter;
 import com.example.lenovo.discountgali.adapter.NavDrawerAdapter;
 import com.example.lenovo.discountgali.adapter.ViewPagerAdapter;
+import com.example.lenovo.discountgali.fragment.CategoryFragment;
 import com.example.lenovo.discountgali.fragment.FeaturedFragment;
 import com.example.lenovo.discountgali.fragment.HomeFragment;
 import com.example.lenovo.discountgali.fragment.LocalDealCategoryFragment;
@@ -42,7 +44,7 @@ import static com.example.lenovo.discountgali.R.id.DrawerLayout;
 public class HomeActivity extends BaseActivity implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener {
 
     private ViewPager viewPager;
-    private TabLayout tabLayout,tabLout1;
+    private TabLayout tabLayout;
     private ViewPagerAdapter adapter;
     private EditText etTextSearch;
     private ArrayList<BottomTab> bottomtab = new ArrayList<>();
@@ -51,7 +53,7 @@ public class HomeActivity extends BaseActivity implements NavigationView.OnNavig
     private FeaturedAdapter pagerAdapter;
     private ArrayList<String> home_tabs_name = new ArrayList<>();
     private CirclePageIndicator vp_indicator;
-
+    private RelativeLayout rl_invite, rl_category;
     private ArrayList<FeaturedModel> featuredModellist = new ArrayList<>();
     private Toolbar mToolBar;
     private static AppBarLayout appBarLayout;
@@ -67,14 +69,12 @@ public class HomeActivity extends BaseActivity implements NavigationView.OnNavig
         setContentView(R.layout.activity_home_fixed);
 
         initUi();
-        getBottomTabs();
         setUpToolbar();
         getHomeTabs();
         getFeaturedList();
         addTabs();
         setupViewPager(viewPager);
         setListener();
-        addBottomTabs();
         setUpDrawer();
 
 
@@ -94,25 +94,8 @@ public class HomeActivity extends BaseActivity implements NavigationView.OnNavig
 
     private void setListener()
     {
-        tabLout1.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
-            @Override
-            public void onTabSelected(TabLayout.Tab tab) {
-            }
-
-            @Override
-            public void onTabUnselected(TabLayout.Tab tab) {
-
-            }
-
-            @Override
-            public void onTabReselected(TabLayout.Tab tab) {
-                switch (tab.getPosition())
-                {
-                    case 0:invite();break;
-                    case 1:
-                }
-            }
-        });
+        rl_category.setOnClickListener(this);
+        rl_invite.setOnClickListener(this);
         tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
@@ -135,11 +118,11 @@ public class HomeActivity extends BaseActivity implements NavigationView.OnNavig
 
                 int tabPosition = tab.getPosition();
 //                    final Fragment fragment = ((ViewPagerAdapter) viewPager.getAdapter()).getFragmentAtPosition(tabPosition);
-                final HomeFragment fragment = (HomeFragment) viewPager.getAdapter().instantiateItem(viewPager, tabPosition);
-                if (fragment != null) {
-
-                   //TODO: scroll to top
-                }
+//                final HomeFragment fragment = (HomeFragment) viewPager.getAdapter().instantiateItem(viewPager, tabPosition);
+//                if (fragment != null) {
+//
+//                   //TODO: scroll to top
+//                }
             }
         });
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
@@ -192,48 +175,18 @@ public class HomeActivity extends BaseActivity implements NavigationView.OnNavig
             }
         }
     }
-    private void addBottomTabs() {
-        if(bottomtab!=null)
-        {
-            for (int i = 0; i < bottomtab.size(); i++) {
-                TabLayout.Tab tab = tabLout1.newTab();
-                View view = getLayoutInflater().inflate(R.layout.layout_bottom_tab,null);
-                TextView tv = (TextView) view.findViewById(R.id.text_home_tab);
-                ImageView iv = (ImageView) view.findViewById(R.id.iv_badge);
-                tv.setText(bottomtab.get(i).title);
-                iv.setImageResource(bottomtab.get(i).icon_id);
-//                ((TextView)(view.findViewById(R.id.text_home_tab))).setText(home_tabs_name.get(i));
-                tab.setCustomView(view);
-//                tab.setCustomView(getLayoutInflater().inflate(R.layout.layout_home_tab, tabLayout, false));
-//                tab.setText(home_tabs_name.get(i));
-                tabLout1.addTab(tab);
-            }
-        }
-    }
     private void getHomeTabs() {
         //Todo: api call here
         if(home_tabs_name!=null)
         {
             home_tabs_name.add("OFFERS");
             home_tabs_name.add("STORES");
+            home_tabs_name.add("CATEGORIES");
             home_tabs_name.add("Deals");
 //            home_tabs_name.add("PRODUCTS");
         }
     }
 
-    private void getBottomTabs() {
-        //Todo: api call here
-        BottomTab bottomtab1 = new BottomTab();
-        bottomtab1.title = "Invite & Earn";
-        bottomtab1.icon_id = R.drawable.ic_person_add_black_24dp;
-
-        bottomtab.add(bottomtab1);
-        bottomtab1 = new BottomTab();
-        bottomtab1.title = "Categories";
-        bottomtab1.icon_id = R.drawable.ic_view_module_black_24dp;
-
-        bottomtab.add(bottomtab1);
-    }
 
     public void initUi()
     {
@@ -245,7 +198,9 @@ public class HomeActivity extends BaseActivity implements NavigationView.OnNavig
         mToolBar = (Toolbar) findViewById(R.id.toolbar);
         appBarLayout = (AppBarLayout) findViewById(R.id.appbar);
         mDrawer = (DrawerLayout) findViewById(DrawerLayout);
-        tabLout1 = (TabLayout) findViewById(R.id.tabs_bottom);
+        rl_invite = (RelativeLayout) findViewById(R.id.rl_invite);
+        rl_category = (RelativeLayout) findViewById(R.id.rl_category);
+
 
     }
 
@@ -253,22 +208,22 @@ public class HomeActivity extends BaseActivity implements NavigationView.OnNavig
     private void setUpToolbar() {
 
         mToolBar.setNavigationIcon(R.drawable.view_sequential);
-        etTextSearch = (EditText) mToolBar.findViewById(R.id.edit_text_search);
         setSupportActionBar(mToolBar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        mToolBar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (mDrawer.isDrawerOpen(GravityCompat.START)) {
-                    mDrawer.closeDrawer(GravityCompat.START);
-                } else {
-                    mDrawer.openDrawer(GravityCompat.START);
-                }
-
-//                Toast.makeText(getApplicationContext(),"Under Development",Toast.LENGTH_SHORT).show();
-            }
-        });
+        getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+        getSupportActionBar().setDefaultDisplayHomeAsUpEnabled(false);
+//        mToolBar.setNavigationOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                if (mDrawer.isDrawerOpen(GravityCompat.START)) {
+//                    mDrawer.closeDrawer(GravityCompat.START);
+//                } else {
+//                    mDrawer.openDrawer(GravityCompat.START);
+//                }
+//
+////                Toast.makeText(getApplicationContext(),"Under Development",Toast.LENGTH_SHORT).show();
+//            }
+//        });
 
     }
     private void setupViewPager(final ViewPager viewPager) {
@@ -283,6 +238,7 @@ public class HomeActivity extends BaseActivity implements NavigationView.OnNavig
 //            }
             adapter.addFragment(HomeFragment.newInstance("Offers"),"Offers");
             adapter.addFragment(new TopStoresFragment(), "Stores");
+            adapter.addFragment(CategoryFragment.newInstance("Categories"), "categories");
             adapter.addFragment(new LocalDealCategoryFragment(), "LocalDeals");
 
             viewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
@@ -409,6 +365,12 @@ public class HomeActivity extends BaseActivity implements NavigationView.OnNavig
 //                intent.putExtra("user", SharedPreference.getMyProfile());
 //                intent.putExtra("user_model_opened", UserModelsUpdateReceiver.UserModelUpdateType.ROAST.name());
 //                startActivity(intent);
+                break;
+            case R.id.rl_invite:
+                invite();
+                break;
+            case R.id.rl_category:
+                viewPager.setCurrentItem(2);
                 break;
         }
     }

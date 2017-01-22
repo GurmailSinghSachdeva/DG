@@ -25,13 +25,13 @@ public class HomeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private OnItemClickListener onItemClickListener;
     private final LayoutInflater inflater;
-    private Context context;
+    private Context context1;
     private ArrayList<TopOffers> topOfferslist = new ArrayList<>();
     public HomeAdapter(Activity context, ArrayList<TopOffers> topOfferslist) {
-        this.context = context;
+        this.context1 = context;
         this.topOfferslist = topOfferslist;
         inflater = LayoutInflater.from(context);
-        onItemClickListener = (OnItemClickListener) context;
+//        onItemClickListener = (OnItemClickListener) context1;
     }
 
     @Override
