@@ -43,6 +43,7 @@ public class NavDrawerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         VHHeader item = (VHHeader) holder;
 
         item.title.setText(dataItem.title);
+        item.icon.setImageResource(dataItem.icon_id);
         }
 
 

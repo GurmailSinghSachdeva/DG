@@ -41,7 +41,7 @@
                 android:layout_alignParentRight="true"
                 android:layout_marginRight="10dp"
                 android:layout_gravity="center|right"
-                android:src="@drawable/ic_youtube_searched_for_black_24dp"
+                android:src="@drawable/magnify"
                 />
         </android.support.v7.widget.Toolbar>
     </android.support.design.widget.AppBarLayout>

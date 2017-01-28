@@ -3,6 +3,7 @@ package com.example.lenovo.discountgali.adapter;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Color;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -13,7 +14,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.lenovo.discountgali.R;
+import com.example.lenovo.discountgali.fragment.HomeFragment;
 import com.example.lenovo.discountgali.model.TopOffers;
+import com.example.lenovo.discountgali.utility.Utils;
 import com.example.lenovo.discountgali.utils.ImageLoaderUtils;
 
 import java.util.ArrayList;
@@ -23,15 +26,16 @@ import java.util.ArrayList;
  */
 public class HomeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
+
     private OnItemClickListener onItemClickListener;
     private final LayoutInflater inflater;
-    private Context context1;
+    private Activity context;
     private ArrayList<TopOffers> topOfferslist = new ArrayList<>();
     public HomeAdapter(Activity context, ArrayList<TopOffers> topOfferslist) {
-        this.context1 = context;
+        this.context = context;
         this.topOfferslist = topOfferslist;
         inflater = LayoutInflater.from(context);
-//        onItemClickListener = (OnItemClickListener) context1;
+//        this.onItemClickListener = (OnItemClickListener) context;
     }
 
     @Override
@@ -68,7 +72,7 @@ TopOffers topOffers = topOfferslist.get(position);
             return null;
         return topOfferslist.get(position);
     }
-    public class MyViewHolder extends RecyclerView.ViewHolder {
+    public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         public TextView brandname,date, branddesc, offertitle;
         public ImageView dealLogo;
@@ -81,6 +85,13 @@ TopOffers topOffers = topOfferslist.get(position);
             offertitle = (TextView) itemView.findViewById(R.id.offertitle);
             dealLogo = (ImageView) itemView.findViewById(R.id.dealLogo);
 
+            itemView.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View view) {
+            Utils.showOfferDetailActivity(context, topOfferslist.get(getAdapterPosition()));
+//            onItemClickListener.onItemClicked(topOfferslist.get(getAdapterPosition()));
         }
     }
     public interface OnItemClickListener {

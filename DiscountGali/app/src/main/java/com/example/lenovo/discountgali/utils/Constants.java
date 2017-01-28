@@ -37,7 +37,7 @@ public class Constants {
 //    public static final String UPLOAD_PROFILE_PIC_URL = "http://192.168.0.82/Roast/Services/UploadServices/uploadUserProfileImage";
 //    public static final String UPLOAD_ROAST_PIC_URL = "http://192.168.0.82/Roast/UploadServices/uploadRoastImage";
 
-    public static final int PAGE_START_DEFAULT = 0;
+    public static final int PAGE_START_DEFAULT = 1;
     public static final int PAGE_LIMIT_DEFAULT = 15; // -1 = all records, -2 = page limit set on server, any positive value = will fetch those no. of records
 
     public static final int PAGE_LIMIT_RECENT = 20;
@@ -124,6 +124,9 @@ public class Constants {
     public interface Grids {
         int Top_stores = 3;
         int Local_Deal_Categories = 2;
+    }
+    public interface ACTIVITYFORRESULT {
+        int REQUESTOFFERDETAIL = 1;
     }
 }
 

@@ -25,8 +25,12 @@ import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.ImageView;
 
+import com.android.volley.NoConnectionError;
 import com.example.lenovo.discountgali.R;
+import com.example.lenovo.discountgali.activity.OfferDetailActivity;
 import com.example.lenovo.discountgali.fragment.CustomSharingDialogFragment;
+import com.example.lenovo.discountgali.fragment.HomeFragment;
+import com.example.lenovo.discountgali.model.TopOffers;
 import com.example.lenovo.discountgali.network.api.APIException;
 import com.example.lenovo.discountgali.utils.Constants;
 import com.example.lenovo.discountgali.utils.DialogUtils;
@@ -904,5 +908,18 @@ public class Utils {
     }
     public static Context getApplicationContext() {
         return mContext;
+    }
+
+    public static boolean isNoInternetException(Exception e) {
+        return e instanceof NoConnectionError;
+    }
+
+    public static void showOfferDetailActivity(Activity context, TopOffers topOffers) {
+        if (context != null) {
+            Intent intent = new Intent(context, OfferDetailActivity.class);
+            intent.putExtra("offer", topOffers);
+            context.startActivityForResult(intent, Constants.ACTIVITYFORRESULT.REQUESTOFFERDETAIL);
+            context.overridePendingTransition(0, 0);
+        }
     }
 }

@@ -1,115 +1,155 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
+    android:orientation="vertical"
     android:layout_height="match_parent"
-    android:background="@color/white">
+    >
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="50dp"></RelativeLayout>
 
-    <include
-        android:id="@+id/tb"
-        layout="@layout/toolbar_layout"
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-
-
-    <ScrollView
-        android:id="@+id/sc"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/tb"
-        android:layout_marginBottom="@dimen/scrollmargin60dp"
-        android:fillViewport="true">
-
-        <LinearLayout
+        android:orientation="vertical"
+        android:weightSum="4"
+        android:layout_height="fill_parent">
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="fill_parent"
-            android:orientation="vertical"
-            android:paddingLeft="@dimen/activity_horizontal_margin"
-            android:paddingRight="@dimen/activity_horizontal_margin"
-            android:paddingTop="12dp">
+            android:id="@+id/couponArea"
+            android:layout_weight="3"
+            android:background="@color/white"
+            android:layout_height="0dp"
+            >
+            <ScrollView
+                android:id="@+id/sc"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/scrollmargin60dp"
+                android:fillViewport="true">
 
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/iv_offerLogo"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="FreeCharge"
-                    android:id="@+id/tv_brandName"
-                    android:layout_toRightOf="@+id/iv_offerLogo"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Validity:"
-                    android:id="@+id/tv_validity_fixed"
-                    android:layout_below="@+id/tv_brandName"
-                    android:layout_toRightOf="@+id/iv_offerLogo"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="12/23/2017 Mon"
-                    android:id="@+id/tv_validity"
-                    android:layout_below="@+id/tv_validity_fixed"
-                    android:layout_toRightOf="@+id/iv_offerLogo"/>
-            </RelativeLayout>
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="fill_parent"
+                    android:orientation="vertical"
+                    android:paddingLeft="@dimen/activity_horizontal_margin"
+                    android:paddingRight="@dimen/activity_horizontal_margin"
+                    android:paddingTop="12dp">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/tv_title"
-                    android:text="Title"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/tv_title"
-                    android:id="@+id/tv_description_fixed"
-                    android:text="Description:"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/tv_description_fixed"
-                    android:id="@+id/tv_description"
-                    android:text="Description"/>
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_marginTop="20dp"
+                        android:layout_height="wrap_content">
+                        <ImageView
+                            android:layout_width="110dp"
+                            android:layout_height="55dp"
+                            android:padding="5dp"
+                            android:layout_centerVertical="true"
+                            android:background="@drawable/border_edittext"
+                            android:id="@+id/iv_offerLogo"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="FreeCharge"
+                            android:layout_alignTop="@+id/iv_offerLogo"
+                            android:textColor="@color/black"
+                            android:layout_marginLeft="20dp"
+                            android:id="@+id/tv_brandName"
+                            android:layout_toRightOf="@+id/iv_offerLogo"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Validity:"
+                            android:layout_marginLeft="20dp"
+                            android:id="@+id/tv_validity_fixed"
+                            android:layout_below="@+id/tv_brandName"
+                            android:layout_toRightOf="@+id/iv_offerLogo"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="12/23/2017 Mon"
+                            android:id="@+id/tv_validity"
+                            android:layout_marginLeft="20dp"
+                            android:layout_below="@+id/tv_validity_fixed"
+                            android:layout_toRightOf="@+id/iv_offerLogo"/>
+                    </RelativeLayout>
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
 
-            </RelativeLayout>
-        </LinearLayout>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="30dp"
+                            android:id="@+id/tv_title"
+                            android:text="Title"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/tv_title"
+                            android:id="@+id/tv_description_fixed"
+                            android:textAllCaps="true"
+                            android:layout_marginTop="10dp"
+                            android:textColor="@color/black"
+                            android:text="Description:"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/tv_description_fixed"
+                            android:id="@+id/tv_description"
+                            android:text="Description"/>
 
-    </ScrollView>
+                    </RelativeLayout>
+                </LinearLayout>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/tv_grab_coupon"
-        android:id="@+id/tv_long_press"
-        android:layout_centerHorizontal="true"
-        android:text="Long press to copy the coupon"/>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/tv_coupon_code"
-        android:layout_above="@+id/tv_long_press"
-        android:layout_centerHorizontal="true"
-        android:text="Grab1243"/>
+            </ScrollView>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_above="@+id/tv_grab_coupon"
+                android:id="@+id/tv_long_press"
+                android:layout_centerHorizontal="true"
+                android:text="Long press to copy the coupon"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/tv_coupon_code"
+                android:layout_above="@+id/tv_long_press"
+                android:layout_centerHorizontal="true"
+                android:text="Grab1243"/>
 
-    <TextView
-        android:id="@+id/tv_grab_coupon"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/login_button_selector"
-        android:enabled="true"
-        android:gravity="center_horizontal"
-        android:padding="18dp"
-        android:textAllCaps="true"
-        android:text="Grab the coupon"
-        android:textColor="@color/button_text_selector"
-        android:textStyle="bold"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
-</RelativeLayout>
+            <TextView
+                android:id="@+id/tv_grab_coupon"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/login_button_selector"
+                android:enabled="true"
+                android:gravity="center_horizontal"
+                android:padding="18dp"
+                android:textAllCaps="true"
+                android:text="Grab the coupon"
+                android:textColor="@color/button_text_selector"
+                android:textStyle="bold"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true" />
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:background="@color/lightBlack"
+            android:id="@+id/extraspace">
+
+<ImageView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:id="@+id/iv_close"
+    android:layout_centerInParent="true"
+    android:src="@drawable/close_circle_outline"/>
+        </RelativeLayout>
+
+    </LinearLayout>
+
+
+</LinearLayout>

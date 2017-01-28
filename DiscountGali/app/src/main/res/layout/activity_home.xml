@@ -12,7 +12,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:fitsSystemWindows="true"
-        android:layout_marginBottom="@dimen/tab_height"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
 
 
@@ -28,14 +27,12 @@
             android:layout_width="match_parent"
             android:layout_height="140dp"
             android:background="@color/white"
-            android:fitsSystemWindows="true"
-            app:layout_scrollFlags="scroll|exitUntilCollapsed">
+            android:fitsSystemWindows="true">
 
             <include layout="@layout/layout_featured_deals"
                 android:layout_below="@+id/toolbar_con"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_scrollFlags="scroll|exitUntilCollapsed|snap"
                 android:id="@+id/layout_featured_deals"/>
         </android.support.design.widget.CollapsingToolbarLayout>
 
@@ -44,10 +41,11 @@
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:fillViewport="true"
+            app:tabTextAppearance="@style/TabLayoutTextStyle"
             android:background="@color/app_orange"
             app:tabBackground="@color/app_orange"
             app:tabGravity="center"
-            app:tabIndicatorColor="@color/app_orange"
+            app:tabIndicatorColor="@color/white"
             app:tabMode="scrollable"
             app:tabSelectedTextColor="@color/white"
             app:tabTextColor="@color/dimWhite"
@@ -56,6 +54,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_gravity="bottom"
+        android:visibility="gone"
         android:layout_height="wrap_content">
         <RelativeLayout
             android:layout_width="0dp"

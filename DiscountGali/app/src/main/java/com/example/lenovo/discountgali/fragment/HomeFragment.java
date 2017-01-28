@@ -30,6 +30,7 @@ import com.example.lenovo.discountgali.network.api.ApiCall;
 import com.example.lenovo.discountgali.network.apicall.GetRecentMessageApiCall;
 import com.example.lenovo.discountgali.utility.AlertUtils;
 import com.example.lenovo.discountgali.utility.Syso;
+import com.example.lenovo.discountgali.utility.Utils;
 import com.example.lenovo.discountgali.utils.EndlessRecyclerOnScrollListener;
 
 import java.util.ArrayList;
@@ -76,6 +77,7 @@ public class HomeFragment extends Fragment implements SwipeRefreshLayout.OnRefre
             };
             mRecyclerView.addOnScrollListener(endlessScrollListener);
             mAdapter = new HomeAdapter(getActivity(), topOfferslist);
+
             mRecyclerView.setAdapter(mAdapter);
             swipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.swipe_refresh_layout);
             swipeRefreshLayout.setOnRefreshListener(this);
@@ -155,7 +157,8 @@ public class HomeFragment extends Fragment implements SwipeRefreshLayout.OnRefre
 //                            break;
 //                    }
                     } else {
-                        AlertUtils.showToast(getActivity(), e.getMessage());
+                        Utils.handleError(e,getActivity());
+//                        AlertUtils.showToast(getActivity(), e.getMessage());
                     }
                 }
             }, false);
@@ -204,8 +207,9 @@ swipeRefreshLayout.setRefreshing(false);
 
     @Override
     public void onItemClicked(TopOffers topOffers) {
-        Intent intent = new Intent(getActivity(), OfferDetailActivity.class);
-        intent.putExtra("offer", topOffers);
-        startActivity(intent);
+        Utils.showOfferDetailActivity(getActivity(), topOffers);
+
     }
+
+
 }

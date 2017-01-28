@@ -1,19 +1,17 @@
 package com.example.lenovo.discountgali.adapter;
 
 import android.app.Activity;
-import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.lenovo.discountgali.R;
-import com.example.lenovo.discountgali.fragment.TopStoresFragment;
+import com.example.lenovo.discountgali.interfaces.CategoryInterface;
 import com.example.lenovo.discountgali.model.ModelCategories;
-import com.example.lenovo.discountgali.utility.Syso;
-import com.example.lenovo.discountgali.utils.ImageLoaderUtils;
 
 import java.util.List;
 
@@ -23,6 +21,34 @@ import java.util.List;
 
 public class AdapterCategories extends RecyclerView.Adapter<AdapterCategories.MyViewHolder>{
 
+    private CategoryInterface categoryInterface;
+    private int[]                               categoryIds = { R.drawable.file_image,
+            R.drawable.automobile,
+            R.drawable.bags,
+            R.drawable.books_stationary,
+            R.drawable.camera,
+            R.drawable.electronics,
+            R.drawable.eyecare,
+            R.drawable.flowers_gifts,
+            R.drawable.food_dining,
+            R.drawable.fun_entertainment,
+            R.drawable.grocery,
+            R.drawable.health_beauty,
+            R.drawable.home_kitchen,
+            R.drawable.hotels_travels,
+            R.drawable.kids_clothing,
+            R.drawable.kids_toys,
+            R.drawable.laptop_computer,
+            R.drawable.lingerie,
+            R.drawable.medical,
+            R.drawable.mens_fashion,
+            R.drawable.mobile,
+            R.drawable.file_image,
+            R.drawable.recharge,
+            R.drawable.health_fitness,
+            R.drawable.watch,
+            R.drawable.women_fashion};
+
     private List<String> listCategories;
     private Activity context;
     private OnItemClickListener listener;
@@ -30,6 +56,7 @@ public class AdapterCategories extends RecyclerView.Adapter<AdapterCategories.My
     public AdapterCategories(Activity activity, List<String> listCategories) {
         this.listCategories = listCategories;
         this.context = activity;
+        categoryInterface = (CategoryInterface) activity;
 //        this.listener= (OnItemClickListener) context;
     }
 
@@ -49,6 +76,16 @@ public class AdapterCategories extends RecyclerView.Adapter<AdapterCategories.My
         final String modelCategories = listCategories.get(position);
 
         holder.categoryName.setText(modelCategories);
+        holder.categoryLogo.setImageResource(categoryIds[position]);
+        if(position == 1)
+        {
+            holder.containerCategories.setBackgroundColor(context.getResources().getColor(R.color.gray));
+        }
+        else {
+            holder.containerCategories.setBackgroundColor(context.getResources().getColor(R.color.white));
+
+        }
+//        holder.onBind(modelCategories);
 //        ImageLoaderUtils.loadImage(modelCategories.getCategoryLogo(), holder.categoryLogo);
     }
 
@@ -66,6 +103,7 @@ public class AdapterCategories extends RecyclerView.Adapter<AdapterCategories.My
         private TextView categoryName;
         private int position;
         private ModelCategories modelCategories;
+        private RelativeLayout containerCategories;
 
 
         public MyViewHolder(View itemView) {
@@ -73,7 +111,7 @@ public class AdapterCategories extends RecyclerView.Adapter<AdapterCategories.My
 
             categoryLogo = (ImageView) itemView.findViewById(R.id.icon_category);
             categoryName = (TextView) itemView.findViewById(R.id.text_category);
-
+            containerCategories = (RelativeLayout) itemView.findViewById(R.id.container_categories);
             itemView.setOnClickListener(this);
         }
 

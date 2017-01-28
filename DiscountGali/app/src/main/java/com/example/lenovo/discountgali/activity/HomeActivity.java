@@ -39,6 +39,7 @@ import com.example.lenovo.discountgali.widget.pageindicator.CirclePageIndicator;
 import java.util.ArrayList;
 
 import static com.example.lenovo.discountgali.R.id.DrawerLayout;
+import static com.example.lenovo.discountgali.R.id.cancel_action;
 
 
 public class HomeActivity extends BaseActivity implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener {
@@ -56,6 +57,7 @@ public class HomeActivity extends BaseActivity implements NavigationView.OnNavig
     private RelativeLayout rl_invite, rl_category;
     private ArrayList<FeaturedModel> featuredModellist = new ArrayList<>();
     private Toolbar mToolBar;
+    private ImageView ivNavDrawer;
     private static AppBarLayout appBarLayout;
     private android.support.v4.widget.DrawerLayout mDrawer;
 
@@ -94,6 +96,7 @@ public class HomeActivity extends BaseActivity implements NavigationView.OnNavig
 
     private void setListener()
     {
+        ivNavDrawer.setOnClickListener(this);
         rl_category.setOnClickListener(this);
         rl_invite.setOnClickListener(this);
         tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
@@ -200,7 +203,7 @@ public class HomeActivity extends BaseActivity implements NavigationView.OnNavig
         mDrawer = (DrawerLayout) findViewById(DrawerLayout);
         rl_invite = (RelativeLayout) findViewById(R.id.rl_invite);
         rl_category = (RelativeLayout) findViewById(R.id.rl_category);
-
+        ivNavDrawer = (ImageView) mToolBar.findViewById(R.id.navDrawerIcon);
 
     }
 
@@ -212,6 +215,7 @@ public class HomeActivity extends BaseActivity implements NavigationView.OnNavig
         getSupportActionBar().setDisplayShowTitleEnabled(false);
         getSupportActionBar().setDisplayHomeAsUpEnabled(false);
         getSupportActionBar().setDefaultDisplayHomeAsUpEnabled(false);
+
 //        mToolBar.setNavigationOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View v) {
@@ -291,12 +295,17 @@ public class HomeActivity extends BaseActivity implements NavigationView.OnNavig
         mRecyclerView.setHasFixedSize(true); // Letting the system know that the list objects are of fixed size
         // TODO: Move all strings to strings.xml file
         final ArrayList<NavDrawerAdapter.NavMenuItem> navMenuItems = new ArrayList<NavDrawerAdapter.NavMenuItem>();
-        navMenuItems.add(new NavDrawerAdapter.NavMenuItem("Hot Offers", R.drawable.file_image));
-        navMenuItems.add(new NavDrawerAdapter.NavMenuItem("Invite & Earn", R.drawable.file_image));
-        navMenuItems.add(new NavDrawerAdapter.NavMenuItem("All Stores", R.drawable.file_image));
-        navMenuItems.add(new NavDrawerAdapter.NavMenuItem("Notifications", R.drawable.file_image));
-        navMenuItems.add(new NavDrawerAdapter.NavMenuItem("About Us", R.drawable.file_image));
-        navMenuItems.add(new NavDrawerAdapter.NavMenuItem("Rate our app", R.drawable.file_image));
+        navMenuItems.add(new NavDrawerAdapter.NavMenuItem("Home", R.drawable.home));
+        navMenuItems.add(new NavDrawerAdapter.NavMenuItem("All Stores", R.drawable.stores_icon));
+        navMenuItems.add(new NavDrawerAdapter.NavMenuItem("Contest", R.drawable.contest));
+        navMenuItems.add(new NavDrawerAdapter.NavMenuItem("Notifications", R.drawable.notifications));
+        navMenuItems.add(new NavDrawerAdapter.NavMenuItem("About Us", R.drawable.about_us));
+        navMenuItems.add(new NavDrawerAdapter.NavMenuItem("Rate us", R.drawable.rate_us));
+        navMenuItems.add(new NavDrawerAdapter.NavMenuItem("Invite & Earn", R.drawable.invitation));
+        navMenuItems.add(new NavDrawerAdapter.NavMenuItem("Deal of the day", R.drawable.deal_day));
+        navMenuItems.add(new NavDrawerAdapter.NavMenuItem("Help us Improve", R.drawable.help_us));
+        navMenuItems.add(new NavDrawerAdapter.NavMenuItem("Merchant", R.drawable.file_image));
+        navMenuItems.add(new NavDrawerAdapter.NavMenuItem("Contact us", R.drawable.contact_us));
 
         NavDrawerAdapter mAdapter = new NavDrawerAdapter(navMenuItems, this);
         mRecyclerView.setAdapter(mAdapter);
@@ -306,18 +315,31 @@ public class HomeActivity extends BaseActivity implements NavigationView.OnNavig
             @Override
             public void onItemClicked(int index) {
                 String navItem = navMenuItems.get(index).title;
-                if (navItem.equalsIgnoreCase("Hot Offers")) {
+                if (navItem.equalsIgnoreCase("Home")) {
+                    viewPager.setCurrentItem(0);
 //                    startActivity(new Intent(HomeActivity.this, LikedStories.class));
-                } else if (navItem.equalsIgnoreCase("Invite & Earn")) {
-                    invite();
                 } else if (navItem.equalsIgnoreCase("All Stores")) {
+                    viewPager.setCurrentItem(1);
+
+                } else if (navItem.equalsIgnoreCase("Contest")) {
 //                    startActivity(new Intent(HomeActivity.this, LikedStories.class));
                 } else if (navItem.equalsIgnoreCase("Notifications")) {
 //                    startActivity(new Intent(HomeActivity.this, PushNotificationActivity.class));
                 } else if (navItem.equalsIgnoreCase("About Us")) {
 //                    clearSearchHistoryDialog(HomeActivity.this);
-                } else if (navItem.equalsIgnoreCase("Rate our app")) {
+                } else if (navItem.equalsIgnoreCase("Rate us")) {
                     Utils.navigatePlayStore();
+                }else if (navItem.equalsIgnoreCase("Invite & Earn")) {
+                    invite();
+//                    clearSearchHistoryDialog(HomeActivity.this);
+                }else if (navItem.equalsIgnoreCase("Deal of the day")) {
+//                    clearSearchHistoryDialog(HomeActivity.this);
+                }else if (navItem.equalsIgnoreCase("Help us Improve")) {
+//                    clearSearchHistoryDialog(HomeActivity.this);
+                }else if (navItem.equalsIgnoreCase("Merchant")) {
+//                    clearSearchHistoryDialog(HomeActivity.this);
+                }else if (navItem.equalsIgnoreCase("Contact us")) {
+//                    clearSearchHistoryDialog(HomeActivity.this);
                 }
 
                 mDrawer.closeDrawer(GravityCompat.START);
@@ -372,6 +394,14 @@ public class HomeActivity extends BaseActivity implements NavigationView.OnNavig
             case R.id.rl_category:
                 viewPager.setCurrentItem(2);
                 break;
+            case R.id.navDrawerIcon:
+                if (mDrawer.isDrawerOpen(GravityCompat.START)) {
+                    mDrawer.closeDrawer(GravityCompat.START);
+                } else {
+                    mDrawer.openDrawer(GravityCompat.START);
+                }
+                break;
+
         }
     }
 
