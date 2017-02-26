@@ -3,6 +3,7 @@ package com.example.lenovo.discountgali.fragment;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -13,6 +14,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.daimajia.androidanimations.library.Techniques;
+import com.daimajia.androidanimations.library.YoYo;
 import com.example.lenovo.discountgali.R;
 import com.example.lenovo.discountgali.activity.HomeActivity;
 import com.example.lenovo.discountgali.activity.OfferDetailActivity;
@@ -24,8 +27,12 @@ import com.example.lenovo.discountgali.model.TopOffers;
 import com.example.lenovo.discountgali.network.Code;
 import com.example.lenovo.discountgali.network.HttpRequestHandler;
 import com.example.lenovo.discountgali.network.api.ApiCall;
+import com.example.lenovo.discountgali.network.apicall.GetCategoriesApiCall;
+import com.example.lenovo.discountgali.network.apicall.GetOffersOnlineCategoryWise;
 import com.example.lenovo.discountgali.network.apicall.GetRecentMessageApiCall;
 import com.example.lenovo.discountgali.utility.AlertUtils;
+import com.example.lenovo.discountgali.utility.Syso;
+import com.example.lenovo.discountgali.utility.Utils;
 import com.example.lenovo.discountgali.utils.EndlessRecyclerOnScrollListener;
 
 import java.lang.reflect.Array;
@@ -37,7 +44,7 @@ import java.util.List;
  * Created by lenovo on 22-01-2017.
  */
 
-public class CategoryFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener, HomeAdapter.OnItemClickListener {
+public class CategoryFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener, HomeAdapter.OnItemClickListener, AdapterCategories.OnItemClickListener {
 
     private RecyclerView                        rv_categories, rv_offers;
     private LinearLayoutManager                 linearLayoutManager, horizontalLayoutManager;
@@ -46,8 +53,12 @@ public class CategoryFragment extends Fragment implements SwipeRefreshLayout.OnR
     private HomeAdapter                         mAdapter;
     private ArrayList<TopOffers>                topOfferslist = new ArrayList<>();
     private String                              serviceId;
-    private int                                 categoryId = 0;
+    private int                                 categoryId = 1;
     private AdapterCategories                   adapterCategories;
+    private ArrayList<ModelCategories>          categoriesList = new ArrayList<>();
+    private boolean isApiRunning;
+    private boolean isLastItemFound;
+    private Handler handler = new Handler();
 
     @Nullable
     @Override
@@ -58,25 +69,26 @@ public class CategoryFragment extends Fragment implements SwipeRefreshLayout.OnR
         parseArguments();
         setRecyclerViews();
         setListeners();
+        getCategoriesApiCall();
 
         return view;
     }
 
     private void setListeners() {
         swipeRefreshLayout.setOnRefreshListener(this);
-//        swipeRefreshLayout.post(new Runnable() {
-//            @Override
-//            public void run() {
-//
-//                getTopOffers();
-//            }
-//        });
+        swipeRefreshLayout.post(new Runnable() {
+            @Override
+            public void run() {
+
+                getOffers();
+            }
+        });
 
         endlessScrollListener = new EndlessRecyclerOnScrollListener(linearLayoutManager) {
             @Override
             public void onLoadMore(int current_page) {
 
-//                    getOffers(serviceId, current_page, visibleThreshold)
+                    getOffers(current_page + 1, visibleThreshold);
             }
 
             @Override
@@ -96,7 +108,7 @@ public class CategoryFragment extends Fragment implements SwipeRefreshLayout.OnR
     private void setCategoryRecyclerView() {
         horizontalLayoutManager = new LinearLayoutManager(getActivity(),LinearLayoutManager.HORIZONTAL, false);
         rv_categories.setLayoutManager(horizontalLayoutManager);
-        adapterCategories = new AdapterCategories(getActivity(), Arrays.asList(getResources().getStringArray(R.array.categories)));
+        adapterCategories = new AdapterCategories(getActivity(), categoriesList, this, 1);
         rv_categories.setHasFixedSize(true);
         rv_categories.setAdapter(adapterCategories);
     }
@@ -110,57 +122,77 @@ public class CategoryFragment extends Fragment implements SwipeRefreshLayout.OnR
     }
 
 
-//    private void getOffers() {
-//
-//        try{
-//
-//            if(isApiRunning)
-//            {
-//                return;
-//            }
-//        swipeRefreshLayout.setRefreshing(true);
-//        final GetOffersCategoryWiseApiCall apiCall = new GetOffersCategoryWiseApiCall();
-//        HttpRequestHandler.getInstance(getActivity()).executeRequest(apiCall, new ApiCall.OnApiCallCompleteListener() {
-//            @Override
-//            public void onComplete(Exception e) {
-////                    dismissProgressDialog();
-//                swipeRefreshLayout.setRefreshing(false);
-//                if (e == null) {
-//                    ServerResponse<TopOffers> serverResponse = (ServerResponse<TopOffers>) changePasswordApiCall.getResult();
-//                    if(serverResponse!=null)
-//                    {
-//                        switch (serverResponse.baseModel.MessageCode)
-//                        {
-//                            case Code.SUCCESS_MESSAGE_CODE:
-//                                topOfferslist.addAll(serverResponse.data);
-//                                mAdapter.notifyDataSetChanged();
-//                                break;
-//                        }
+    private void getOffers(int... pagingParams) {
+
+        try {
+            if (isApiRunning) {
+                Syso.print("INSIDE " + "API RUNNING");
+                if (pagingParams.length == 2) {
+                    endlessScrollListener.decreasePagingCount();
+                }
+                return;
+            }
+
+            if (isLastItemFound) {
+                return;
+            }
+            isApiRunning = true;
+            swipeRefreshLayout.setRefreshing(true);
+            final GetOffersOnlineCategoryWise apiCall;
+            if (pagingParams.length == 2) {
+                apiCall = new GetOffersOnlineCategoryWise(pagingParams[0], pagingParams[1], adapterCategories.checkedCategory);
+            } else {
+                apiCall = new GetOffersOnlineCategoryWise(adapterCategories.checkedCategory);
+            }
+            HttpRequestHandler.getInstance(getActivity()).executeRequest(apiCall, new ApiCall.OnApiCallCompleteListener() {
+                @Override
+                public void onComplete(Exception e) {
+//                    dismissProgressDialog();
+                    isApiRunning = false;
+
+                    swipeRefreshLayout.setRefreshing(false);
+                    if (e == null) {
+
+                        try {
+                            ServerResponse<TopOffers> serverResponse = (ServerResponse<TopOffers>) apiCall.getResult();
+                            if (serverResponse != null) {
+                                switch (serverResponse.baseModel.MessageCode) {
+                                    case Code.SUCCESS_MESSAGE_CODE:
+                                        topOfferslist.addAll(serverResponse.data);
+                                        mAdapter.notifyDataSetChanged();
+
+                                        if(topOfferslist.size()>0 && topOfferslist.size() == apiCall.getTotalRecords())
+                                            isLastItemFound = true;
+
+                                        break;
+                                }
+                            }
+//                    ServerResponse serverResponse = (ServerResponse) changePasswordApiCall.getResult();
+//                    switch (serverResponse.getCode()){
+//                        case Code.CHANGED_PASSWORD_SUCCESS:
+//                            finish();
+//                            AlertUtils.showToast(ChangePasswordActivity.this, serverResponse.getMessage());
+//                            break;
+//                        default:
+//                            AlertUtils.showToast(ChangePasswordActivity.this, !TextUtils.isEmpty(serverResponse.getMessage()) ? serverResponse.getMessage() : getString(R.string.alert_invalid_response));
+//                            break;
 //                    }
-////                    ServerResponse serverResponse = (ServerResponse) changePasswordApiCall.getResult();
-////                    switch (serverResponse.getCode()){
-////                        case Code.CHANGED_PASSWORD_SUCCESS:
-////                            finish();
-////                            AlertUtils.showToast(ChangePasswordActivity.this, serverResponse.getMessage());
-////                            break;
-////                        default:
-////                            AlertUtils.showToast(ChangePasswordActivity.this, !TextUtils.isEmpty(serverResponse.getMessage()) ? serverResponse.getMessage() : getString(R.string.alert_invalid_response));
-////                            break;
-////                    }
-//                } else {
-//                    AlertUtils.showToast(getActivity(), e.getMessage());
-//                }
-//            }
-//        }, false);
-//
-//
-////        for(int i=0; i<100; i++)
-////        {
-////            topOfferslist.add(new TopOffers());
-////        }
-////        mAdapter.notifyDataSetChanged();
-//    }
-//
+                        } catch (Exception e1) {
+                            Utils.handleError("No Deals Available", getActivity(), null);
+
+                        }
+                    } else {
+                        AlertUtils.showToast(getActivity(), e.getMessage());
+                    }
+                }
+            }, false);
+
+        } catch (Exception e) {
+            Utils.handleError(e, getActivity());
+        }
+    }
+
+
     public void initUi(View view)
     {
         rv_offers = (RecyclerView) view.findViewById(R.id.recyclerView);
@@ -184,19 +216,96 @@ public class CategoryFragment extends Fragment implements SwipeRefreshLayout.OnR
     }
 
     @Override
-    public void onResume() {
-        super.onResume();
+    public void onRefresh() {
+        Syso.print("INSIDE " + "onrefresh Home fragment");
+
+        resetLoading();
+        getOffers();
+
+    }
+    private void resetLoading() {
+        isLastItemFound = false;
+        topOfferslist.clear();
+        if (mAdapter != null && rv_offers != null)
+            mAdapter.notifyDataSetChanged();
+        endlessScrollListener.reset();
+    }
+
+    public void scrollToTop() {
+        if (linearLayoutManager != null && rv_offers != null && mAdapter != null)
+            linearLayoutManager.scrollToPositionWithOffset(0, 0);
     }
 
     @Override
-    public void onRefresh() {
-        swipeRefreshLayout.setRefreshing(false);
-    }
+    public void onResume() {
+        super.onResume();
+        handler.post(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    if (mAdapter != null && rv_offers != null)
+                        mAdapter.notifyDataSetChanged();
+                } catch (Exception e) {
+                }
+            }
+        });
 
+        animateCategoriesStrip();
+    }
     @Override
     public void onItemClicked(TopOffers topOffers) {
         Intent intent = new Intent(getActivity(), OfferDetailActivity.class);
         intent.putExtra("offer", topOffers);
         startActivity(intent);
+    }
+
+        private void getCategoriesApiCall() {
+        try {
+
+            final GetCategoriesApiCall apiCall;
+
+            apiCall = new GetCategoriesApiCall();
+
+            HttpRequestHandler.getInstance(getActivity().getApplicationContext()).executeRequest(apiCall, new ApiCall.OnApiCallCompleteListener() {
+
+                @Override
+                public void onComplete(Exception e) {
+                    if (e == null) { // Success
+                        try {
+                            categoriesList.clear();
+                            categoriesList.addAll(apiCall.getCategoriesList());
+                            adapterCategories.notifyDataSetChanged();
+
+
+                        } catch (Exception e1) {
+                            Utils.handleError(e1, getActivity());
+                        }
+                    } else { // Failure
+                        Utils.handleError(e, getActivity());
+                    }
+
+                }
+            }, false);
+        } catch (Exception e) {
+            Utils.handleError(e, getActivity());
+        }
+
+
+    }
+
+
+    @Override
+    public void onItemClick() {
+
+        onRefresh();
+    }
+
+    public void animateCategoriesStrip(){
+        if(rv_categories!=null)
+        {
+            YoYo.with(Techniques.FlipInX)
+                    .duration(700)
+                    .playOn(rv_categories);
+        }
     }
 }

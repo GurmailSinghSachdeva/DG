@@ -5,6 +5,8 @@ import android.content.Context;
 import com.example.lenovo.discountgali.model.ModelTopStores;
 import com.example.lenovo.discountgali.model.ServerResponse;
 import com.example.lenovo.discountgali.network.ServerRequests;
+import com.example.lenovo.discountgali.utility.Syso;
+import com.example.lenovo.discountgali.utils.Constants;
 import com.example.lenovo.discountgali.utils.JSONParsingUtils;
 
 import org.json.JSONArray;
@@ -28,20 +30,19 @@ import javax.xml.parsers.ParserConfigurationException;
 
 public class GetTopStoreApiCall extends BaseApiCall {
 
-    private String service_id;
     private int page_start,page_limit;
-    private Context context;
     private String result;
     private String outputjson;
     private ServerResponse<ModelTopStores> serverResponse = new ServerResponse<>();
 
-    public GetTopStoreApiCall(Context context,String service_id, int page_start, int page_limit) {
-        this.service_id = service_id;
+    public GetTopStoreApiCall(int page_start, int page_limit) {
         this.page_start = page_start;
         this.page_limit = page_limit;
-        this.context = context;
     }
-
+    public GetTopStoreApiCall() {
+        this.page_start = Constants.PAGE_START_DEFAULT;
+        this.page_limit = Constants.PAGE_LIMIT_DEFAULT;
+    }
     @Override
     protected String getRequestUrl() {
         return ServerRequests.REQUEST_TOP_STORES;
@@ -49,7 +50,12 @@ public class GetTopStoreApiCall extends BaseApiCall {
 
     public void populateFromResponse(Object response) throws JSONException {
         super.populateFromResponse(response);
-        result = (String) response;
+        try{
+            result = (String) response;
+        }catch (Exception e)
+        {
+            e.printStackTrace();
+        }
         parseXml(result);
     }
 
@@ -64,9 +70,10 @@ public class GetTopStoreApiCall extends BaseApiCall {
                 is.setCharacterStream(new StringReader(result));
                 Document doc = db.parse(is);
                 outputjson = doc.getDocumentElement().getTextContent();
-                System.out.println("HELLO " + outputjson);
                 parseData(outputjson.toString());
 
+                Syso.print("URL " + getRequestUrl());
+                Syso.print("RESPONSE TOP STORES " + outputjson.toString());
             } catch (SAXException e) {
                 // handle SAXException
             } catch (IOException e) {
@@ -90,6 +97,7 @@ public class GetTopStoreApiCall extends BaseApiCall {
                 serverResponse.data = JSONParsingUtils.getTopStores(listdata);
                 serverResponse.baseModel.MessageCode = json.getInt("MessageCode");
                 serverResponse.baseModel.Message = json.getString("Message");
+                serverResponse.totalCount = json.getInt("TotalRecordCount");
 
             } catch (Exception e) {
                 e.printStackTrace();
@@ -112,26 +120,18 @@ public class GetTopStoreApiCall extends BaseApiCall {
     @Override
     public String getStringRequest() {
 
-//        String requestBody =
-//                "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n" +
-//                "<soap:Envelope xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\n" +
-//                "  <soap:Body>\n" +
-//                "    <GetOnlineBrand xmlns=\"http://tempuri.org/\">\n" +
-//                "      <pageCount>" + page_limit + "</pageCount>\n" +
-//                "      <pageNo>" + page_start + "</pageNo>\n" +
-//                "    </GetOnlineBrand>\n" +
-//                "  </soap:Body>\n" +
-//                "</soap:Envelope>";
-
         String requestBody = "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n" +
                 "<soap12:Envelope xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:soap12=\"http://www.w3.org/2003/05/soap-envelope\">\n" +
                 "  <soap12:Body>\n" +
-                "    <GetOnlineBrand xmlns=\"http://tempuri.org/\">\n" +
+                "    <GetOnlineBrand xmlns=\"http://DiscountGali.com/\">\n" +
                 "      <pageCount>" + page_limit + "</pageCount>\n" +
                 "      <pageNo>" + page_start + "</pageNo>\n" +
+                "      <allRecords>1</allRecords>\n" +
                 "    </GetOnlineBrand>\n" +
                 "  </soap12:Body>\n" +
                 "</soap12:Envelope>";
+
+        Syso.print("REQUEST TOP STORES " + requestBody);
         return requestBody;
     }
     public ArrayList<ModelTopStores> getStoreList()
@@ -140,6 +140,6 @@ public class GetTopStoreApiCall extends BaseApiCall {
     }
     public int getTotalRecords()
     {
-        return serverResponse.data.size();
+        return serverResponse.totalCount;
     }
 }

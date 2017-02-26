@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:gravity="center"
+    android:padding="@dimen/activity_horizontal_margin"
+    >
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/tv_coupon_header"
+        android:text="@string/tv_coupon_code_header"
+        android:textColor="@color/black"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/tv_coupon"
+        android:text="@string/tv_coupon_code"
+        android:textColor="@color/app_black"/>
+<View
+    android:layout_width="match_parent"
+    android:layout_marginTop="2dp"
+    android:layout_height="1dp"
+    android:background="@color/app_black"/>
+
+</LinearLayout>

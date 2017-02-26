@@ -10,7 +10,16 @@ public class ModelCategories implements Serializable {
     private String CategoryLogo = "";
     private String CategoryName = "";
     private int CategoryId = 0;
+    private boolean check = false;
     private boolean CategoryStatus = false;
+
+    public boolean isCheck() {
+        return check;
+    }
+
+    public void setCheck(boolean check) {
+        this.check = check;
+    }
 
     public String getCategoryLogo() {
         return CategoryLogo;

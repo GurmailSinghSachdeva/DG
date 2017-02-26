@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:background="@color/white"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <include layout="@layout/toolbar_layout_inside"/>
+
+    <include layout="@layout/coupon_header_layout"
+        android:id="@+id/coupon_conatiner"/>
+
+    <include layout="@layout/progressbar_layout"
+        android:visibility="gone"
+        android:id="@+id/progress_bar_container"/>
+
+    <include layout="@layout/store_prompt_layout"/>
+    <!--<WebView-->
+        <!--android:id="@+id/web_view"-->
+        <!--android:background="@color/white"-->
+        <!--android:layout_width="fill_parent"-->
+        <!--android:layout_height="fill_parent"/>-->
+
+</LinearLayout>

@@ -64,6 +64,9 @@
     <dimen name="nav_header_height">80dp</dimen>
     <dimen name="scrollmargin60dp">60dp</dimen>
     <dimen name="size_48dp">48dp</dimen>
+    <dimen name="margin_bottom_button_visibility">20dp</dimen>
+    <dimen name="margine_top_form">14dp</dimen>
+    <dimen name="padding_bottom_button">14dp</dimen>
 
 
 </resources>

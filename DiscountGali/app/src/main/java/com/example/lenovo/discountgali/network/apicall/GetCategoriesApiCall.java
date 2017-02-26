@@ -7,6 +7,7 @@ import com.example.lenovo.discountgali.model.ModelTopStores;
 import com.example.lenovo.discountgali.model.ServerResponse;
 import com.example.lenovo.discountgali.network.ServerRequests;
 import com.example.lenovo.discountgali.utility.Syso;
+import com.example.lenovo.discountgali.utils.Constants;
 import com.example.lenovo.discountgali.utils.JSONParsingUtils;
 
 import org.json.JSONArray;
@@ -37,13 +38,11 @@ public class GetCategoriesApiCall extends BaseApiCall {
         private String outputjson;
         private ServerResponse<ModelCategories> serverResponse = new ServerResponse<>();
 
-        public GetCategoriesApiCall(Context context,String service_id, int page_start, int page_limit) {
-            this.service_id = service_id;
-            this.page_start = page_start;
-            this.page_limit = page_limit;
-            this.context = context;
-        }
 
+    public GetCategoriesApiCall() {
+       this.page_limit = Constants.PAGE_LIMIT_DEFAULT;
+        this.page_start = Constants.PAGE_START_DEFAULT;
+    }
         @Override
         protected String getRequestUrl() {
             return ServerRequests.REQUEST_CATEGORIES;
@@ -66,8 +65,9 @@ public class GetCategoriesApiCall extends BaseApiCall {
                     is.setCharacterStream(new StringReader(result));
                     Document doc = db.parse(is);
                     outputjson = doc.getDocumentElement().getTextContent();
-                    Syso.print("============ResponseCAtegories======== " + outputjson);
+                    Syso.print("RESPONSE TOP ONLINE CATEGORIES " + outputjson);
                     parseData(outputjson.toString());
+
 
                 } catch (SAXException e) {
                     // handle SAXException
@@ -92,7 +92,7 @@ public class GetCategoriesApiCall extends BaseApiCall {
                     serverResponse.data = JSONParsingUtils.getCategoriesList(listdata);
                     serverResponse.baseModel.MessageCode = json.getInt("MessageCode");
                     serverResponse.baseModel.Message = json.getString("Message");
-                    serverResponse.totalCount = json.getInt("TotalCount");
+                    serverResponse.totalCount = json.getInt("TotalRecordCount");
 
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -118,14 +118,15 @@ public class GetCategoriesApiCall extends BaseApiCall {
             String requestBody = "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n" +
                     "<soap12:Envelope xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:soap12=\"http://www.w3.org/2003/05/soap-envelope\">\n" +
                     "  <soap12:Body>\n" +
-                    "    <GetOnlineCategories xmlns=\"http://tempuri.org/\">\n" +
+                    "    <GetOnlineCategories xmlns=\"http://DiscountGali.com/\">\n" +
                     "      <pageCount>" + page_limit + "</pageCount>\n" +
                     "      <pageNo>" + page_start + "</pageNo>\n" +
+                    "      <allRecords>0</allRecords>\n" +
                     "    </GetOnlineCategories>\n" +
                     "  </soap12:Body>\n" +
                     "</soap12:Envelope>";
 
-            Syso.print("!!!!!!!!!!!!!!Request!!!!" + requestBody);
+            Syso.print("REQUEST ONLINE CATEGORIES" + requestBody);
             return requestBody;
         }
         public ArrayList<ModelCategories> getCategoriesList()

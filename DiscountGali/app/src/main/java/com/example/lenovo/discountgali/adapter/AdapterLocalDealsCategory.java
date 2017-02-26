@@ -24,11 +24,12 @@ public class AdapterLocalDealsCategory extends RecyclerView.Adapter<AdapterLocal
     private List<LocalDealCategoryModel> listCategories;
     private Activity context;
     private AdapterLocalDealsCategory.OnItemClickListener listener;
+    public static int categoryId = -1;
 
-    public AdapterLocalDealsCategory(Activity activity, List<LocalDealCategoryModel> listCategories, TopStoresFragment context) {
+    public AdapterLocalDealsCategory(Activity activity, List<LocalDealCategoryModel> listCategories, OnItemClickListener listener) {
         this.listCategories = listCategories;
         this.context = activity;
-//        this.listener= (OnItemClickListener) context;
+        this.listener= listener;
     }
 
     @Override
@@ -44,10 +45,13 @@ public class AdapterLocalDealsCategory extends RecyclerView.Adapter<AdapterLocal
 
     @Override
     public void onBindViewHolder(AdapterLocalDealsCategory.MyViewHolder holder, int position) {
-        final LocalDealCategoryModel LocalDealCategoryModel = listCategories.get(position);
+        final LocalDealCategoryModel localDealCategoryModel = listCategories.get(position);
 
-        Syso.print("------Adapter" + LocalDealCategoryModel.getCategoryName());
-        holder.categoryName.setText(LocalDealCategoryModel.getCategoryName());
+        Syso.print("------Adapter" + localDealCategoryModel.getCategoryName());
+        holder.categoryName.setText(localDealCategoryModel.getCategoryName());
+
+        holder.onBind(localDealCategoryModel);
+        holder.position = position;
 //        ImageLoaderUtils.loadImage(LocalDealCategoryModel.getCategoryLogo(), holder.categoryLogo);
     }
 
@@ -64,7 +68,7 @@ public class AdapterLocalDealsCategory extends RecyclerView.Adapter<AdapterLocal
         private ImageView categoryLogo ;
         private TextView categoryName;
         private int position;
-        private LocalDealCategoryModel LocalDealCategoryModel;
+        private LocalDealCategoryModel localDealCategoryModel;
 
 
         public MyViewHolder(View itemView) {
@@ -76,17 +80,22 @@ public class AdapterLocalDealsCategory extends RecyclerView.Adapter<AdapterLocal
             itemView.setOnClickListener(this);
         }
 
-        public void onBind(LocalDealCategoryModel LocalDealCategoryModel)
+        public void onBind(LocalDealCategoryModel localDealCategoryModel)
         {
-            this.LocalDealCategoryModel = LocalDealCategoryModel;
+            this.localDealCategoryModel = localDealCategoryModel;
         }
 
         @Override
         public void onClick(View v) {
+
+
+            categoryId = localDealCategoryModel.getCategoryId();
+            listener.onItemClick(localDealCategoryModel, v);
 //            if(recentsModel.getForwardHeader() == 0){
 //                listener.onItemClick(recentsModel,v);
 //            }
 //            listener.onItemClick(recentsModel,v);
         }
+
     }
 }

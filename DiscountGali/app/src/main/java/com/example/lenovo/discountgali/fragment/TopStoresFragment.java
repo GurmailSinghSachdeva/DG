@@ -60,10 +60,6 @@ public class TopStoresFragment extends Fragment implements SwipeRefreshLayout.On
 
         setListeners();
 
-//        getCategoriesApiCall();
-
-//        getTopStoresApiCAll(null);
-
         return view;
 
     }
@@ -75,7 +71,7 @@ public class TopStoresFragment extends Fragment implements SwipeRefreshLayout.On
 
                 Syso.print("HELLO " + "inside onload  more");
 
-//                getTopStoresApiCAll(null, (current_page * visibleThreshold), visibleThreshold);
+                getTopStoresApiCAll(current_page + 1, visibleThreshold);
 
             }
         };
@@ -86,19 +82,19 @@ public class TopStoresFragment extends Fragment implements SwipeRefreshLayout.On
             public void run() {
                 Syso.print("HELLO " + "inside onswipe");
 
-                getTopStoresApiCAll(null);
+                getTopStoresApiCAll();
             }
         });
     }
 
-    private void getTopStoresApiCAll(String service_id, int... pagingParams) {
+    private void getTopStoresApiCAll(int... pagingParams) {
         try {
             Syso.print("HELLO " + "inside api");
 
             if (isTopStoresApiRunning) {
-//                if (pagingParams.length == 2) {
-//                    endlessScrollListenerGrid.decreasePagingCount();
-//                }
+                if (pagingParams.length == 2) {
+                    endlessScrollListenerGrid.decreasePagingCount();
+                }
                 return;
             }
             if (isLastStoreFound) {
@@ -109,10 +105,11 @@ public class TopStoresFragment extends Fragment implements SwipeRefreshLayout.On
             final ProgressDialog progressDialog = DialogUtils.getProgressDialog(getActivity());
             //progressDialog.show();
             final GetTopStoreApiCall apiCall;
-
-//            apiCall = new GetTopStoreApiCall(getActivity(), service_id, pagingParams[0], pagingParams[1]);
-            apiCall = new GetTopStoreApiCall(getActivity(), service_id, 1, 15);
-
+            if (pagingParams.length == 2) {
+                apiCall = new GetTopStoreApiCall(pagingParams[0], pagingParams[1]);
+            } else {
+                apiCall = new GetTopStoreApiCall();
+            }
             HttpRequestHandler.getInstance(getActivity().getApplicationContext()).executeRequest(apiCall, new ApiCall.OnApiCallCompleteListener() {
 
                 @Override
@@ -126,9 +123,9 @@ public class TopStoresFragment extends Fragment implements SwipeRefreshLayout.On
                             storesList.addAll(apiCall.getStoreList());
                             adapterTopStores.notifyDataSetChanged();
 
-                            if (apiCall.getTotalRecords() > 0 && apiCall.getTotalRecords() == storesList.size()) {
-                                isLastStoreFound = true;
-                            }
+//                            if (apiCall.getTotalRecords() > 0 && apiCall.getTotalRecords() == storesList.size()) {
+//                                isLastStoreFound = true;
+//                            }
 
 //                            if(Utils.getVersionCode(getActivity())<apiCall.getServerVersionCode())
 //                            {
@@ -157,57 +154,6 @@ public class TopStoresFragment extends Fragment implements SwipeRefreshLayout.On
 
     }
 
-//    private void getCategoriesApiCall() {
-//        try {
-//            if (isCategoryApiRunning) {
-//
-//                return;
-//            }
-//
-//            isCategoryApiRunning = true;
-//
-//            final ProgressDialog progressDialog = DialogUtils.getProgressDialog(getActivity());
-//            //progressDialog.show();
-//            final GetCategoriesApiCall apiCall;
-//
-//            apiCall = new GetCategoriesApiCall(getActivity(), null, 1, 15);
-//
-//            HttpRequestHandler.getInstance(getActivity().getApplicationContext()).executeRequest(apiCall, new ApiCall.OnApiCallCompleteListener() {
-//
-//                @Override
-//                public void onComplete(Exception e) {
-//                    isCategoryApiRunning = false;
-////                    swipeRefreshLayout.setRefreshing(false);
-//                    DialogUtils.hideProgressDialog(progressDialog);
-//                    if (e == null) { // Success
-//                        try {
-//                            Syso.print("-----------Inside--------" + "onresponse category");
-//                            categoriesList.clear();
-//                            categoriesList.addAll(apiCall.getCategoriesList());
-//                            Syso.print("-----------Inside" + categoriesList.size());
-////                            if(categoriesList!=null && !categoriesList.isEmpty())
-////                            adapterCategories.notifyDataSetChanged();
-////                            else recyclerCategories.setVisibility(View.GONE);
-////                            setRecyclerViewCategories();
-//                            adapterCategories.notifyDataSetChanged();
-//
-//
-//                        } catch (Exception e1) {
-//                            Utils.handleError(e1, getActivity());
-//                        }
-//                    } else { // Failure
-//                        Utils.handleError(e, getActivity());
-//                    }
-//
-//                }
-//            }, false);
-//        } catch (Exception e) {
-//            Utils.handleError(e, getActivity());
-//        }
-//
-//
-//    }
-
 
     private void setRecyclerViews() {
         setRecyclerViewStores();
@@ -216,8 +162,47 @@ public class TopStoresFragment extends Fragment implements SwipeRefreshLayout.On
 
     private void setRecyclerViewStores() {
         adapterTopStores = new AdapterTopStores(getActivity(), storesList);
-        gridLayoutManager = new GridLayoutManager(getActivity(), Constants.Grids.Top_stores);
+        gridLayoutManager = new GridLayoutManager(getContext(), Constants.Grids.Top_stores);
         recyclerTopStores.setLayoutManager(gridLayoutManager);
+
+//        mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener(){
+//            @Override
+//            public void onScrolled(RecyclerView rv, int dx, int dy) {
+//                super.onScrolled(rv, dx, dy);
+//
+//                String url;
+//
+//                visibleItemCount = mRecyclerView.getChildCount();
+//                totalItemCount = mGridLayoutManager.getItemCount();
+//                firstVisibleItem = mGridLayoutManager.findFirstVisibleItemPosition();
+//
+//                if (loading) {
+//                    if (totalItemCount > previousTotal) {
+//                        loading = false;
+//                        previousTotal = totalItemCount;
+//                        pageCount++;
+//                    }
+//                }
+//                if (!loading && (totalItemCount - visibleItemCount) <= (firstVisibleItem + visibleThreshold)){
+//                    url = PHOTOS_URL + "&page=" + String.valueOf(pageCount);
+//                    sendJSONRequest(url);
+//                    loading = true;
+//                }
+//            }
+//        });
+
+
+        recyclerTopStores.addOnScrollListener(new EndlessRecyclerOnScrollListenerGrid(gridLayoutManager) {
+            @Override
+            public void onLoadMore(int current_page) {
+
+                Syso.print("HELLO " + "inside onload  more");
+
+                getTopStoresApiCAll(current_page + 1, visibleThreshold);
+            }
+
+
+        });
         recyclerTopStores.setAdapter(adapterTopStores);
     }
 
@@ -236,7 +221,7 @@ public class TopStoresFragment extends Fragment implements SwipeRefreshLayout.On
 
         resetLoading();
         swipeRefreshLayout.setRefreshing(false);
-        getTopStoresApiCAll(null);
+        getTopStoresApiCAll();
 
     }
     private void resetLoading() {

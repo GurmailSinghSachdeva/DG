@@ -2,12 +2,16 @@ package com.example.lenovo.discountgali.utils;
 
 
 import android.text.Spannable;
+import android.text.TextUtils;
 import android.util.Log;
 
+import com.example.lenovo.discountgali.model.CityModel;
+import com.example.lenovo.discountgali.model.DealUrlModel;
 import com.example.lenovo.discountgali.model.LocalDealCategoryModel;
 import com.example.lenovo.discountgali.model.ModelCategories;
 import com.example.lenovo.discountgali.model.ModelTopStores;
 import com.example.lenovo.discountgali.model.TopOffers;
+import com.example.lenovo.discountgali.myviews.MyJsonObject;
 import com.example.lenovo.discountgali.utility.Syso;
 
 import org.json.JSONArray;
@@ -31,7 +35,9 @@ public class JSONParsingUtils {
 
                     modelCategories.setCategoryId(object.getInt("CategoryId"));
                     if(object.has("Logo"))
-                        modelCategories.setCategoryLogo("http://discountgali.com" + getSubString(object.getString("Logo")));
+//                        modelCategories.setCategoryLogo("http://discountgali.com" + getSubString(object.getString("Logo")));
+                        modelCategories.setCategoryLogo(object.getString("Logo"));
+
                     modelCategories.setCategoryName(object.getString("CategoryName"));
                     categoriesList.add(modelCategories);
 
@@ -56,7 +62,9 @@ public class JSONParsingUtils {
 
                     modelCategories.setCategoryId(object.getInt("CategoryId"));
                     if(object.has("Logo"))
-                    modelCategories.setCategoryLogo("http://discountgali.com" + getSubString(object.getString("Logo")));
+//                    modelCategories.setCategoryLogo("http://discountgali.com" + getSubString(object.getString("Logo")));
+                        modelCategories.setCategoryLogo(object.getString("Logo"));
+
                     modelCategories.setCategoryName(object.getString("CategoryName"));
                     modelCategories.setCategoryStatus(object.getBoolean("CategoryStatus"));
                     categoriesList.add(modelCategories);
@@ -86,7 +94,7 @@ public class JSONParsingUtils {
 
                     modelTopStores.setName(object.getString("CompanyName"));
 
-                    Syso.print("HELLO " + modelTopStores.getIcon() + modelTopStores.getName());
+//                    Syso.print("HELLO " + modelTopStores.getIcon() + modelTopStores.getName());
                     topStoresList.add(modelTopStores);
 
                 }
@@ -111,6 +119,7 @@ public class JSONParsingUtils {
     }
 
 
+
     public static ArrayList<TopOffers> getTopOffers(JSONArray listdata) {
         ArrayList<TopOffers> topOffersList = null;
 
@@ -120,19 +129,28 @@ public class JSONParsingUtils {
                 topOffersList = new ArrayList<>();
                 for (int i = 0; i < listdata.length(); i++) {
                     TopOffers topoffers = new TopOffers();
-                    JSONObject object = listdata.getJSONObject(i);
-                    topoffers.BrandName = object.getString("BrandName");
-                    topoffers.OnlineDeal_Logo = "http://discountgali.com" + getSubString(object.getString("OnlineDeal_Logo"));
-                    topoffers.onlineDeal_WebSiteName = object.getString("onlineDeal_WebSiteName");
-                    topoffers.OnlineDeal_CouponCode = object.getString("OnlineDeal_CouponCode");
-                    topoffers.OnlineDeal_Offer = object.getString("OnlineDeal_Offer");
-                    topoffers.OnlineDeal_OfferDescription = object.getString("OnlineDeal_OfferDescription");
-                    topoffers.OnlineDeal_Avail = object.getString("OnlineDeal_Avail");
-                    topoffers.OnlineDeal_StartDate = object.getString("OnlineDeal_StartDate");
-                    topoffers.OnlineDeal_EndDate = object.getString("OnlineDeal_EndDate");
+                    JSONObject parent = listdata.getJSONObject(i);
+                    MyJsonObject object = new MyJsonObject(parent);
 
+                    topoffers.BrandName = object.getString("CompanyName");
+//                    topoffers.OnlineDeal_Logo = "http://discountgali.com" + getSubString(object.getString("OnlineDealsLogo"));
+                    topoffers.OnlineDeal_Logo = object.getString("OnlineDealsLogo");
+
+                    topoffers.onlineDeal_WebSiteName = object.getString("WebsiteName");
+                    topoffers.OnlineDeal_CouponCode = object.getString("CouponCode");
+
+                    if(topoffers.OnlineDeal_CouponCode.equals("No Coupon Code"))
+                        topoffers.OnlineDeal_CouponCode = "";
+
+                    topoffers.OnlineDeal_Offer = object.getString("Offer");
+                    topoffers.OnlineDeal_OfferDescription = object.getString("Description");
+                    topoffers.OnlineDeal_Avail = object.getString("OnlineDeal_Avail");
+                    topoffers.OnlineDeal_StartDate = object.getString("DealStartDate");
+                    topoffers.OnlineDeal_EndDate = object.getString("DealEndDate");
                     topoffers.OnlineDealId = object.getInt("OnlineDealId");
-                    topoffers.OnlineDeal_Type = object.getInt("OnlineDeal_Type");
+                    topoffers.OnlineDeal_Type = object.getInt("DealType");
+
+                    topoffers.OnlineDeal_Type = Constants.typeOnline;
 
                     topOffersList.add(topoffers);
                 }
@@ -141,6 +159,80 @@ public class JSONParsingUtils {
             e.printStackTrace();
         }
         return topOffersList;
+    }
+
+    public static ArrayList<CityModel> getCityList(JSONArray listdata) {
+
+        ArrayList<CityModel> cityList = null;
+
+        try {
+            if(listdata!=null && listdata.length()>0)
+            {
+                cityList = new ArrayList<>();
+                for (int i = 0; i < listdata.length(); i++) {
+                    CityModel cityModel = new CityModel();
+                    JSONObject parent = listdata.getJSONObject(i);
+                    MyJsonObject object = new MyJsonObject(parent);
+
+                    cityModel.CityId = object.getInt("CityId");
+                    cityModel.CityName = object.getString("CityName");
+                    cityModel.StateName = object.getString("StateName");
+                    cityList.add(cityModel);
+                }
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return cityList;
+    }
+
+    public static ArrayList<TopOffers> getLocalDeals(JSONArray listdata) {
+        ArrayList<TopOffers> topOffersList = null;
+
+        try {
+            if(listdata!=null && listdata.length()>0)
+            {
+                topOffersList = new ArrayList<>();
+                for (int i = 0; i < listdata.length(); i++) {
+                    TopOffers topoffers = new TopOffers();
+                    JSONObject parent = listdata.getJSONObject(i);
+                    MyJsonObject object = new MyJsonObject(parent);
+
+                    topoffers.BrandName = object.getString("StoreName");
+                    topoffers.OnlineDeal_Offer = object.getString("DealName");
+                    topoffers.OnlineDeal_OfferDescription = object.getString("Address");
+                    topoffers.OnlineDealId = object.getInt("DealId");
+                    topoffers.OnlineDeal_StartDate = object.getString("DealStartDate");
+                    topoffers.OnlineDeal_EndDate = object.getString("DealEndDate");
+                    topoffers.OnlineDeal_Type = Constants.typeOffline;
+
+                    topOffersList.add(topoffers);
+                }
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return topOffersList;
+
+    }
+
+    public static ArrayList<DealUrlModel> getDealUrl(JSONArray listdata) {
+        ArrayList<DealUrlModel> dealUrls = null;
+
+        try {
+            if(listdata!=null && listdata.length()>0)
+            {
+                dealUrls = new ArrayList<>();
+                    DealUrlModel deal = new DealUrlModel();
+                    JSONObject parent = listdata.getJSONObject(0);
+                    MyJsonObject object = new MyJsonObject(parent);
+                    deal.url = object.getString("URL");
+                dealUrls.add(deal);
+                }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return dealUrls;
     }
 
 //    public static Roast_2 getNews(JSONObject roastJO) {

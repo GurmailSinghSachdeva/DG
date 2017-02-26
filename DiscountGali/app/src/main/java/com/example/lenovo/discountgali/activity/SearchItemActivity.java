@@ -15,6 +15,8 @@ import android.widget.TextView;
 import com.example.lenovo.discountgali.R;
 import com.example.lenovo.discountgali.adapter.HomeAdapter;
 import com.example.lenovo.discountgali.adapter.RecentSearchAdapter;
+import com.example.lenovo.discountgali.model.ModelCategories;
+import com.example.lenovo.discountgali.model.ServerResponse;
 import com.example.lenovo.discountgali.model.TopOffers;
 import com.example.lenovo.discountgali.network.HttpRequestHandler;
 import com.example.lenovo.discountgali.network.api.ApiCall;
@@ -125,7 +127,7 @@ public class SearchItemActivity extends BaseActivity implements View.OnClickList
             @Override
             public void onLoadMore(int current_page) {
 
-                itemSearchApiCall(searchingWord, (current_page * visibleThreshold), visibleThreshold);
+                itemSearchApiCall(searchingWord, current_page + 1, visibleThreshold);
             }
 
             @Override
@@ -282,18 +284,25 @@ public class SearchItemActivity extends BaseActivity implements View.OnClickList
             } else {
                 switch (searchItemsListApiCall.getSearchType()) {
                     case ONLINE: {
+                        Syso.print("INSIDE " + "skipping layout1");
+                        ServerResponse<TopOffers> serverResponse = (ServerResponse<TopOffers>) searchItemsListApiCall.getResult();
+                        if(serverResponse.data!=null && !serverResponse.data.isEmpty())
+                        onlineList.addAll(serverResponse.data);
+                        Syso.print("INSIDE " + "skipping layout3");
 
-                        onlineList.addAll((ArrayList<TopOffers>) searchItemsListApiCall.getResult());
                         if (onlineList != null && !onlineList.isEmpty()) {
+                            Syso.print("INSIDE " + "skipping layout2");
+
                             hideEmptyView();
                             if (isPagingParamsCall(pagingParams)) {
+                                Syso.print("INSIDE " + "skipping layout");
                                 adapter.notifyDataSetChanged();
                             } else {
                                 adapter = new HomeAdapter(SearchItemActivity.this, onlineList);
                                 recyclerViewSearch.setAdapter(adapter);
                             }
                             setLastItemConditon(searchItemsListApiCall, onlineList);
-                            SharedPreference.addSearchingWords(searchKeyWord, SearchItemActivity.this);
+//                            SharedPreference.addSearchingWords(searchKeyWord, SearchItemActivity.this);
                         } else {
                             adapter = null;
                             recyclerViewSearch.setAdapter(null);
@@ -304,7 +313,9 @@ public class SearchItemActivity extends BaseActivity implements View.OnClickList
                     }
                     case OFFLINE: {
 
-                        offlineList.addAll((ArrayList<TopOffers>) searchItemsListApiCall.getResult());
+                        ServerResponse<TopOffers> serverResponse = (ServerResponse<TopOffers>) searchItemsListApiCall.getResult();
+                        if(serverResponse.data!=null && !serverResponse.data.isEmpty())
+                        offlineList.addAll(serverResponse.data);
                         if (offlineList != null && !offlineList.isEmpty()) {
                             hideEmptyView();
                             if (isPagingParamsCall(pagingParams)) {
@@ -314,7 +325,7 @@ public class SearchItemActivity extends BaseActivity implements View.OnClickList
                                 recyclerViewSearch.setAdapter(adapter);
                             }
                             setLastItemConditon(searchItemsListApiCall, offlineList);
-                            SharedPreference.addSearchingWords(searchKeyWord, SearchItemActivity.this);
+//                            SharedPreference.addSearchingWords(searchKeyWord, SearchItemActivity.this);
                         } else {
                             adapter = null;
                             recyclerViewSearch.setAdapter(null);
@@ -382,9 +393,9 @@ public class SearchItemActivity extends BaseActivity implements View.OnClickList
         isLastItemFound = false;
         onlineList.clear();
         offlineList.clear();
-        /*if(adapter != null && recyclerViewSearch != null) {
+        if(adapter != null && recyclerViewSearch != null) {
             adapter.notifyDataSetChanged();
-        }*/
+        }
         endlessScrollListener.reset();
     }
 }

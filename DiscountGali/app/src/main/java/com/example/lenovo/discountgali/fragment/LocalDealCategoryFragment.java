@@ -1,11 +1,13 @@
 package com.example.lenovo.discountgali.fragment;
 
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -13,11 +15,16 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.lenovo.discountgali.R;
+import com.example.lenovo.discountgali.adapter.AdapterCategories;
 import com.example.lenovo.discountgali.adapter.AdapterLocalDealsCategory;
+import com.example.lenovo.discountgali.model.CityModel;
 import com.example.lenovo.discountgali.model.LocalDealCategoryModel;
+import com.example.lenovo.discountgali.model.ServerResponse;
 import com.example.lenovo.discountgali.network.HttpRequestHandler;
 import com.example.lenovo.discountgali.network.api.ApiCall;
+import com.example.lenovo.discountgali.network.apicall.GetCityListApiCall;
 import com.example.lenovo.discountgali.network.apicall.GetLocalDealCategoryApiCAll;
+import com.example.lenovo.discountgali.network.apicall.GetRecentMessageApiCall;
 import com.example.lenovo.discountgali.utility.Syso;
 import com.example.lenovo.discountgali.utility.Utils;
 import com.example.lenovo.discountgali.utils.Constants;
@@ -25,12 +32,13 @@ import com.example.lenovo.discountgali.utils.DialogUtils;
 import com.example.lenovo.discountgali.utils.EndlessRecyclerOnScrollListenerGrid;
 
 import java.util.ArrayList;
+import java.util.Collection;
 
 /**
  * Created by lenovo on 19-01-2017.
  */
 
-public class LocalDealCategoryFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
+public class LocalDealCategoryFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener, AdapterLocalDealsCategory.OnItemClickListener {
     private RecyclerView recyclerView;
     private AdapterLocalDealsCategory adapterLocalDealsCategory;
     private ArrayList<LocalDealCategoryModel> localDealCategoryList = new ArrayList<>();
@@ -38,6 +46,7 @@ public class LocalDealCategoryFragment extends Fragment implements SwipeRefreshL
     private EndlessRecyclerOnScrollListenerGrid endlessScrollListenerGrid;
     private GridLayoutManager gridLayoutManager;
     private Handler handler = new Handler();
+    private ArrayList<CityModel> cityList = new ArrayList<>();
 
 
     private boolean isApiRunning;
@@ -77,9 +86,8 @@ public class LocalDealCategoryFragment extends Fragment implements SwipeRefreshL
             @Override
             public void onLoadMore(int current_page) {
 
-                Syso.print("HELLO " + "inside onload  more");
 
-//                getTopStoresApiCAll(null, (current_page * visibleThreshold), visibleThreshold);
+                getLocalDealCategoryApiCall(current_page + 1, visibleThreshold);
 
             }
         };
@@ -88,21 +96,57 @@ public class LocalDealCategoryFragment extends Fragment implements SwipeRefreshL
         swipeRefreshLayout.post(new Runnable() {
             @Override
             public void run() {
-                Syso.print("HELLO " + "inside onswipe");
 
-                getLocalDealCategoryApiCall(null);
+                getLocalDealCategoryApiCall();
             }
         });
     }
-
-    private void getLocalDealCategoryApiCall(String service_id, int... pagingParams) {
+    private void getCityListApiCAll() {
         try {
-            Syso.print("HELLO " + "inside api");
+
+
+            final ProgressDialog progressDialog = DialogUtils.getProgressDialog(getActivity());
+            progressDialog.show();
+            final GetCityListApiCall apiCall;
+                apiCall = new GetCityListApiCall();
+            HttpRequestHandler.getInstance(getActivity().getApplicationContext()).executeRequest(apiCall, new ApiCall.OnApiCallCompleteListener() {
+
+                @Override
+                public void onComplete(Exception e) {
+                    DialogUtils.hideProgressDialog(progressDialog);
+                    if (e == null) { // Success
+                        try {
+                            ServerResponse<CityModel> serverResponse = (ServerResponse<CityModel>) apiCall.getResult();
+                            if(serverResponse!=null){
+                                cityList.clear();
+                                cityList.addAll(serverResponse.data);
+                            }
+                            showCityDialog();
+                        } catch (Exception e1) {
+
+                            Utils.handleError(e1, getActivity());
+                        }
+                    } else { // Failure
+                        Utils.handleError(e, getActivity());
+                    }
+
+                }
+            }, false);
+        } catch (Exception e) {
+
+            Utils.handleError(e, getActivity());
+        }
+
+
+    }
+
+    private void getLocalDealCategoryApiCall(int... pagingParams) {
+        try {
 
             if (isApiRunning) {
-//                if (pagingParams.length == 2) {
-//                    endlessScrollListenerGrid.decreasePagingCount();
-//                }
+                if (pagingParams.length == 2) {
+                    endlessScrollListenerGrid.decreasePagingCount();
+                }
                 return;
             }
             if (isLastItemFound) {
@@ -113,10 +157,11 @@ public class LocalDealCategoryFragment extends Fragment implements SwipeRefreshL
             final ProgressDialog progressDialog = DialogUtils.getProgressDialog(getActivity());
             //progressDialog.show();
             final GetLocalDealCategoryApiCAll apiCall;
-
-//            apiCall = new GetTopStoreApiCall(getActivity(), service_id, pagingParams[0], pagingParams[1]);
-            apiCall = new GetLocalDealCategoryApiCAll(getActivity(), service_id, 1, 15);
-
+            if (pagingParams.length == 2) {
+                apiCall = new GetLocalDealCategoryApiCAll(pagingParams[0], pagingParams[1]);
+            } else {
+                apiCall = new GetLocalDealCategoryApiCAll();
+            }
             HttpRequestHandler.getInstance(getActivity().getApplicationContext()).executeRequest(apiCall, new ApiCall.OnApiCallCompleteListener() {
 
                 @Override
@@ -126,7 +171,6 @@ public class LocalDealCategoryFragment extends Fragment implements SwipeRefreshL
                     DialogUtils.hideProgressDialog(progressDialog);
                     if (e == null) { // Success
                         try {
-                            Syso.print("HELLO 6" + "inside response");
                             localDealCategoryList.addAll(apiCall.getList());
                             adapterLocalDealsCategory.notifyDataSetChanged();
 
@@ -141,19 +185,15 @@ public class LocalDealCategoryFragment extends Fragment implements SwipeRefreshL
 //                            }
                         } catch (Exception e1) {
 
-                            Syso.print("HELLO " + e1.getMessage());
                             Utils.handleError(e1, getActivity());
                         }
                     } else { // Failure
-                        Syso.print("HELLO 1" + e.getMessage());
-
                         Utils.handleError(e, getActivity());
                     }
 
                 }
             }, false);
         } catch (Exception e) {
-            Syso.print("HELLO 2 " + e.getMessage());
 
             Utils.handleError(e, getActivity());
         }
@@ -164,9 +204,15 @@ public class LocalDealCategoryFragment extends Fragment implements SwipeRefreshL
 
 
     private void setRecyclerViews() {
-        adapterLocalDealsCategory = new AdapterLocalDealsCategory(getActivity(), localDealCategoryList, null);
+        adapterLocalDealsCategory = new AdapterLocalDealsCategory(getActivity(), localDealCategoryList, this);
         gridLayoutManager = new GridLayoutManager(getActivity(), Constants.Grids.Local_Deal_Categories);
         recyclerView.setLayoutManager(gridLayoutManager);
+        recyclerView.addOnScrollListener(new EndlessRecyclerOnScrollListenerGrid(gridLayoutManager) {
+            @Override
+            public void onLoadMore(int current_page) {
+                getLocalDealCategoryApiCall(current_page + 1, visibleThreshold);
+            }
+        });
         recyclerView.setAdapter(adapterLocalDealsCategory);
 
     }
@@ -183,8 +229,7 @@ public class LocalDealCategoryFragment extends Fragment implements SwipeRefreshL
         Syso.print("HELLO " + "inside onrefresh");
 
         resetLoading();
-        swipeRefreshLayout.setRefreshing(false);
-        getLocalDealCategoryApiCall(null);
+        getLocalDealCategoryApiCall();
 
     }
     private void resetLoading() {
@@ -214,6 +259,48 @@ public class LocalDealCategoryFragment extends Fragment implements SwipeRefreshL
             }
         });
 
+    }
+
+    @Override
+    public void onItemClick(LocalDealCategoryModel LocalDealCategoryModel, View view) {
+getCityListApiCAll();    }
+    AlertDialog alertDialog;
+    int cityId = -1;
+    String cityName = "";
+    public void showCityDialog(){
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        builder.setTitle(getString(R.string.dialog_select_city));
+
+        String[] cityNames = new String[cityList.size()];
+        final int[] cityIds = new int[cityList.size()];
+        for(int i = 0;i<cityList.size();i++)
+        {
+            cityNames[i] = cityList.get(i).CityName;
+            cityIds[i] = cityList.get(i).CityId;
+        }
+        builder.setSingleChoiceItems(cityNames, cityId,
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int item) {
+                        Syso.print("position >>" + item);
+                        cityId = cityIds[item];
+                    }
+                });
+        builder.setPositiveButton(getString(R.string.tv_ok), new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                alertDialog.dismiss();
+
+                for (int i=0;i<cityList.size();i++)
+                {
+                    if(cityList.get(i).CityId == cityId)
+                    cityName = cityList.get(i).CityName;
+                }
+                Utils.showLocalDealsActivity(getActivity(), cityName, adapterLocalDealsCategory.categoryId);
+            }
+        });
+        alertDialog = builder.create();
+        alertDialog.show();
     }
 
 }

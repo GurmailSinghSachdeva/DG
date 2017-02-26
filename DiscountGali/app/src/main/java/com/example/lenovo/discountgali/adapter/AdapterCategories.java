@@ -2,6 +2,7 @@ package com.example.lenovo.discountgali.adapter;
 
 import android.app.Activity;
 import android.support.v7.widget.RecyclerView;
+import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,7 +13,9 @@ import android.widget.TextView;
 import com.example.lenovo.discountgali.R;
 import com.example.lenovo.discountgali.interfaces.CategoryInterface;
 import com.example.lenovo.discountgali.model.ModelCategories;
+import com.example.lenovo.discountgali.utils.ImageLoaderUtils;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -22,7 +25,7 @@ import java.util.List;
 public class AdapterCategories extends RecyclerView.Adapter<AdapterCategories.MyViewHolder>{
 
     private CategoryInterface categoryInterface;
-    private int[]                               categoryIds = { R.drawable.file_image,
+    private int[]                               categoryIds = { R.drawable.all_category,
             R.drawable.automobile,
             R.drawable.bags,
             R.drawable.books_stationary,
@@ -43,20 +46,23 @@ public class AdapterCategories extends RecyclerView.Adapter<AdapterCategories.My
             R.drawable.medical,
             R.drawable.mens_fashion,
             R.drawable.mobile,
-            R.drawable.file_image,
+            R.drawable.others,
             R.drawable.recharge,
             R.drawable.health_fitness,
             R.drawable.watch,
             R.drawable.women_fashion};
 
-    private List<String> listCategories;
+
+    private ArrayList<ModelCategories> listCategories;
     private Activity context;
     private OnItemClickListener listener;
+    public int checkedCategory;
 
-    public AdapterCategories(Activity activity, List<String> listCategories) {
+    public AdapterCategories(Activity activity, ArrayList<ModelCategories> listCategories, OnItemClickListener listener, int checkedCategory) {
         this.listCategories = listCategories;
         this.context = activity;
-        categoryInterface = (CategoryInterface) activity;
+        this.listener = listener;
+        this.checkedCategory = checkedCategory;
 //        this.listener= (OnItemClickListener) context;
     }
 
@@ -73,20 +79,21 @@ public class AdapterCategories extends RecyclerView.Adapter<AdapterCategories.My
 
     @Override
     public void onBindViewHolder(AdapterCategories.MyViewHolder holder, int position) {
-        final String modelCategories = listCategories.get(position);
+        final ModelCategories modelCategories = listCategories.get(position);
 
-        holder.categoryName.setText(modelCategories);
+        holder.categoryName.setText(modelCategories.getCategoryName());
+//        ImageLoaderUtils.loadImage(modelCategories.getCategoryLogo(), holder.categoryLogo);
+
         holder.categoryLogo.setImageResource(categoryIds[position]);
-        if(position == 1)
+        if(modelCategories.getCategoryId() == checkedCategory)
         {
             holder.containerCategories.setBackgroundColor(context.getResources().getColor(R.color.gray));
-        }
-        else {
+        }else {
             holder.containerCategories.setBackgroundColor(context.getResources().getColor(R.color.white));
 
         }
-//        holder.onBind(modelCategories);
-//        ImageLoaderUtils.loadImage(modelCategories.getCategoryLogo(), holder.categoryLogo);
+       holder.position = position;
+        holder.onBind(modelCategories);
     }
 
     @Override
@@ -95,7 +102,7 @@ public class AdapterCategories extends RecyclerView.Adapter<AdapterCategories.My
     }
 
     public interface OnItemClickListener {
-        void onItemClick(ModelCategories modelCategories,View view);
+        void onItemClick();
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
@@ -122,10 +129,13 @@ public class AdapterCategories extends RecyclerView.Adapter<AdapterCategories.My
 
         @Override
         public void onClick(View v) {
-//            if(recentsModel.getForwardHeader() == 0){
-//                listener.onItemClick(recentsModel,v);
-//            }
-//            listener.onItemClick(recentsModel,v);
+
+            checkedCategory = modelCategories.getCategoryId();
+            modelCategories.setCheck(!modelCategories.isCheck());       // this is not doing anything but used si that adapter could know that some chenge has been done on the arraylist and so notifydatasetchanged should work
+            notifyDataSetChanged();
+            listener.onItemClick();
+
+
         }
     }
 }

@@ -8,6 +8,7 @@ import com.example.lenovo.discountgali.model.TopOffers;
 import com.example.lenovo.discountgali.network.ServerRequests;
 import com.example.lenovo.discountgali.utility.Syso;
 import com.example.lenovo.discountgali.utility.Utils;
+import com.example.lenovo.discountgali.utils.Constants;
 import com.example.lenovo.discountgali.utils.JSONParsingUtils;
 
 import org.json.JSONArray;
@@ -29,20 +30,21 @@ import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
 public class GetRecentMessageApiCall extends BaseApiCall {
-    private String pkAccount,timeStamp,newMessage;
+    private int page_start = Constants.PAGE_NO_DEFAULT;
+    private int page_limit = Constants.PAGE_LIMIT_DEFAULT;
     private Context context;
     private String result;
     private String outputjson;
     private ServerResponse<TopOffers> serverResponse = new ServerResponse<>();
 
-    public GetRecentMessageApiCall(Context context,String pkAccount, String timeStamp, String newMessage) {
-        this.pkAccount = pkAccount;
-        this.timeStamp = timeStamp;
-        this.newMessage = newMessage;
-        this.context = context;
+    public GetRecentMessageApiCall(int page_start, int page_limit) {
+        this.page_limit = page_limit;
+        this.page_start = page_start;
     }
     public GetRecentMessageApiCall() {
 
+        page_limit = Constants.PAGE_LIMIT_DEFAULT;
+        page_start = Constants.PAGE_START_DEFAULT;
     }
     @Override
     protected String getRequestUrl() {
@@ -76,7 +78,9 @@ public class GetRecentMessageApiCall extends BaseApiCall {
         }
 
 //        SoapObject soapObject = result;
-        Syso.print("HELLO "  + result.toString());
+        Syso.print("URL "  + getRequestUrl());
+        Syso.print("RESPONSE GET Top Offers "  + result.toString());
+
         if (response instanceof JSONObject) {
 //            Type type = new TypeToken<ServerResponseList<MessageList>>() {}.getType();
 //            serverResponseList = new Gson().fromJson(response.toString(),type);
@@ -99,6 +103,7 @@ public class GetRecentMessageApiCall extends BaseApiCall {
                 serverResponse.data = JSONParsingUtils.getTopOffers(listdata);
                 serverResponse.baseModel.MessageCode = json.getInt("MessageCode");
                 serverResponse.baseModel.Message = json.getString("Message");
+                serverResponse.totalCount = json.getInt("TotalRecordCount");
 
             } catch (Exception e) {
                 e.printStackTrace();
@@ -138,15 +143,20 @@ public class GetRecentMessageApiCall extends BaseApiCall {
         String requestBody = "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n" +
                 "<soap12:Envelope xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:soap12=\"http://www.w3.org/2003/05/soap-envelope\">\n" +
                 "  <soap12:Body>\n" +
-                "    <GetOnlineTopOffers xmlns=\"http://tempuri.org/\">\n" +
+                "    <GetOnlineTopOffers xmlns=\"http://DiscountGali.com/\">\n" +
                 "      <filter></filter>\n" +
-                "      <pageCount>15</pageCount>\n" +
-                "      <pageNo>1</pageNo>\n" +
+                "      <pageCount>" + page_limit + "</pageCount>\n" +
+                "      <pageNo>" + page_start + "</pageNo>\n" +
+                "      <allRecords>1</allRecords>\n" +
                 "    </GetOnlineTopOffers>\n" +
                 "  </soap12:Body>\n" +
                 "</soap12:Envelope>";
-        Syso.print("!!!!!!!!!!!!!!Request Get Offers!!!!" + requestBody);
+        Syso.print("REQUEST Get top offers" + requestBody);
 
         return requestBody;
+    }
+    public int getTotalRecords()
+    {
+        return serverResponse.totalCount;
     }
 }

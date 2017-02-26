@@ -10,8 +10,6 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_margin="@dimen/size_20dp"
-        android:ems="10"
-        android:maxLength="50"
-        android:inputType="textPersonName"
-        android:text="Name" />
+        android:maxLength="10"
+        android:inputType="phone" />
 </LinearLayout>

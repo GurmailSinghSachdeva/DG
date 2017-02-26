@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+
+    >
+
+    <include layout="@layout/toolbar_layout_inside"
+        android:id="@+id/tb"/>
+
+
+    <ScrollView
+        android:id="@+id/sc"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tb"
+        android:layout_marginBottom="@dimen/margin_bottom_button_visibility"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="fill_parent"
+            android:orientation="vertical"
+            android:paddingLeft="@dimen/activity_horizontal_margin"
+            android:paddingRight="@dimen/activity_horizontal_margin"
+            android:paddingTop="12dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+
+                >
+
+
+                <LinearLayout
+                    android:id="@+id/layout_profile_fields"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="14dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/label_name"
+                        android:textColor="@color/app_black" />
+
+                    <EditText
+                        android:id="@+id/et_name"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/border_bottom"
+                        android:maxLength="15"
+                        android:singleLine="true"
+                        android:textColor="@color/app_black" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/margine_top_form"
+                        android:text="@string/label_roast_handle"
+                        android:textColor="@color/app_black" />
+
+                    <EditText
+                        android:id="@+id/et_email"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/border_bottom"
+                        android:singleLine="true"
+                        android:textColor="@color/app_black" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/margine_top_form"
+                        android:text="@string/label_link"
+                        android:textColor="@color/app_black" />
+
+                    <EditText
+                        android:id="@+id/et_mobile"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/border_bottom"
+                        android:maxLength="80"
+                        android:singleLine="true"
+                        android:textColor="@color/black" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/margine_top_form"
+                        android:text="@string/label_bio"
+                        android:textColor="@color/app_black"
+                        android:id="@+id/textView4" />
+
+                    <EditText
+                        android:id="@+id/et_suggesst"
+                        android:layout_width="match_parent"
+                        android:layout_height="200dp"
+                        android:gravity="top"
+                        android:padding="@dimen/size_10dp"
+                        android:layout_marginTop="@dimen/activity_horizontal_margin"
+                        android:maxLines="10"
+                        android:background="@drawable/border_editext_black_suggesstion"
+                        android:maxLength="200"
+                        android:textColor="@color/black" />
+
+
+
+                </LinearLayout>
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+
+    <TextView
+        android:id="@+id/tv_submit"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="25dp"
+        android:background="@drawable/login_button_selector"
+        android:enabled="true"
+        android:gravity="center_horizontal"
+        android:padding="@dimen/padding_bottom_button"
+        android:text="@string/label_update_profile_all_caps"
+        android:textColor="@color/button_text_selector"
+        android:textStyle="bold" />
+</RelativeLayout>

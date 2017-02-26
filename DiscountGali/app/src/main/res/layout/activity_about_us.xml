@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
+
+    <include layout="@layout/toolbar_layout_inside"/>
+
+    <include layout="@layout/progressbar_layout"
+        android:id="@+id/progress_bar_container"/>
+    <WebView
+        android:id="@+id/web_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+    <!--<TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/activity_horizontal_margin"
+        android:padding="@dimen/activity_horizontal_margin"
+        android:text="simply dummy text simply dummy text simply dummy text simply dummy text simply dummy text simply dummy text simply dummy text simply dummy text simply dummy text simply dummy text simply dummy text simply dummy text simply dummy text simply dummy text simply dummy text simply dummy text"
+        android:textColor="@color/black" />-->
+</LinearLayout>

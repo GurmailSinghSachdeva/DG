@@ -7,6 +7,7 @@ import com.example.lenovo.discountgali.model.ModelTopStores;
 import com.example.lenovo.discountgali.model.ServerResponse;
 import com.example.lenovo.discountgali.network.ServerRequests;
 import com.example.lenovo.discountgali.utility.Syso;
+import com.example.lenovo.discountgali.utils.Constants;
 import com.example.lenovo.discountgali.utils.JSONParsingUtils;
 
 import org.json.JSONArray;
@@ -36,13 +37,14 @@ public class GetLocalDealCategoryApiCAll extends BaseApiCall {
     private String outputjson;
     private ServerResponse<LocalDealCategoryModel> serverResponse = new ServerResponse<>();
 
-    public GetLocalDealCategoryApiCAll(Context context,String service_id, int page_start, int page_limit) {
-        this.service_id = service_id;
+    public GetLocalDealCategoryApiCAll(int page_start, int page_limit) {
         this.page_start = page_start;
         this.page_limit = page_limit;
-        this.context = context;
     }
-
+    public GetLocalDealCategoryApiCAll() {
+        this.page_start = Constants.PAGE_START_DEFAULT;
+        this.page_limit = Constants.PAGE_LIMIT_DEFAULT;
+    }
     @Override
     protected String getRequestUrl() {
         return ServerRequests.REQUEST_LOCAL_DEAL_CATEGORIES;
@@ -91,7 +93,7 @@ public class GetLocalDealCategoryApiCAll extends BaseApiCall {
                 serverResponse.data = JSONParsingUtils.getLocalDealCategories(listdata);
                 serverResponse.baseModel.MessageCode = json.getInt("MessageCode");
                 serverResponse.baseModel.Message = json.getString("Message");
-                serverResponse.totalCount = json.getInt("TotalCount");
+                serverResponse.totalCount = json.getInt("TotalRecordCount");
 
             } catch (Exception e) {
                 e.printStackTrace();
@@ -128,7 +130,7 @@ public class GetLocalDealCategoryApiCAll extends BaseApiCall {
         String requestBody = "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n" +
                 "<soap12:Envelope xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:soap12=\"http://www.w3.org/2003/05/soap-envelope\">\n" +
                 "  <soap12:Body>\n" +
-                "    <GetLocalDealCategories xmlns=\"http://tempuri.org/\" />\n" +
+                "    <GetLocalDealCategories xmlns=\"http://DiscountGali.com/\" />\n" +
                 "  </soap12:Body>\n" +
                 "</soap12:Envelope>";
         return requestBody;
@@ -139,7 +141,7 @@ public class GetLocalDealCategoryApiCAll extends BaseApiCall {
     }
     public int getTotalRecords()
     {
-        return serverResponse.data.size();
+        return serverResponse.totalCount;
     }
 
 }

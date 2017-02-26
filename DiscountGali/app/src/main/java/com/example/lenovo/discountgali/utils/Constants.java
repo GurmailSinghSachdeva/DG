@@ -4,6 +4,9 @@ package com.example.lenovo.discountgali.utils;
  * Created by Dushyant Singh on 11/24/2016.
  */
 public class Constants {
+    public static final int PAGE_NO_DEFAULT = 1;
+    public static final String REDIRECT_URL = "redirect_url";
+    public static final String COUPON_CODE = "coupon_code";
     public static boolean DEBUG = false; // TODO: should be false for final build
 
 //    public static final String BASE_URL = "http://dev2.rapidsoft.in/Roast/Services/index";
@@ -93,6 +96,8 @@ public class Constants {
 
     public final static int offline = 1;
     public final static int online = 2;
+    public static int typeOffline = 2;
+    public static int typeOnline = 1;
 
     public interface SocialPlatformIds {
         String FACEBOOK = "1";
@@ -127,6 +132,7 @@ public class Constants {
     }
     public interface ACTIVITYFORRESULT {
         int REQUESTOFFERDETAIL = 1;
+        int REQUESTOFFERSTORES = 2;
     }
 }
 

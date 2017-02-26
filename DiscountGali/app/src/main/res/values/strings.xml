@@ -215,6 +215,22 @@
     <string name="progress_dialog">Please wait...</string>
     <string name="alert_no_network">No network connection available</string>
 
+    <string name="dialog_select_city">Select city</string>
+    <string name="label_name">Name</string>
+    <string name="label_roast_handle">Email</string>
+    <string name="label_link">Mobile</string>
+    <string name="label_bio">Suggesstion(200 chars)</string>
+    <string name="label_update_profile_all_caps">Submit</string>
+    <string name="tv_coupon_code">Coupon</string>
+    <string name="tv_coupon_code_header">Long press here to copy coupon code</string>
+    <string name="enterPhoneNumbet">Enter Phone  Number</string>
+    <string name="alertNoUrl">Operation cannot be completed this time!!! Please try again later</string>
+    <string name="succes_send_message">Deal sent to your mobile number</string>
+    <string name="alertWrongMobileNo">Please enter 10 digit valid mobile number</string>
+    <string name="dealCopied">Code copied to the clipboard</string>
+    <string name="tv_visit_store">Visit Store</string>
+
+
     <string-array name="categories">
         <item>All Categories</item>
         <item>Automotive \u0026 Accessories</item>

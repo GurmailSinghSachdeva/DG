@@ -1,0 +1,138 @@
+<div style="float: none; margin: 0 auto; width: 80%;">
+        <div style="height: 25%; width: 100%">
+            <img src="images/download.jpg" width="100%" />
+        </div>
+        <div style="width: 100%">
+            <table border="0px" width="100%">
+                <tr>
+                    <td colspan="2">
+                        <h2>
+                            Get In Touch</h2>
+                    </td>
+                    <td rowspan="10">
+                            <b>Our Location</b><br /> <span lang="EN-US">We&#39;d love to hear from you.<br /> You can reach us by:</span>
+                            <p class="MsoNormal">
+                                <b>For Customer service and support</b></p>
+                            <b>Email</b> <a href="mailto:vishal@discountgali.com">vishal@discountgali.com</a>
+                            <p class="MsoNormal">
+                                <b>For Media</b></p>
+                            <p class="MsoNormal">
+                                <b>Email</b> <a href="mailto:shweta@discountgali.com">shweta@discountgali.com</a></p>
+                            <p class="MsoNormal">
+                                <b>For business and affiliation program</b></p>
+                            <p class="MsoNormal">
+                                <b>Email</b> <a href="mailto:vipul@discountgali.com">vipul@discountgali.com</a></p>
+                        
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        Please fill up the form below and we will get back soon
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Name*
+                    </td>
+                    <td>
+                        <asp:TextBox ID="txtName" runat="server" Width="200px" Style="border: 1px solid #878585;
+                            float: left;"></asp:TextBox>
+                        <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ControlToValidate="txtName" ValidationGroup="S" CssClass="ErrorMsg"
+                            ErrorMessage="Please enter your name."></asp:RequiredFieldValidator>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Email Address*
+                    </td>
+                    <td>
+                        <asp:TextBox ID="txtEmailAdd" runat="server" Width="200px" Style="border: 1px solid #878585;
+                            float: left;"></asp:TextBox>
+                        <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ControlToValidate="txtEmailAdd" ValidationGroup="S" CssClass="ErrorMsg"
+                            ErrorMessage="Please enter your Email Id."></asp:RequiredFieldValidator>
+                             <asp:RegularExpressionValidator ID="Regularexpressionmail" ErrorMessage="Please enter valid Email Id" ValidationGroup="Sub" CssClass="ErrorMsg"
+ runat="server" ControlToValidate="txtEmailAdd" ValidationExpression="\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*"></asp:RegularExpressionValidator>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        City*
+                    </td>
+                    <td>
+                        <asp:TextBox ID="txtcity" runat="server" Width="200px" Style="border: 1px solid #878585;
+                            float: left;"></asp:TextBox>
+                        <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ControlToValidate="txtcity" ValidationGroup="S" CssClass="ErrorMsg"
+                            ErrorMessage="Please enter your city."></asp:RequiredFieldValidator>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Phone*
+                    </td>
+                    <td>
+                        <asp:TextBox ID="txtphone" runat="server" Width="200px" Style="border: 1px solid #878585;float: left;" MaxLength="10" onkeypress="return isNumberKey(event)"
+                            ></asp:TextBox>
+                        <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server" ControlToValidate="txtphone" ValidationGroup="S" CssClass="ErrorMsg"
+                            ErrorMessage="Please enter Phone Number."></asp:RequiredFieldValidator>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Reason for Contacting
+                    </td>
+                    <td>
+                        <asp:DropDownList ID="ddlReason" runat="server">
+                            <asp:ListItem Text="Issue with Discount Coupons" Value="0"></asp:ListItem>
+                            <asp:ListItem Text="Payment questions" Value="1"></asp:ListItem>
+                            <asp:ListItem Text="General questions/comments" Value="2"></asp:ListItem>
+                        </asp:DropDownList>
+                        
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Description*
+                    </td>
+                    <td>
+                        <asp:TextBox ID="txtdescription" runat="server" TextMode="MultiLine" Width="300px"
+                            Height="100px"></asp:TextBox>
+                             <asp:RequiredFieldValidator ID="RequiredFieldValidator5" runat="server" ControlToValidate="txtdescription" ValidationGroup="S" CssClass="ErrorMsg"
+                            ErrorMessage="Please enter Description."></asp:RequiredFieldValidator>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Security Code*
+                    </td>
+                    <td>
+                    <asp:UpdatePanel ID="UP1" runat="server">
+                        <ContentTemplate>
+                            <table>
+                                <tr>
+                                    <td style="height: 50px; width:100px;">
+                                        <asp:Image ID="imgCaptcha" runat="server" />
+                                    </td>
+                                    <td valign="middle" align="right">
+                                       <p> <asp:Button ID="btnRefresh" runat="server" Text="Refresh" style="float:right" width="100px" OnClick="btnRefresh_Click" /></p>
+                                    </td>
+                                </tr>
+                            </table>
+                        </ContentTemplate>
+                    </asp:UpdatePanel>
+                        <asp:TextBox ID="txtCaptcha" runat="server" Width="200px" Style="border: 1px solid #878585;
+                            float: left;"></asp:TextBox>
+                            
+                    </td>
+                </tr>
+                <tr align="center">
+                    <td colspan="2">
+                     <br />
+                     <asp:Button ID="btnRegiser" runat="server" Text="Register" Width="150px" OnClick="btnRegister_Click" ValidationGroup="S" />
+                    <asp:Button ID="btnCancel" runat="server" Text="Cancel" Width="150px" 
+                            onclick="btnCancel_Click" />
+                    
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>

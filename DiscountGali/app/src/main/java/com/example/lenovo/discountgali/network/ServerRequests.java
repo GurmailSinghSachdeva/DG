@@ -48,10 +48,16 @@ public class ServerRequests {
     public static final String REQUEST_GET_MESSAGE = SP_MESSAGE + "iaGetRecentMessages";
     public static final String REQUEST_DELETE_MESSAGE = SP_MESSAGE + "iaDeleteMessages";
 
-    public static final String REQUEST_GET_OFFERS = BASE_URL + "op=GetOnlineTopOffers";
-    public static final String REQUEST_TOP_STORES = BASE_URL + "op=GetOnlineBrand";
-    public static final String REQUEST_CATEGORIES = BASE_URL + "op=GetCategories" ;
-    public static final String REQUEST_LOCAL_DEAL_CATEGORIES = BASE_URL + "op=GetLocalDealCategories" ;
+    public static final String REQUEST_GET_OFFERS = BASE_URL                            + "op=GetOnlineTopOffers";
+    public static final String REQUEST_TOP_STORES = BASE_URL                            + "op=GetOnlineBrand";
+    public static final String REQUEST_CATEGORIES = BASE_URL                            + "op=GetCategories" ;
+    public static final String REQUEST_LOCAL_DEAL_CATEGORIES = BASE_URL                 + "op=GetLocalDealCategories" ;
+    public static final String REQUEST_OFFERS_STORES_WISE = BASE_URL                    + "op=GetOnlineTopDeals";
+    public static final String REQUEST_GET_OFFERS_ONLINE_CATEGORY_WISE = BASE_URL       + "op=GetOnlineDealOnCategory";
+    public static final String REQUEST_CITY_LIST = BASE_URL                             + "op=GetListOfCities";
+    public static final String REQUEST_LOCAL_DEALS = BASE_URL                           + "op=GetLocalDeals";
+    public static final String REQUEST_SEARCH = BASE_URL                                + "op=GetSearchOnlineResult";
+    public static final String REQUEST_GET_URL_ON_MOBILE_NUMBER = BASE_URL              + "op=GetDealWithMobileNo";
 
 
     public static final String UPLOAD_USER_PROFILE_IMAGE = BASE_URL + SP_PROFILE + "iaUploadFile";

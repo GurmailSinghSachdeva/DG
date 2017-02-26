@@ -14,6 +14,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Gravity;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
@@ -58,6 +59,7 @@ public class HomeActivity extends BaseActivity implements NavigationView.OnNavig
     private ArrayList<FeaturedModel> featuredModellist = new ArrayList<>();
     private Toolbar mToolBar;
     private ImageView ivNavDrawer;
+    private ImageView ivSearch;
     private static AppBarLayout appBarLayout;
     private android.support.v4.widget.DrawerLayout mDrawer;
 
@@ -96,6 +98,7 @@ public class HomeActivity extends BaseActivity implements NavigationView.OnNavig
 
     private void setListener()
     {
+        ivSearch.setOnClickListener(this);
         ivNavDrawer.setOnClickListener(this);
         rl_category.setOnClickListener(this);
         rl_invite.setOnClickListener(this);
@@ -185,7 +188,7 @@ public class HomeActivity extends BaseActivity implements NavigationView.OnNavig
             home_tabs_name.add("OFFERS");
             home_tabs_name.add("STORES");
             home_tabs_name.add("CATEGORIES");
-            home_tabs_name.add("Deals");
+            home_tabs_name.add("DEALS");
 //            home_tabs_name.add("PRODUCTS");
         }
     }
@@ -205,6 +208,7 @@ public class HomeActivity extends BaseActivity implements NavigationView.OnNavig
         rl_category = (RelativeLayout) findViewById(R.id.rl_category);
         ivNavDrawer = (ImageView) mToolBar.findViewById(R.id.navDrawerIcon);
 
+        ivSearch = (ImageView) mToolBar.findViewById(R.id.search);
     }
 
 
@@ -322,11 +326,11 @@ public class HomeActivity extends BaseActivity implements NavigationView.OnNavig
                     viewPager.setCurrentItem(1);
 
                 } else if (navItem.equalsIgnoreCase("Contest")) {
-//                    startActivity(new Intent(HomeActivity.this, LikedStories.class));
+                    startActivity(new Intent(HomeActivity.this, ContestActivity.class));
                 } else if (navItem.equalsIgnoreCase("Notifications")) {
 //                    startActivity(new Intent(HomeActivity.this, PushNotificationActivity.class));
                 } else if (navItem.equalsIgnoreCase("About Us")) {
-//                    clearSearchHistoryDialog(HomeActivity.this);
+                    startActivity(new Intent(HomeActivity.this, AboutUsActivity.class));
                 } else if (navItem.equalsIgnoreCase("Rate us")) {
                     Utils.navigatePlayStore();
                 }else if (navItem.equalsIgnoreCase("Invite & Earn")) {
@@ -335,11 +339,11 @@ public class HomeActivity extends BaseActivity implements NavigationView.OnNavig
                 }else if (navItem.equalsIgnoreCase("Deal of the day")) {
 //                    clearSearchHistoryDialog(HomeActivity.this);
                 }else if (navItem.equalsIgnoreCase("Help us Improve")) {
-//                    clearSearchHistoryDialog(HomeActivity.this);
+                    startActivity(new Intent(HomeActivity.this, HelpUsImproveActivity.class));
                 }else if (navItem.equalsIgnoreCase("Merchant")) {
 //                    clearSearchHistoryDialog(HomeActivity.this);
                 }else if (navItem.equalsIgnoreCase("Contact us")) {
-//                    clearSearchHistoryDialog(HomeActivity.this);
+                    startActivity(new Intent(HomeActivity.this, ContactUsActivity.class));
                 }
 
                 mDrawer.closeDrawer(GravityCompat.START);
@@ -401,11 +405,15 @@ public class HomeActivity extends BaseActivity implements NavigationView.OnNavig
                     mDrawer.openDrawer(GravityCompat.START);
                 }
                 break;
-
+            case R.id.search:
+                Utils.showSearchActivity(HomeActivity.this);
+                break;
         }
     }
 
-//    void setTabLayout(int pos) {
+
+
+    //    void setTabLayout(int pos) {
 //
 //            tabLayout.getTabAt(pos).setText(home_tabs_name.get(pos));
 //        }

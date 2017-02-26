@@ -27,9 +27,15 @@ import android.widget.ImageView;
 
 import com.android.volley.NoConnectionError;
 import com.example.lenovo.discountgali.R;
+import com.example.lenovo.discountgali.activity.DealUrlActivity;
+import com.example.lenovo.discountgali.activity.HomeActivity;
+import com.example.lenovo.discountgali.activity.LocalDealsActivty;
 import com.example.lenovo.discountgali.activity.OfferDetailActivity;
+import com.example.lenovo.discountgali.activity.OfferOnlineStoresActivity;
+import com.example.lenovo.discountgali.activity.SearchItemActivity;
 import com.example.lenovo.discountgali.fragment.CustomSharingDialogFragment;
 import com.example.lenovo.discountgali.fragment.HomeFragment;
+import com.example.lenovo.discountgali.model.ModelTopStores;
 import com.example.lenovo.discountgali.model.TopOffers;
 import com.example.lenovo.discountgali.network.api.APIException;
 import com.example.lenovo.discountgali.utils.Constants;
@@ -922,4 +928,58 @@ public class Utils {
             context.overridePendingTransition(0, 0);
         }
     }
+
+    public static void showOffersOnlineStoresActivity(Activity context, ModelTopStores modelTopStores) {
+        if (context != null) {
+            Intent intent = new Intent(context, OfferOnlineStoresActivity.class);
+            intent.putExtra("store", modelTopStores);
+            context.startActivity(intent);
+        }
+
+    }
+
+    public static void showLocalDealsActivity(Activity context, String cityName, int categoryId) {
+
+        if (context != null) {
+            Intent intent = new Intent(context, LocalDealsActivty.class);
+            intent.putExtra("cityId", cityName);
+            intent.putExtra("categoryId", categoryId);
+            context.startActivity(intent);
+        }
+    }
+
+    public static void showSearchActivity(Context context) {
+        if (context != null) {
+            Intent intent = new Intent(context, SearchItemActivity.class);
+            context.startActivity(intent);
+        }
+    }
+
+    public static void showDealUrlActivity(Activity context, String coupon, String url) {
+        if (context != null) {
+            Intent intent = new Intent(context, DealUrlActivity.class);
+            intent.putExtra(Constants.REDIRECT_URL, url);
+            intent.putExtra(Constants.COUPON_CODE, coupon);
+            context.startActivity(intent);
+        }
+    }
+
+    public static void openUrl(Context context, String url) {
+        if (context != null && url != null) {
+            try {
+                if (!url.startsWith("https://") && !url.startsWith("http://")) {
+                    url = "http://" + url;
+                }
+                Uri webpage = Uri.parse(url);
+                Intent intent = new Intent(Intent.ACTION_VIEW, webpage);
+                //intent.setType("text/html");
+                if (intent.resolveActivity(context.getPackageManager()) != null) {
+                    context.startActivity(intent);
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
 }

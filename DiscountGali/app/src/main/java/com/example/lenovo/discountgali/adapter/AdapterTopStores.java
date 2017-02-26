@@ -1,6 +1,7 @@
 package com.example.lenovo.discountgali.adapter;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -51,9 +52,10 @@ public class AdapterTopStores extends RecyclerView.Adapter<AdapterTopStores.MyVi
     public void onBindViewHolder(AdapterTopStores.MyViewHolder holder, int position) {
         final ModelTopStores modelTopStores = listStores.get(position);
 
-        Syso.print("HELLO  " + modelTopStores.getIcon());
 
         ImageLoaderUtils.loadImage(modelTopStores.getIcon(), holder.img_store);
+
+        holder.onBind(modelTopStores);
 
     }
 
@@ -87,6 +89,7 @@ public class AdapterTopStores extends RecyclerView.Adapter<AdapterTopStores.MyVi
 
         @Override
         public void onClick(View v) {
+            Utils.showOffersOnlineStoresActivity(context, modelTopStores);
 //            if(recentsModel.getForwardHeader() == 0){
 //                listener.onItemClick(recentsModel,v);
 //            }
