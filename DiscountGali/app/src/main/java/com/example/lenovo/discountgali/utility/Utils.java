@@ -168,10 +168,26 @@ public class Utils {
 //                    }
 //                }).create().show();
 //    }
+public static void showSoftKeyboard(Activity context) {
+    try {
+        View view = context.getCurrentFocus();
+        if (view != null) {
+            InputMethodManager imm = (InputMethodManager) context.getSystemService(Activity.INPUT_METHOD_SERVICE);
+            imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, 0);
+            Syso.print("--------- open keyboard 1 :");
+        }
 
-    public static void hideSoftKeyBoard(Activity context) {
+
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+}
+
+    public static void hideSoftKeyBoard(Activity context, View view) {
         try {
-            View view = context.getCurrentFocus();
+//            View view = context.getCurrentFocus();
+
+            view.requestFocus();
             if (view != null) {
                 InputMethodManager imm = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
                 boolean value = imm.hideSoftInputFromWindow(view.getWindowToken(), 0);

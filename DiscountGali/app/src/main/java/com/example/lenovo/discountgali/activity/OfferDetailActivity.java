@@ -12,6 +12,7 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -150,11 +151,12 @@ public class OfferDetailActivity extends Activity implements View.OnClickListene
         View view = getLayoutInflater().inflate(R.layout.dialog_edit_text,null);
         final EditText editText = (EditText) view.findViewById(R.id.et_input);
         editText.setHint("Ex - 1234567890");
+        editText.requestFocus();
         builder.setView(view);
         builder.setPositiveButton(getString(R.string.tv_ok), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                Utils.hideSoftKeyBoard(OfferDetailActivity.this);
+                Utils.hideSoftKeyBoard(OfferDetailActivity.this, editText);
 
                 String editTextValue = editText.getText().toString();
                 if(!TextUtils.isEmpty(editTextValue) && editTextValue.length() == 10){
@@ -173,11 +175,15 @@ public class OfferDetailActivity extends Activity implements View.OnClickListene
         builder.setNegativeButton(R.string.dialog_cancel, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                Utils.hideSoftKeyBoard(OfferDetailActivity.this);
+                Utils.hideSoftKeyBoard(OfferDetailActivity.this, editText);
                 dialog.cancel();
             }
         });
         builder.create().show();
+        editText.requestFocus();
+        InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, 0);
+
 
     }
 

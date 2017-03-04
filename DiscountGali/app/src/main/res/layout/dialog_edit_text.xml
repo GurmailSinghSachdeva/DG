@@ -10,6 +10,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_margin="@dimen/size_20dp"
+        android:focusable="true"
         android:maxLength="10"
         android:inputType="phone" />
 </LinearLayout>
