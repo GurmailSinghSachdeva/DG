@@ -4,6 +4,7 @@ import android.content.Context;
 
 import com.example.lenovo.discountgali.model.ServerResponse;
 import com.example.lenovo.discountgali.model.TopOffers;
+import com.example.lenovo.discountgali.network.Code;
 import com.example.lenovo.discountgali.network.ServerRequests;
 import com.example.lenovo.discountgali.utility.Syso;
 import com.example.lenovo.discountgali.utils.Constants;
@@ -98,10 +99,14 @@ public class GetOffersOnlineCategoryWise extends BaseApiCall {
         if (response != null && !response.isEmpty()) {
             try {
                 JSONObject json = new JSONObject(response);
-                JSONObject dataobject = json.getJSONObject("Data");
-                JSONArray listdata = dataobject.getJSONArray("List");
+                serverResponse.baseModel.MessageCode = json.getInt("MessageCode");
+                if(serverResponse.baseModel.MessageCode == Code.SUCCESS_MESSAGE_CODE) {
 
-                serverResponse.data = JSONParsingUtils.getTopOffers(listdata);
+                    JSONObject dataobject = json.getJSONObject("Data");
+                    JSONArray listdata = dataobject.getJSONArray("List");
+
+                    serverResponse.data = JSONParsingUtils.getTopOffers(listdata);
+                }
                 serverResponse.baseModel.MessageCode = json.getInt("MessageCode");
                 serverResponse.baseModel.Message = json.getString("Message");
                 serverResponse.totalCount = json.getInt("TotalRecordCount");

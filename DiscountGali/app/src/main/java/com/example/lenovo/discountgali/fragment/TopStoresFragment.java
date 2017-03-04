@@ -135,7 +135,7 @@ public class TopStoresFragment extends Fragment implements SwipeRefreshLayout.On
                         } catch (Exception e1) {
 
                             Syso.print("HELLO " + e1.getMessage());
-                            Utils.handleError(e1, getActivity());
+                            Utils.handleError(getString(R.string.alert_no_deals_availabale), getActivity(), null);
                         }
                     } else { // Failure
                         Syso.print("HELLO 1" + e.getMessage());

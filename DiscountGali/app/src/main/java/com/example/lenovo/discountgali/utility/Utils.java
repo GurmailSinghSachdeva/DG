@@ -854,7 +854,9 @@ public class Utils {
             return;
         }
         //   String msg = "No internet found. Check your connection or try again"; //"Unable to complete request. Please try again later.";
-        String msg = "Operation could not be completed due to some problem. We are trying hard to resolve the same. Your inconvenience is regretted.";
+//        String msg = "Operation could not be completed due to some problem. We are trying hard to resolve the same. Your inconvenience is regretted.";
+        String msg = "No Deals Available";
+
         if (alternateMsg != null && !alternateMsg.isEmpty())
             msg = alternateMsg;
         if (e != null) {

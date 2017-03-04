@@ -17,6 +17,8 @@
         android:layout_height="wrap_content"
         android:id="@+id/tv_coupon"
         android:text="@string/tv_coupon_code"
+        android:textStyle="bold"
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
         android:textColor="@color/app_black"/>
 <View
     android:layout_width="match_parent"

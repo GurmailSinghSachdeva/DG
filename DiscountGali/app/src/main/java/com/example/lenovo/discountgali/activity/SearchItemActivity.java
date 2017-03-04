@@ -284,6 +284,7 @@ public class SearchItemActivity extends BaseActivity implements View.OnClickList
             } else {
                 switch (searchItemsListApiCall.getSearchType()) {
                     case ONLINE: {
+
                         Syso.print("INSIDE " + "skipping layout1");
                         ServerResponse<TopOffers> serverResponse = (ServerResponse<TopOffers>) searchItemsListApiCall.getResult();
                         if(serverResponse.data!=null && !serverResponse.data.isEmpty())

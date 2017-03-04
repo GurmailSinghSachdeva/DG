@@ -10,6 +10,7 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
@@ -33,6 +34,7 @@ import com.example.lenovo.discountgali.network.apicall.GetRecentMessageApiCall;
 import com.example.lenovo.discountgali.utility.AlertUtils;
 import com.example.lenovo.discountgali.utility.Syso;
 import com.example.lenovo.discountgali.utility.Utils;
+import com.example.lenovo.discountgali.utils.DialogUtils;
 import com.example.lenovo.discountgali.utils.EndlessRecyclerOnScrollListener;
 
 import java.lang.reflect.Array;
@@ -111,6 +113,29 @@ public class CategoryFragment extends Fragment implements SwipeRefreshLayout.OnR
         adapterCategories = new AdapterCategories(getActivity(), categoriesList, this, 1);
         rv_categories.setHasFixedSize(true);
         rv_categories.setAdapter(adapterCategories);
+//        rv_categories.setOnTouchListener(new View.OnTouchListener() {
+//            @Override
+//            public boolean onTouch(View v, MotionEvent event) {
+//                if (v.getId() == R.id.recycler_categories) {
+//                    v.getParent().requestDisallowInterceptTouchEvent(true);
+//                    switch (event.getAction() & MotionEvent.ACTION_MASK) {
+//                        case MotionEvent.ACTION_UP:
+//                            v.getParent().requestDisallowInterceptTouchEvent(false);
+//                            break;
+//                    }
+//
+//                }
+//                return false;
+//            }
+//        });
+
+//        rv_categories.addOnScrollListener(new RecyclerView.OnScrollListener() {
+//            @Override
+//            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+//                super.onScrolled(recyclerView, dx, dy);
+//                horizontalLayoutManager.findLastCompletelyVisibleItemPosition()
+//            }
+//        });
     }
 
     private void setOffersRecyclerView() {
@@ -165,6 +190,10 @@ public class CategoryFragment extends Fragment implements SwipeRefreshLayout.OnR
                                             isLastItemFound = true;
 
                                         break;
+                                    default:
+                                        DialogUtils.showAlert(getActivity(), getString(R.string.alert_no_deals_availabale));
+
+                                        break;
                                 }
                             }
 //                    ServerResponse serverResponse = (ServerResponse) changePasswordApiCall.getResult();
@@ -178,7 +207,7 @@ public class CategoryFragment extends Fragment implements SwipeRefreshLayout.OnR
 //                            break;
 //                    }
                         } catch (Exception e1) {
-                            Utils.handleError("No Deals Available", getActivity(), null);
+                            Utils.handleError(getString(R.string.alert_no_deals_availabale), getActivity(), null);
 
                         }
                     } else {
@@ -272,6 +301,7 @@ public class CategoryFragment extends Fragment implements SwipeRefreshLayout.OnR
                 public void onComplete(Exception e) {
                     if (e == null) { // Success
                         try {
+
                             categoriesList.clear();
                             categoriesList.addAll(apiCall.getCategoriesList());
                             adapterCategories.notifyDataSetChanged();

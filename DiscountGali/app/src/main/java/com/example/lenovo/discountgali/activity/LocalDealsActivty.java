@@ -19,7 +19,9 @@ import com.example.lenovo.discountgali.network.HttpRequestHandler;
 import com.example.lenovo.discountgali.network.api.ApiCall;
 import com.example.lenovo.discountgali.network.apicall.GetLocalDeals;
 import com.example.lenovo.discountgali.network.apicall.GetOffersOnlineStoreWise;
+import com.example.lenovo.discountgali.utility.AlertUtils;
 import com.example.lenovo.discountgali.utility.Utils;
+import com.example.lenovo.discountgali.utils.DialogUtils;
 import com.example.lenovo.discountgali.utils.EndlessRecyclerOnScrollListener;
 
 import java.util.ArrayList;
@@ -93,7 +95,7 @@ public class LocalDealsActivty extends BaseActivity implements SwipeRefreshLayou
 
     private void parseArguments() {
         try {
-            cityName = getIntent().getStringExtra("cityName");
+            cityName = getIntent().getStringExtra("cityId");
             categoryId = getIntent().getIntExtra("categoryId", -1);
         } catch (Exception e) {
             e.printStackTrace();
@@ -183,11 +185,14 @@ public class LocalDealsActivty extends BaseActivity implements SwipeRefreshLayou
                                     if (topOfferslist.size() == apiCall.getTotalRecords())
                                         isLastItemFound = true;
                                     break;
+                                default:
+                                    DialogUtils.showAlert(LocalDealsActivty.this, getString(R.string.alert_no_deals_availabale));
+                                    break;
                             }
                         }
 
                     } else {
-                        Utils.handleError(e, getApplicationContext());
+                        Utils.handleError(e, LocalDealsActivty.this);
                     }
                 }
             }, false);

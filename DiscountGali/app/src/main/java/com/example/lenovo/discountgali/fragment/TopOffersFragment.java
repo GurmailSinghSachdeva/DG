@@ -22,6 +22,7 @@ import com.example.lenovo.discountgali.network.HttpRequestHandler;
 import com.example.lenovo.discountgali.network.api.ApiCall;
 import com.example.lenovo.discountgali.network.apicall.GetRecentMessageApiCall;
 import com.example.lenovo.discountgali.utility.AlertUtils;
+import com.example.lenovo.discountgali.utils.DialogUtils;
 import com.example.lenovo.discountgali.utils.EndlessRecyclerOnScrollListener;
 
 import java.util.ArrayList;
@@ -131,6 +132,9 @@ public class TopOffersFragment extends Fragment implements SwipeRefreshLayout.On
                                 case Code.SUCCESS_MESSAGE_CODE:
                                     topOfferslist.addAll(serverResponse.data);
                                     mAdapter.notifyDataSetChanged();
+                                    break;
+                                default:
+                                    DialogUtils.showAlert(getActivity(), getString(R.string.alert_no_deals_availabale));
                                     break;
                             }
                         }

@@ -33,6 +33,7 @@ import com.example.lenovo.discountgali.network.apicall.GetRecentMessageApiCall;
 import com.example.lenovo.discountgali.utility.AlertUtils;
 import com.example.lenovo.discountgali.utility.Syso;
 import com.example.lenovo.discountgali.utility.Utils;
+import com.example.lenovo.discountgali.utils.DialogUtils;
 import com.example.lenovo.discountgali.utils.EndlessRecyclerOnScrollListener;
 
 import java.util.ArrayList;
@@ -177,6 +178,10 @@ public class HomeFragment extends Fragment implements SwipeRefreshLayout.OnRefre
 
                                         isLastItemFound = true;
                                     }
+                                    break;
+                                default:
+                                    DialogUtils.showAlert(getActivity(), getString(R.string.alert_no_deals_availabale));
+
                                     break;
                             }
                         }

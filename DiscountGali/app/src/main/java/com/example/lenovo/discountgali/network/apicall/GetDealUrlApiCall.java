@@ -5,6 +5,7 @@ import android.content.Context;
 import com.example.lenovo.discountgali.model.DealUrlModel;
 import com.example.lenovo.discountgali.model.ServerResponse;
 import com.example.lenovo.discountgali.model.TopOffers;
+import com.example.lenovo.discountgali.network.Code;
 import com.example.lenovo.discountgali.network.ServerRequests;
 import com.example.lenovo.discountgali.utility.Syso;
 import com.example.lenovo.discountgali.utils.Constants;
@@ -85,12 +86,13 @@ public class GetDealUrlApiCall extends BaseApiCall {
         if (response != null && !response.isEmpty()) {
             try {
                 JSONObject json = new JSONObject(response);
-                JSONObject dataobject = json.getJSONObject("Data");
-                if(dealType == Constants.typeOnline)
-                {
+                serverResponse.baseModel.MessageCode = json.getInt("MessageCode");
+                if(serverResponse.baseModel.MessageCode == Code.SUCCESS_MESSAGE_CODE) {
+                    JSONObject dataobject = json.getJSONObject("Data");
+                if(dealType == Constants.typeOnline) {
                     JSONArray listdata = dataobject.getJSONArray("List");
                     serverResponse.data = JSONParsingUtils.getDealUrl(listdata);
-
+                }
                 }
                 serverResponse.baseModel.MessageCode = json.getInt("MessageCode");
                 serverResponse.baseModel.Message = json.getString("Message");

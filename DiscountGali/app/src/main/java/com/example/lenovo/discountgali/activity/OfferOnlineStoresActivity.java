@@ -21,8 +21,10 @@ import com.example.lenovo.discountgali.network.HttpRequestHandler;
 import com.example.lenovo.discountgali.network.api.ApiCall;
 import com.example.lenovo.discountgali.network.apicall.GetOffersOnlineStoreWise;
 import com.example.lenovo.discountgali.network.apicall.GetRecentMessageApiCall;
+import com.example.lenovo.discountgali.utility.AlertUtils;
 import com.example.lenovo.discountgali.utility.Syso;
 import com.example.lenovo.discountgali.utility.Utils;
+import com.example.lenovo.discountgali.utils.DialogUtils;
 import com.example.lenovo.discountgali.utils.EndlessRecyclerOnScrollListener;
 
 import java.util.ArrayList;
@@ -186,6 +188,9 @@ public class OfferOnlineStoresActivity extends BaseActivity implements SwipeRefr
 
                                     if (topOfferslist.size() == apiCall.getTotalRecords())
                                         isLastItemFound = true;
+                                    break;
+                                default:
+                                    DialogUtils.showAlert(OfferOnlineStoresActivity.this, getString(R.string.alert_no_deals_availabale));
                                     break;
                             }
                         }

@@ -2,6 +2,9 @@ package com.example.lenovo.discountgali.activity;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.ClipData;
+import android.content.ClipboardManager;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -30,14 +33,19 @@ import com.example.lenovo.discountgali.utils.ImageLoaderUtils;
 
 import java.util.ArrayList;
 
-public class OfferDetailActivity extends Activity implements View.OnClickListener {
+public class OfferDetailActivity extends Activity implements View.OnClickListener, View.OnLongClickListener {
 
     Toolbar mToolBar;
-
+    private View coupon_layout;
+    private TextView tvCouponCode;
     private ImageView ivClose;
     private TextView tv_title, tv_description, tv_date, tv_brandName, tv_couponCode, tv_grab_coupon, tv_long_press, tv_description_fixed;
     private ImageView iv_logo;
     private TopOffers topOffer;
+    private String coupon;
+    private String url;
+    private boolean couponMode;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,6 +59,7 @@ public class OfferDetailActivity extends Activity implements View.OnClickListene
     }
 
     private void setListener() {
+        coupon_layout.setOnLongClickListener(this);
         tv_grab_coupon.setOnClickListener(this);
         ivClose.setOnClickListener(this);
     }
@@ -69,6 +78,7 @@ public class OfferDetailActivity extends Activity implements View.OnClickListene
         tv_couponCode.setVisibility(View.GONE);
         tv_long_press.setVisibility(View.GONE);
 
+        coupon_layout.setVisibility(View.GONE);
         tv_description_fixed.setText(topOffer.OnlineDeal_Type == Constants.typeOnline?"DESCRIPTION":"ADDRESS");
     }
 
@@ -88,6 +98,8 @@ public class OfferDetailActivity extends Activity implements View.OnClickListene
         iv_logo = (ImageView) findViewById(R.id.iv_offerLogo);
         tv_description_fixed = (TextView) findViewById(R.id.tv_description_fixed);
         ivClose = (ImageView) findViewById(R.id.iv_close);
+        coupon_layout = findViewById(R.id.coupon_conatiner);
+        tvCouponCode = (TextView) findViewById(R.id.tv_coupon);
     }
 //    private void setUpToolbar(String title, int navId) {
 ////        TextView tv = (TextView) mToolBar.findViewById(R.id.toolbar_title);
@@ -114,7 +126,13 @@ public class OfferDetailActivity extends Activity implements View.OnClickListene
             case R.id.tv_grab_coupon:
 //                tv_couponCode.setVisibility(View.VISIBLE);
 //                tv_long_press.setVisibility(View.VISIBLE);
-                showPhoneNumberDialog();
+                if(couponMode){
+                    if(!TextUtils.isEmpty(url))
+                    Utils.openUrl(this, url);
+                }
+                else {
+                    showPhoneNumberDialog();
+                }
                 break;
             case R.id.iv_close:
                 setResult(Constants.ACTIVITYFORRESULT.REQUESTOFFERDETAIL);
@@ -174,32 +192,43 @@ public class OfferDetailActivity extends Activity implements View.OnClickListene
             HttpRequestHandler.getInstance(this).executeRequest(apiCall, new ApiCall.OnApiCallCompleteListener() {
                 @Override
                 public void onComplete(Exception e) {
-                    DialogUtils.hideProgressDialog(progressDialog);
-                    if (e == null) {
-                        ServerResponse<DealUrlModel> serverResponse = (ServerResponse<DealUrlModel>) apiCall.getResult();
-                        if (serverResponse != null) {
-                            switch (serverResponse.baseModel.MessageCode) {
-                                case Code.SUCCESS_MESSAGE_CODE:
-                                   ArrayList<DealUrlModel> dealUtlModels = new ArrayList<DealUrlModel>();
-                                    dealUtlModels = serverResponse.data;
-                                    if(topOffer.OnlineDeal_Type == Constants.typeOffline){
-                                        AlertUtils.showToast(OfferDetailActivity.this, R.string.succes_send_message);
-                                        finish();
-                                    }
-                                    if(!TextUtils.isEmpty(dealUtlModels.get(0).url))
-                                    {
-                                        Utils.showDealUrlActivity(OfferDetailActivity.this, topOffer.OnlineDeal_CouponCode,
-                                                dealUtlModels.get(0).url);
-                                    }
-                                    else {
-                                        AlertUtils.showToast(OfferDetailActivity.this, R.string.alertNoUrl);
-                                    }
-                                    break;
-                            }
-                        }
+                    try {
+                        DialogUtils.hideProgressDialog(progressDialog);
+                        if (e == null) {
+                            ServerResponse<DealUrlModel> serverResponse = (ServerResponse<DealUrlModel>) apiCall.getResult();
+                            if (serverResponse != null) {
+                                switch (serverResponse.baseModel.MessageCode) {
+                                    case Code.SUCCESS_MESSAGE_CODE:
+                                        ArrayList<DealUrlModel> dealUtlModels = new ArrayList<DealUrlModel>();
+                                        dealUtlModels = serverResponse.data;
+                                        if (topOffer.OnlineDeal_Type == Constants.typeOffline) {
+                                            AlertUtils.showToast(OfferDetailActivity.this, R.string.succes_send_message);
+                                            finish();
+                                            return;
+                                        }
+                                        if (!TextUtils.isEmpty(dealUtlModels.get(0).url)) {
+                                            url = dealUtlModels.get(0).url;
+                                            setCouponConatiner();
+//                                            Utils.showDealUrlActivity(OfferDetailActivity.this, topOffer.OnlineDeal_CouponCode,
+//                                                    dealUtlModels.get(0).url);
+                                        } else {
+                                            AlertUtils.showToast(OfferDetailActivity.this, R.string.alertNoUrl);
+                                        }
+                                        break;
+                                    default:
+                                        DialogUtils.showAlert(OfferDetailActivity.this, getString(R.string.alert_no_deals_availabale));
 
-                    } else {
-                        Utils.handleError(e, OfferDetailActivity.this);
+                                        break;
+                                }
+
+                            }
+
+                        } else {
+                            Utils.handleError(e, OfferDetailActivity.this);
+                        }
+                    }catch (Exception e1)
+                    {
+                        e1.printStackTrace();
                     }
                 }
             }, false);
@@ -208,5 +237,28 @@ public class OfferDetailActivity extends Activity implements View.OnClickListene
             e.printStackTrace();
         }
     }
+    private void setCouponConatiner() {
+        if(!TextUtils.isEmpty(topOffer.OnlineDeal_CouponCode)){
+            coupon_layout.setVisibility(View.VISIBLE);
+            tvCouponCode.setText(topOffer.OnlineDeal_CouponCode);
+        }
+        else {
+            coupon_layout.setVisibility(View.GONE);
+        }
+        couponMode = true;
+        tv_grab_coupon.setText(R.string.tv_visit_store);
+    }
 
+    @Override
+    public boolean onLongClick(View view) {
+        switch (view.getId()){
+            case R.id.coupon_conatiner:
+                ClipboardManager clipboard = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
+                ClipData clip = ClipData.newPlainText(topOffer.OnlineDeal_CouponCode, topOffer.OnlineDeal_CouponCode);
+                clipboard.setPrimaryClip(clip);
+                AlertUtils.showToast(OfferDetailActivity.this, R.string.dealCopied);
+                break;
+        }
+        return false;
+    }
 }

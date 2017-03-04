@@ -117,11 +117,14 @@ public class LocalDealCategoryFragment extends Fragment implements SwipeRefreshL
                     if (e == null) { // Success
                         try {
                             ServerResponse<CityModel> serverResponse = (ServerResponse<CityModel>) apiCall.getResult();
-                            if(serverResponse!=null){
+                            if(serverResponse!=null && serverResponse.data!=null && serverResponse.data.size()>0){
                                 cityList.clear();
                                 cityList.addAll(serverResponse.data);
+                                showCityDialog();
                             }
-                            showCityDialog();
+                            else {
+                                DialogUtils.showAlert(getActivity(), getString(R.string.alert_no_deals_availabale));
+                            }
                         } catch (Exception e1) {
 
                             Utils.handleError(e1, getActivity());
@@ -282,8 +285,9 @@ getCityListApiCAll();    }
         builder.setSingleChoiceItems(cityNames, cityId,
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int item) {
-                        Syso.print("position >>" + item);
+                        Syso.print("position sele >>" + item);
                         cityId = cityIds[item];
+                        Syso.print("position id " + cityId);
                     }
                 });
         builder.setPositiveButton(getString(R.string.tv_ok), new DialogInterface.OnClickListener() {
@@ -296,6 +300,8 @@ getCityListApiCAll();    }
                     if(cityList.get(i).CityId == cityId)
                     cityName = cityList.get(i).CityName;
                 }
+                Syso.print("position id name " + cityName);
+
                 Utils.showLocalDealsActivity(getActivity(), cityName, adapterLocalDealsCategory.categoryId);
             }
         });

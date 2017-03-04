@@ -188,7 +188,7 @@ public class HomeActivity extends BaseActivity implements NavigationView.OnNavig
             home_tabs_name.add("OFFERS");
             home_tabs_name.add("STORES");
             home_tabs_name.add("CATEGORIES");
-            home_tabs_name.add("DEALS");
+            home_tabs_name.add("CITY DEALS");
 //            home_tabs_name.add("PRODUCTS");
         }
     }
@@ -302,7 +302,7 @@ public class HomeActivity extends BaseActivity implements NavigationView.OnNavig
         navMenuItems.add(new NavDrawerAdapter.NavMenuItem("Home", R.drawable.home));
         navMenuItems.add(new NavDrawerAdapter.NavMenuItem("All Stores", R.drawable.stores_icon));
         navMenuItems.add(new NavDrawerAdapter.NavMenuItem("Contest", R.drawable.contest));
-        navMenuItems.add(new NavDrawerAdapter.NavMenuItem("Notifications", R.drawable.notifications));
+//        navMenuItems.add(new NavDrawerAdapter.NavMenuItem("Notifications", R.drawable.notifications));
         navMenuItems.add(new NavDrawerAdapter.NavMenuItem("About Us", R.drawable.about_us));
         navMenuItems.add(new NavDrawerAdapter.NavMenuItem("Rate us", R.drawable.rate_us));
         navMenuItems.add(new NavDrawerAdapter.NavMenuItem("Invite & Earn", R.drawable.invitation));

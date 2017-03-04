@@ -133,9 +133,9 @@ public class DealUrlActivity extends BaseActivity implements View.OnLongClickLis
 
     private void initUi() {
         progress_bar_layout = findViewById(R.id.progress_bar_container);
-        coupon_layout = findViewById(R.id.coupon_conatiner);
         mToolBar = (Toolbar) findViewById(R.id.toolbar);
         tvVisistStore = (TextView) findViewById(R.id.tv_visit_store);
+        coupon_layout = findViewById(R.id.coupon_conatiner);
 
         tvCouponCode = (TextView) findViewById(R.id.tv_coupon);
 //        webView = (WebView) findViewById(R.id.web_view);
