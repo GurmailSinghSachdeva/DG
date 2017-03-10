@@ -34,7 +34,7 @@ import com.example.lenovo.discountgali.utils.ImageLoaderUtils;
 
 import java.util.ArrayList;
 
-public class OfferDetailActivity extends Activity implements View.OnClickListener, View.OnLongClickListener {
+public class OfferDetailActivity extends AppCompatActivity implements View.OnClickListener, View.OnLongClickListener {
 
     Toolbar mToolBar;
     private View coupon_layout;
@@ -66,7 +66,16 @@ public class OfferDetailActivity extends Activity implements View.OnClickListene
     }
 
     private void setData() {
-        ImageLoaderUtils.loadImage(topOffer.OnlineDeal_Logo, iv_logo);
+        if(topOffer.OnlineDeal_Type == Constants.typeOnline)
+        {
+            ImageLoaderUtils.loadImage(topOffer.OnlineDeal_Logo, iv_logo);
+
+        }
+        else
+        {
+            ImageLoaderUtils.loadImage(topOffer.background, iv_logo);
+
+        }
         tv_brandName.setText(topOffer.BrandName);
         tv_title.setText(topOffer.OnlineDeal_Offer);
         tv_description.setText(topOffer.OnlineDeal_OfferDescription);

@@ -905,6 +905,7 @@ public static void showSoftKeyboard(Activity context) {
                 }
             }
         }
+        if(context instanceof Activity && !((Activity)context).isFinishing())
         DialogUtils.showAlert(context, msg, runnable);
     }
 

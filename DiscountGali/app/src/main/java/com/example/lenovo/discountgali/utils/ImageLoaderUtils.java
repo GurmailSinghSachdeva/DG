@@ -46,9 +46,12 @@ public class ImageLoaderUtils {
                             //.displayer(new FadeInBitmapDisplayer(300))
                             //.resetViewBeforeLoading(true)
                             //.cacheInMemory(true)
-                    .showImageOnLoading(R.drawable.file_image)
-                    .showImageOnFail(R.drawable.file_image)
-                    .showImageForEmptyUri(R.drawable.file_image)
+//                    .showImageOnLoading(R.drawable.file_image)
+//                    .showImageOnFail(R.drawable.file_image)
+//                    .showImageForEmptyUri(R.drawable.file_image)
+                    .showImageOnLoading(null)
+                    .showImageOnFail(null)
+                    .showImageForEmptyUri(null)
                     .build();
 
             defaultNew = new DisplayImageOptions.Builder()

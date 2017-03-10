@@ -10,50 +10,68 @@
     android:layout_marginLeft="5dp"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <LinearLayout
-        android:id="@+id/layout_roast"
+
+    <RelativeLayout
+        android:id="@+id/layout_offer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/white"
-        android:padding="10dp"
-        android:orientation="vertical">
+        android:background="@color/white">
         <TextView
             android:layout_width="wrap_content"
+            android:id="@+id/loadingIcon"
             android:layout_height="wrap_content"
-            android:id="@+id/brandname"
-            android:text="Paytm"
-            android:layout_gravity="center"
-            android:textColor="@color/colorAccent"/>
+            android:layout_centerInParent="true"
+            android:text="@string/loading_data"/>
         <ImageView
-            android:layout_width="110dp"
-            android:layout_height="50dp"
-            android:id="@+id/dealLogo"
-            android:layout_marginTop="5dp"
-            android:scaleType="centerInside"
-            android:src="@drawable/paytm"/>
-        <TextView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textColor="@color/black"
-            android:layout_marginTop="5dp"
-            android:id="@+id/offertitle"
-            android:textStyle="bold"
-            android:text="Get 10% FC Cashback on Prepaid recharges"/>
-        <TextView
+            android:id="@+id/iv_back_offer"
+            android:scaleType="fitXY"
+            android:layout_height="170dp" />
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/date_exp"
-            android:layout_marginTop="5dp"
-            android:text="18th Nov 2016"
-            android:gravity="right"/>
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="View Offer"
-            android:textSize="20sp"
-            android:layout_marginTop="5dp"
-            android:textColor="@color/colorPrimary"
-            android:layout_gravity="center"
-            android:gravity="center"/>
-    </LinearLayout>
+            android:orientation="vertical"
+            android:padding="10dp"
+            android:layout_height="170dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/brandname"
+                android:text="Paytm"
+                android:layout_gravity="center"
+                android:textColor="@color/colorAccent"/>
+            <ImageView
+                android:layout_width="110dp"
+                android:layout_height="50dp"
+                android:id="@+id/dealLogo"
+                android:layout_marginTop="5dp"
+                android:scaleType="centerInside"
+                />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:layout_marginTop="5dp"
+                android:id="@+id/offertitle"
+                android:textStyle="bold"
+                android:text="Get 10% FC Cashback on Prepaid recharges"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/date_exp"
+                android:layout_marginTop="5dp"
+                android:text="18th Nov 2016"
+                android:gravity="right"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="View Offer"
+                android:textSize="20sp"
+                android:id="@+id/tv_view_offer"
+                android:layout_marginTop="5dp"
+                android:textColor="@color/colorPrimary"
+                android:layout_gravity="center"
+                android:gravity="center"/>
+
+        </LinearLayout>
+    </RelativeLayout>
 </android.support.v7.widget.CardView>

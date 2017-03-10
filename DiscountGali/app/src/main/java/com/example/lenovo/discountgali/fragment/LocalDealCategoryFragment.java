@@ -25,6 +25,7 @@ import com.example.lenovo.discountgali.network.api.ApiCall;
 import com.example.lenovo.discountgali.network.apicall.GetCityListApiCall;
 import com.example.lenovo.discountgali.network.apicall.GetLocalDealCategoryApiCAll;
 import com.example.lenovo.discountgali.network.apicall.GetRecentMessageApiCall;
+import com.example.lenovo.discountgali.utility.AlertUtils;
 import com.example.lenovo.discountgali.utility.Syso;
 import com.example.lenovo.discountgali.utility.Utils;
 import com.example.lenovo.discountgali.utils.Constants;
@@ -69,15 +70,21 @@ public class LocalDealCategoryFragment extends Fragment implements SwipeRefreshL
 
         initUi(view);
 
-        setRecyclerViews();
 
+        setGridlayoitManager();
         setListeners();
+        setRecyclerViews();
 
 //        getLocalDealCategoryApiCall(null);
 
 //        getTopStoresApiCAll(null);
 
         return view;
+
+    }
+    private void setGridlayoitManager()
+    {
+        gridLayoutManager = new GridLayoutManager(getContext(), Constants.Grids.Local_Deal_Categories);
 
     }
 
@@ -208,14 +215,15 @@ public class LocalDealCategoryFragment extends Fragment implements SwipeRefreshL
 
     private void setRecyclerViews() {
         adapterLocalDealsCategory = new AdapterLocalDealsCategory(getActivity(), localDealCategoryList, this);
-        gridLayoutManager = new GridLayoutManager(getActivity(), Constants.Grids.Local_Deal_Categories);
         recyclerView.setLayoutManager(gridLayoutManager);
-        recyclerView.addOnScrollListener(new EndlessRecyclerOnScrollListenerGrid(gridLayoutManager) {
-            @Override
-            public void onLoadMore(int current_page) {
-                getLocalDealCategoryApiCall(current_page + 1, visibleThreshold);
-            }
-        });
+//        recyclerView.addOnScrollListener(new EndlessRecyclerOnScrollListenerGrid(gridLayoutManager) {
+//            @Override
+//            public void onLoadMore(int current_page) {
+//                getLocalDealCategoryApiCall(current_page + 1, visibleThreshold);
+//            }
+//        });
+
+        recyclerView.addOnScrollListener(endlessScrollListenerGrid);
         recyclerView.setAdapter(adapterLocalDealsCategory);
 
     }
@@ -270,6 +278,7 @@ getCityListApiCAll();    }
     AlertDialog alertDialog;
     int cityId = -1;
     String cityName = "";
+
     public void showCityDialog(){
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
@@ -295,14 +304,23 @@ getCityListApiCAll();    }
             public void onClick(DialogInterface dialog, int which) {
                 alertDialog.dismiss();
 
-                for (int i=0;i<cityList.size();i++)
+                if(cityId !=-1)
                 {
-                    if(cityList.get(i).CityId == cityId)
-                    cityName = cityList.get(i).CityName;
-                }
-                Syso.print("position id name " + cityName);
+                    for (int i=0;i<cityList.size();i++)
+                    {
+                        if(cityList.get(i).CityId == cityId)
+                            cityName = cityList.get(i).CityName;
+                    }
+                    Syso.print("position id name " + cityName);
 
-                Utils.showLocalDealsActivity(getActivity(), cityName, adapterLocalDealsCategory.categoryId);
+                    Utils.showLocalDealsActivity(getActivity(), cityName, adapterLocalDealsCategory.categoryId);
+                    cityId = -1;
+                }
+                else {
+                    AlertUtils.showToast(getActivity(), R.string.alert_please_select_city);
+                    showCityDialog();
+                }
+
             }
         });
         alertDialog = builder.create();

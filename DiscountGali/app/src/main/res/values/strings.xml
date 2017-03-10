@@ -230,6 +230,7 @@
     <string name="dealCopied">Code copied to the clipboard</string>
     <string name="tv_visit_store">VISIT STORE</string>
     <string name="alert_no_deals_availabale">No Deals Available</string>
+    <string name="alert_please_select_city">Please select a acity</string>
 
 
     <string-array name="categories">

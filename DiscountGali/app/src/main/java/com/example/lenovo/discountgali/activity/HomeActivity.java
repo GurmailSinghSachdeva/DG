@@ -85,6 +85,7 @@ public class HomeActivity extends BaseActivity implements NavigationView.OnNavig
     }
 
     private void getFeaturedList() {
+
         //TODO: get featured list here api call
         FeaturedModel featuredModel = new FeaturedModel("Coupons by 500+ stores","Plus extra cashback","");
         featuredModellist.add(featuredModel);
@@ -289,6 +290,18 @@ public class HomeActivity extends BaseActivity implements NavigationView.OnNavig
             e.getMessage();
         }
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+//        Intent i = new Intent("com.android.vending.INSTALL_REFERRER");
+//        i.setPackage("com.example.lenovo.discountgali");
+////referrer is a composition of the parameter of the campaing
+//        i.putExtra("referrer", "android dev");
+//        sendBroadcast(i);
+
+    }
+
     private void setUpDrawer() {
         //  Setup Profile
 //        setupProfile();

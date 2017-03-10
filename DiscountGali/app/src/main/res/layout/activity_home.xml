@@ -22,20 +22,20 @@
         android:fitsSystemWindows="true"
         >
 
-        <android.support.design.widget.CollapsingToolbarLayout
-            android:id="@+id/collapsing_toolbar"
-            android:layout_width="match_parent"
+        <!--<android.support.design.widget.CollapsingToolbarLayout-->
+            <!--android:id="@+id/collapsing_toolbar"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="140dp"-->
+            <!--android:background="@color/white"-->
+            <!--android:fitsSystemWindows="true">-->
+
+           <!---->
+        <!--</android.support.design.widget.CollapsingToolbarLayout>-->
+        <include layout="@layout/layout_featured_deals"
+            android:layout_below="@+id/toolbar_con"
+            android:layout_width="wrap_content"
             android:layout_height="140dp"
-            android:background="@color/white"
-            android:fitsSystemWindows="true">
-
-            <include layout="@layout/layout_featured_deals"
-                android:layout_below="@+id/toolbar_con"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/layout_featured_deals"/>
-        </android.support.design.widget.CollapsingToolbarLayout>
-
+            android:id="@+id/layout_featured_deals"/>
         <android.support.design.widget.TabLayout
             android:id="@+id/tabs"
             android:layout_width="match_parent"

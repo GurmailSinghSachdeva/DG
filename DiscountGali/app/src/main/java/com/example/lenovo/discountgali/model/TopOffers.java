@@ -18,4 +18,5 @@ public class TopOffers implements Serializable {
     public int OnlineDeal_Type = 0;
     public String OnlineDeal_StartDate = "";
     public String OnlineDeal_EndDate = "";
+    public String background = "";
 }

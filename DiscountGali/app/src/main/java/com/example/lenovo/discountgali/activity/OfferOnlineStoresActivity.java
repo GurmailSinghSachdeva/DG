@@ -1,5 +1,6 @@
 package com.example.lenovo.discountgali.activity;
 
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.os.Handler;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -190,7 +191,8 @@ public class OfferOnlineStoresActivity extends BaseActivity implements SwipeRefr
                                         isLastItemFound = true;
                                     break;
                                 default:
-                                    DialogUtils.showAlert(OfferOnlineStoresActivity.this, getString(R.string.alert_no_deals_availabale));
+                                    if(!OfferOnlineStoresActivity.this.isFinishing())
+                                        DialogUtils.showAlert(OfferOnlineStoresActivity.this, getString(R.string.alert_no_deals_availabale));
                                     break;
                             }
                         }

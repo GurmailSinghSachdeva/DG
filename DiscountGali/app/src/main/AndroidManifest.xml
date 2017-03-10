@@ -8,10 +8,40 @@
     <application
         android:name=".DiscountGaliApplication"
         android:allowBackup="true"
-        android:icon="@drawable/chat121_ic_bottom_smiley"
+        android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/MyMaterialTheme">
+
+        <receiver
+            android:name="com.google.android.gms.analytics.AnalyticsReceiver"
+            android:enabled="true">
+            <intent-filter>
+                <action android:name="com.google.android.gms.analytics.ANALYTICS_DISPATCH" />
+            </intent-filter>
+        </receiver>
+
+        <service
+            android:name="com.google.android.gms.analytics.AnalyticsService"
+            android:enabled="true"
+            android:exported="false" />
+        <receiver android:name="com.google.android.gms.analytics.CampaignTrackingReceiver"
+            android:enabled="true"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="com.android.vending.INSTALL_REFERRER" />
+            </intent-filter>
+        </receiver>
+        <service android:name="com.google.android.gms.analytics.CampaignTrackingService"
+            android:enabled="true"
+            android:exported="false" />
+        <receiver
+            android:name=".receiver.CampaignTrackingReceiver"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="com.android.vending.INSTALL_REFERRER" />
+            </intent-filter>
+        </receiver>
         <activity android:name=".activity.ChangePasswordActivity" />
         <activity
             android:name=".activity.SplashActivity"
@@ -26,10 +56,33 @@
             android:name=".activity.HomeActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
-        <activity android:name=".activity.OfferDetailActivity"
+        <activity
+            android:name=".activity.OfferDetailActivity"
             android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar"
+            android:theme="@style/Theme.AppCompat.Translucent"
             android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name=".activity.OfferOnlineStoresActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.LocalDealsActivty"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.AboutUsActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.ContactUsActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.ContestActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.HelpUsImproveActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.SearchItemActivity"
+            android:screenOrientation="portrait" />
+        <activity android:name=".activity.DealUrlActivity"></activity>
     </application>
 
 </manifest>

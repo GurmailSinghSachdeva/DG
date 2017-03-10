@@ -1,5 +1,6 @@
 package com.example.lenovo.discountgali.activity;
 
+import android.app.Activity;
 import android.os.Handler;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -186,7 +187,9 @@ public class LocalDealsActivty extends BaseActivity implements SwipeRefreshLayou
                                         isLastItemFound = true;
                                     break;
                                 default:
-                                    DialogUtils.showAlert(LocalDealsActivty.this, getString(R.string.alert_no_deals_availabale));
+
+                                    if(!LocalDealsActivty.this.isFinishing())
+                                        DialogUtils.showAlert(LocalDealsActivty.this, getString(R.string.alert_no_deals_availabale));
                                     break;
                             }
                         }

@@ -7,6 +7,7 @@ import android.util.Log;
 
 import com.example.lenovo.discountgali.model.CityModel;
 import com.example.lenovo.discountgali.model.DealUrlModel;
+import com.example.lenovo.discountgali.model.FeaturedModel;
 import com.example.lenovo.discountgali.model.LocalDealCategoryModel;
 import com.example.lenovo.discountgali.model.ModelCategories;
 import com.example.lenovo.discountgali.model.ModelTopStores;
@@ -204,6 +205,8 @@ public class JSONParsingUtils {
                     topoffers.OnlineDealId = object.getInt("DealId");
                     topoffers.OnlineDeal_StartDate = object.getString("DealStartDate");
                     topoffers.OnlineDeal_EndDate = object.getString("DealEndDate");
+                    topoffers.background = object.getString("DefaultImage");
+
                     topoffers.OnlineDeal_Type = Constants.typeOffline;
 
                     topOffersList.add(topoffers);
@@ -233,6 +236,29 @@ public class JSONParsingUtils {
             e.printStackTrace();
         }
         return dealUrls;
+    }
+
+    public static ArrayList<FeaturedModel> getBanners(JSONArray listdata) {
+        ArrayList<FeaturedModel> featuredDeals = null;
+
+        try {
+            if(listdata!=null && listdata.length()>0)
+            {
+                featuredDeals = new ArrayList<>();
+                for (int i = 0; i < listdata.length(); i++) {
+                    FeaturedModel deal = new FeaturedModel();
+                    JSONObject parent = listdata.getJSONObject(i);
+                    MyJsonObject object = new MyJsonObject(parent);
+
+                    deal.icon = object.getString("logo");
+
+                    featuredDeals.add(deal);
+                }
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return featuredDeals;
     }
 
 //    public static Roast_2 getNews(JSONObject roastJO) {

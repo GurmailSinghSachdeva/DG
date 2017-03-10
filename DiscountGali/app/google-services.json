@@ -1,0 +1,38 @@
+{
+  "project_info": {
+    "project_number": "570951595090",
+    "project_id": "firebase-discountgali"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:570951595090:android:457c1d3418514af1",
+        "android_client_info": {
+          "package_name": "com.example.lenovo.discountgali"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDvTFmihRoyEF_UN9GAx4dyQGc0qXE4yYk"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 2,
+          "analytics_property": {
+            "tracking_id": "UA-93507517-1"
+          }
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 1
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

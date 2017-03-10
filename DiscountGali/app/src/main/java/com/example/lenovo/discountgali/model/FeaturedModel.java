@@ -15,4 +15,7 @@ public class FeaturedModel implements Serializable {
         this.description = description;
         this.icon = icon;
     }
+
+    public FeaturedModel() {
+    }
 }

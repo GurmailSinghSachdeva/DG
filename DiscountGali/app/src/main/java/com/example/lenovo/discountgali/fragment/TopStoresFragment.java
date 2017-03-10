@@ -56,14 +56,19 @@ public class TopStoresFragment extends Fragment implements SwipeRefreshLayout.On
 
         initUi(view);
 
-        setRecyclerViews();
-
+        setGridlayoitManager();
         setListeners();
+        setRecyclerViews();
 
         return view;
 
     }
 
+    private void setGridlayoitManager()
+    {
+        gridLayoutManager = new GridLayoutManager(getContext(), Constants.Grids.Top_stores);
+
+    }
     private void setListeners() {
         endlessScrollListenerGrid = new EndlessRecyclerOnScrollListenerGrid(gridLayoutManager) {
             @Override
@@ -162,7 +167,6 @@ public class TopStoresFragment extends Fragment implements SwipeRefreshLayout.On
 
     private void setRecyclerViewStores() {
         adapterTopStores = new AdapterTopStores(getActivity(), storesList);
-        gridLayoutManager = new GridLayoutManager(getContext(), Constants.Grids.Top_stores);
         recyclerTopStores.setLayoutManager(gridLayoutManager);
 
 //        mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener(){
@@ -192,17 +196,18 @@ public class TopStoresFragment extends Fragment implements SwipeRefreshLayout.On
 //        });
 
 
-        recyclerTopStores.addOnScrollListener(new EndlessRecyclerOnScrollListenerGrid(gridLayoutManager) {
-            @Override
-            public void onLoadMore(int current_page) {
-
-                Syso.print("HELLO " + "inside onload  more");
-
-                getTopStoresApiCAll(current_page + 1, visibleThreshold);
-            }
-
-
-        });
+//        recyclerTopStores.addOnScrollListener(new EndlessRecyclerOnScrollListenerGrid(gridLayoutManager) {
+//            @Override
+//            public void onLoadMore(int current_page) {
+//
+//                Syso.print("HELLO " + "inside onload  more");
+//
+//                getTopStoresApiCAll(current_page + 1, visibleThreshold);
+//            }
+//
+//
+//        });
+        recyclerTopStores.addOnScrollListener(endlessScrollListenerGrid);
         recyclerTopStores.setAdapter(adapterTopStores);
     }
 

@@ -28,101 +28,101 @@
                 android:layout_marginRight="5dp"
                 android:background="@color/white"
                 android:layout_height="match_parent">
-                <ScrollView
-                    android:id="@+id/sc"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_above="@+id/coupon_conatiner"
-                    android:fillViewport="true">
+                <!--<LinearLayout-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="match_parent">-->
+                    <ScrollView
+                        android:id="@+id/sc"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_above="@+id/coupon_conatiner"
+                        android:fillViewport="true">
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="fill_parent"
-                        android:orientation="vertical"
-                        android:paddingLeft="@dimen/activity_horizontal_margin"
-                        android:paddingRight="@dimen/activity_horizontal_margin"
-                        android:paddingTop="12dp">
-
-                        <RelativeLayout
+                        <LinearLayout
                             android:layout_width="match_parent"
-                            android:layout_marginTop="20dp"
-                            android:layout_height="wrap_content">
-                            <ImageView
-                                android:layout_width="110dp"
-                                android:layout_height="55dp"
-                                android:padding="5dp"
-                                android:layout_centerVertical="true"
-                                android:background="@drawable/border_edittext"
-                                android:id="@+id/iv_offerLogo"/>
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="FreeCharge"
-                                android:textStyle="bold"
-                                android:layout_alignTop="@+id/iv_offerLogo"
-                                android:textColor="@color/black"
-                                android:layout_marginLeft="20dp"
-                                android:id="@+id/tv_brandName"
-                                android:layout_toRightOf="@+id/iv_offerLogo"/>
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Validity:"
-                                android:textColor="@color/app_black"
-                                android:layout_marginLeft="20dp"
-                                android:id="@+id/tv_validity_fixed"
-                                android:layout_below="@+id/tv_brandName"
-                                android:layout_toRightOf="@+id/iv_offerLogo"/>
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="12/23/2017 Mon"
-                                android:id="@+id/tv_validity"
-                                android:textColor="@color/app_black"
-                                android:layout_marginLeft="20dp"
-                                android:layout_below="@+id/tv_validity_fixed"
-                                android:layout_toRightOf="@+id/iv_offerLogo"/>
-                        </RelativeLayout>
-                        <RelativeLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content">
+                            android:layout_height="fill_parent"
+                            android:orientation="vertical"
+                            android:paddingLeft="@dimen/activity_horizontal_margin"
+                            android:paddingRight="@dimen/activity_horizontal_margin"
+                            android:paddingTop="12dp">
 
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="30dp"
-                                android:id="@+id/tv_title"
-                                android:textStyle="bold"
-                                android:textColor="@color/app_black"
-                                android:text="Title"/>
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_below="@+id/tv_title"
-                                android:id="@+id/tv_description_fixed"
-                                android:textAllCaps="true"
-                                android:textStyle="bold"
-                                android:layout_marginTop="10dp"
-                                android:textColor="@color/black"
-                                android:text="Description:"/>
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="5dp"
-                                android:layout_below="@+id/tv_description_fixed"
-                                android:id="@+id/tv_description"
-                                android:textColor="@color/app_black"
-                                android:text="Description"/>
+                            <RelativeLayout
+                                android:layout_width="match_parent"
+                                android:layout_marginTop="20dp"
+                                android:layout_height="wrap_content">
+                                <ImageView
+                                    android:layout_width="110dp"
+                                    android:layout_height="55dp"
+                                    android:padding="5dp"
+                                    android:layout_centerVertical="true"
+                                    android:background="@drawable/border_edittext"
+                                    android:id="@+id/iv_offerLogo"/>
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="FreeCharge"
+                                    android:textStyle="bold"
+                                    android:layout_alignTop="@+id/iv_offerLogo"
+                                    android:textColor="@color/black"
+                                    android:layout_marginLeft="20dp"
+                                    android:id="@+id/tv_brandName"
+                                    android:layout_toRightOf="@+id/iv_offerLogo"/>
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Validity:"
+                                    android:textColor="@color/app_black"
+                                    android:layout_marginLeft="20dp"
+                                    android:id="@+id/tv_validity_fixed"
+                                    android:layout_below="@+id/tv_brandName"
+                                    android:layout_toRightOf="@+id/iv_offerLogo"/>
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="12/23/2017 Mon"
+                                    android:id="@+id/tv_validity"
+                                    android:textColor="@color/app_black"
+                                    android:layout_marginLeft="20dp"
+                                    android:layout_below="@+id/tv_validity_fixed"
+                                    android:layout_toRightOf="@+id/iv_offerLogo"/>
+                            </RelativeLayout>
+                            <RelativeLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content">
 
-                        </RelativeLayout>
-                    </LinearLayout>
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="30dp"
+                                    android:id="@+id/tv_title"
+                                    android:textStyle="bold"
+                                    android:textColor="@color/app_black"
+                                    android:text="Title"/>
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_below="@+id/tv_title"
+                                    android:id="@+id/tv_description_fixed"
+                                    android:textAllCaps="true"
+                                    android:textStyle="bold"
+                                    android:layout_marginTop="10dp"
+                                    android:textColor="@color/black"
+                                    android:text="Description:"/>
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="5dp"
+                                    android:layout_below="@+id/tv_description_fixed"
+                                    android:id="@+id/tv_description"
+                                    android:textColor="@color/app_black"
+                                    android:text="Description"/>
 
-                </ScrollView>
-                <include layout="@layout/coupon_header_layout"
-                    android:layout_above="@+id/tv_grab_coupon"
-                    android:id="@+id/coupon_conatiner"
-                    android:layout_height="wrap_content"
-                    android:layout_width="match_parent"/>
+                            </RelativeLayout>
+                        </LinearLayout>
+
+                    </ScrollView>
+
+                <!--</LinearLayout>-->
 
                 <ImageView
                     android:layout_width="wrap_content"
@@ -164,6 +164,13 @@
                     android:layout_alignParentBottom="true"
                     android:layout_alignParentLeft="true"
                     android:layout_alignParentStart="true" />
+
+                <include layout="@layout/coupon_header_layout"
+                    android:id="@+id/coupon_conatiner"
+                    android:visibility="gone"
+                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:layout_above="@+id/tv_grab_coupon"/>
 
             </RelativeLayout>
            </RelativeLayout>
