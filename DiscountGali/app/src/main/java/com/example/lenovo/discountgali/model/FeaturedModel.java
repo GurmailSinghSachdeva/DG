@@ -9,6 +9,7 @@ public class FeaturedModel implements Serializable {
     public String title = "";
     public String description = "";
     public String icon = "";
+    public String redirect_url = "";
 
     public FeaturedModel(String title, String description, String icon) {
         this.title = title;

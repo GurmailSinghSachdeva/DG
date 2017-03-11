@@ -1,5 +1,8 @@
 package com.example.lenovo.discountgali.activity;
 
+import android.app.ProgressDialog;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.NavigationView;
@@ -13,6 +16,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -33,11 +37,26 @@ import com.example.lenovo.discountgali.fragment.HomeFragment;
 import com.example.lenovo.discountgali.fragment.LocalDealCategoryFragment;
 import com.example.lenovo.discountgali.fragment.TopStoresFragment;
 import com.example.lenovo.discountgali.model.BottomTab;
+import com.example.lenovo.discountgali.model.CityModel;
 import com.example.lenovo.discountgali.model.FeaturedModel;
+import com.example.lenovo.discountgali.model.ServerResponse;
+import com.example.lenovo.discountgali.network.HttpRequestHandler;
+import com.example.lenovo.discountgali.network.api.ApiCall;
+import com.example.lenovo.discountgali.network.apicall.GetBannerApiCall;
+import com.example.lenovo.discountgali.network.apicall.GetCityListApiCall;
+import com.example.lenovo.discountgali.utility.Syso;
 import com.example.lenovo.discountgali.utility.Utils;
+import com.example.lenovo.discountgali.utils.DialogUtils;
 import com.example.lenovo.discountgali.widget.pageindicator.CirclePageIndicator;
+import com.google.android.gms.analytics.CampaignTrackingReceiver;
+import com.google.android.gms.analytics.HitBuilders;
+import com.google.android.gms.analytics.Tracker;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 import static com.example.lenovo.discountgali.R.id.DrawerLayout;
 import static com.example.lenovo.discountgali.R.id.cancel_action;
@@ -86,14 +105,57 @@ public class HomeActivity extends BaseActivity implements NavigationView.OnNavig
 
     private void getFeaturedList() {
 
+        getBannerApiCall();
         //TODO: get featured list here api call
-        FeaturedModel featuredModel = new FeaturedModel("Coupons by 500+ stores","Plus extra cashback","");
-        featuredModellist.add(featuredModel);
-        featuredModellist.add(featuredModel);
-        featuredModellist.add(featuredModel);
+//        FeaturedModel featuredModel = new FeaturedModel("Coupons by 500+ stores","Plus extra cashback","");
+//        featuredModellist.add(featuredModel);
+//        featuredModellist.add(featuredModel);
+//        featuredModellist.add(featuredModel);
 
     }
 
+    private void getBannerApiCall() {
+        try {
+
+
+            final ProgressDialog progressDialog = DialogUtils.getProgressDialog(this);
+            progressDialog.show();
+            final GetBannerApiCall apiCall;
+            apiCall = new GetBannerApiCall();
+            HttpRequestHandler.getInstance(this.getApplicationContext()).executeRequest(apiCall, new ApiCall.OnApiCallCompleteListener() {
+
+                @Override
+                public void onComplete(Exception e) {
+                    DialogUtils.hideProgressDialog(progressDialog);
+                    if (e == null) { // Success
+                        try {
+                            ServerResponse<FeaturedModel> serverResponse = (ServerResponse<FeaturedModel>) apiCall.getResult();
+                            if(serverResponse!=null && serverResponse.data!=null && serverResponse.data.size()>0){
+                                vp_featured.setVisibility(View.VISIBLE);
+                                featuredModellist.clear();
+                                featuredModellist.addAll(serverResponse.data);
+                                addFeatutedPager();
+                            }
+                            else {
+                                vp_featured.setVisibility(View.GONE);
+                            }
+                        } catch (Exception e1) {
+
+                            Utils.handleError(e1, HomeActivity.this);
+                        }
+                    } else { // Failure
+                        Utils.handleError(e, HomeActivity.this);
+                    }
+
+                }
+            }, false);
+        } catch (Exception e) {
+
+            Utils.handleError(e, HomeActivity.this);
+        }
+
+
+    }
 
 
 
@@ -134,6 +196,12 @@ public class HomeActivity extends BaseActivity implements NavigationView.OnNavig
         });
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
 
+
+    }
+
+
+    private void addFeatutedPager()
+    {
         pagerAdapter = new FeaturedAdapter(getSupportFragmentManager(), featuredModellist);
         for(int i=0; i<featuredModellist.size();i++)
             pagerAdapter.addFragment(FeaturedFragment.newInstance(featuredModellist.get(i)));
@@ -162,8 +230,6 @@ public class HomeActivity extends BaseActivity implements NavigationView.OnNavig
             }
         });
     }
-
-
 
     private void addTabs() {
         if(home_tabs_name!=null)
@@ -297,7 +363,7 @@ public class HomeActivity extends BaseActivity implements NavigationView.OnNavig
 //        Intent i = new Intent("com.android.vending.INSTALL_REFERRER");
 //        i.setPackage("com.example.lenovo.discountgali");
 ////referrer is a composition of the parameter of the campaing
-//        i.putExtra("referrer", "android dev");
+//        i.putExtra("referrer", "https://market.android.com/details?id=com.giago.referraltester&feature=search_result");
 //        sendBroadcast(i);
 
     }
@@ -425,10 +491,73 @@ public class HomeActivity extends BaseActivity implements NavigationView.OnNavig
     }
 
 
+    public static class CampaignTrackingReceiverCustom extends BroadcastReceiver {
+        private String TAG = "COMPAIGN";
 
-    //    void setTabLayout(int pos) {
+
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            Syso.print("===onReceive====" + "====CampaignTrackingReceiver===");
+//      "utm_source=testSource&utm_medium=testMedium&utm_term=testTerm&utm_content=testContent&utm_campaign=testCampaign"
+
+
+            if (intent.hasExtra("referrer")) {
+                Syso.print(TAG + "-----referrer is found-----");
+                Bundle extras = intent.getExtras();
+                String referrerString = null;
+                try {
+                    referrerString = URLDecoder.decode(extras.getString("referrer"),"UTF-8");
+                    Syso.print(TAG + extras.getString("referrer"));
+
+                mTracker.setScreenName("Home");
+                mTracker.send(new HitBuilders.ScreenViewBuilder()
+                        .setCampaignParamsFromUrl(referrerString)
+                        .build());
+                    new CampaignTrackingReceiver().onReceive(context, intent);
+
+                } catch (UnsupportedEncodingException e) {
+                    referrerString = extras.getString("referrer");
+                    e.printStackTrace();
+                }
+                Log.v(TAG,referrerString);
+//            SharedPreference.saveCompaignTrackingUrl(context,referrerString);
+//             Next line uses my helper function to parse a query (eg "a=b&c=d") into key-value pairs
+//            HashMap<String, String> getParams = null;
+//            try {
+//                getParams = (HashMap<String, String>) getHashMapFromQuery(referrerString);
 //
-//            tabLayout.getTabAt(pos).setText(home_tabs_name.get(pos));
-//        }
+//            } catch (UnsupportedEncodingException e) {
+//                e.printStackTrace();
+//            }
+            } else {
+                Log.v(TAG, "-----referrer is not found-----");
+//            SharedPreference.saveCompaignTrackingUrl(context,"");
+            }
 
+        }
+
+        public Map<String, String> getHashMapFromQuery(String query)
+                throws UnsupportedEncodingException {
+
+            Map<String, String> query_pairs = new LinkedHashMap<String, String>();
+
+            String[] pairs = query.split("&");
+            for (String pair : pairs) {
+                int idx = pair.indexOf("=");
+                query_pairs.put(URLDecoder.decode(pair.substring(0, idx), "UTF-8"),
+                        URLDecoder.decode(pair.substring(idx + 1), "UTF-8"));
+                Log.v("==Key=" + pair.substring(0, idx), "" + pair.substring(idx + 1));
+            }
+            return query_pairs;
+        }
+
+        public void printData(Bundle bundle) {
+            for (String key : bundle.keySet()) {
+                Object value = bundle.get(key);
+                Log.d("-----Data------", String.format("%s %s (%s)", key,
+                        value.toString(), value.getClass().getName()));
+            }
+        }
+
+    }
 }

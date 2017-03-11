@@ -10,7 +10,7 @@
         android:id="@+id/vp_tutorial"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@+id/ll_bottom_bar"/>
+        />
 
     <LinearLayout
         android:id="@+id/ll_bottom_bar"
@@ -25,12 +25,12 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dip"
             app:centered="true"
-            app:fillColor="@color/black"
+            app:fillColor="@color/white"
             app:pageColor="#88cccccc"
             app:radius="5dp"
             app:snap="false"
-            app:strokeColor="@android:color/black"
-            app:strokeWidth="0dp"
+            app:strokeColor="@color/app_orange"
+            app:strokeWidth="1dp"
             android:layout_gravity="center_horizontal"/>
 
 

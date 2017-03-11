@@ -13,6 +13,8 @@ import android.widget.Toast;
 
 import com.example.lenovo.discountgali.R;
 import com.example.lenovo.discountgali.model.FeaturedModel;
+import com.example.lenovo.discountgali.utility.Utils;
+import com.example.lenovo.discountgali.utils.ImageLoaderUtils;
 
 /**
  * Created by Dushyant Singh on 11/24/2016.
@@ -21,6 +23,7 @@ public class FeaturedFragment extends Fragment implements View.OnClickListener {
     public int a = 0;
 
     private FeaturedModel featuredModel;
+    private ImageView ivIcon;
 
     public static FeaturedFragment newInstance(FeaturedModel featuredModel) {
         FeaturedFragment fragment = new FeaturedFragment();
@@ -43,6 +46,15 @@ public class FeaturedFragment extends Fragment implements View.OnClickListener {
 
         ((TextView)rootView.findViewById(R.id.tv_title)).setText(featuredModel.title);
         ((TextView)rootView.findViewById(R.id.tv_text)).setText(featuredModel.description);
+        ivIcon = (ImageView) rootView.findViewById(R.id.iv_icon);
+
+        ivIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Utils.openUrl(getActivity(), featuredModel.redirect_url);
+            }
+        });
+        ImageLoaderUtils.loadImage(featuredModel.icon, ivIcon);
 //        ((ImageView)rootView.findViewById(R.id.iv_icon)).setImageURI(Uri.parse(featuredModel.icon));
         return rootView;
     }

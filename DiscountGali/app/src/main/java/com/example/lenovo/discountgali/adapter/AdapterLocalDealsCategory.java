@@ -13,6 +13,7 @@ import com.example.lenovo.discountgali.fragment.TopStoresFragment;
 import com.example.lenovo.discountgali.model.LocalDealCategoryModel;
 import com.example.lenovo.discountgali.model.ModelCategories;
 import com.example.lenovo.discountgali.utility.Syso;
+import com.example.lenovo.discountgali.utils.ImageLoaderUtils;
 
 import java.util.List;
 
@@ -25,6 +26,16 @@ public class AdapterLocalDealsCategory extends RecyclerView.Adapter<AdapterLocal
     private Activity context;
     private AdapterLocalDealsCategory.OnItemClickListener listener;
     public static int categoryId = -1;
+    private int[]                               categoryIds = {
+            R.drawable.local_food,
+            R.drawable.local_spa,
+            R.drawable.local_travel,
+            R.drawable.local_fun,
+            R.drawable.local_service,
+            R.drawable.local_health,
+            R.drawable.local_clothing
+    };
+
 
     public AdapterLocalDealsCategory(Activity activity, List<LocalDealCategoryModel> listCategories, OnItemClickListener listener) {
         this.listCategories = listCategories;
@@ -52,7 +63,8 @@ public class AdapterLocalDealsCategory extends RecyclerView.Adapter<AdapterLocal
 
         holder.onBind(localDealCategoryModel);
         holder.position = position;
-//        ImageLoaderUtils.loadImage(LocalDealCategoryModel.getCategoryLogo(), holder.categoryLogo);
+        holder.categoryLogo.setImageResource(categoryIds[position]);
+//        ImageLoaderUtils.loadImage(localDealCategoryModel.getCategoryLogo(), holder.categoryLogo);
     }
 
     @Override
@@ -74,7 +86,7 @@ public class AdapterLocalDealsCategory extends RecyclerView.Adapter<AdapterLocal
         public MyViewHolder(View itemView) {
             super(itemView);
 
-            categoryLogo = (ImageView) itemView.findViewById(R.id.icon_category);
+            categoryLogo = (ImageView) itemView.findViewById(R.id.img_media);
             categoryName = (TextView) itemView.findViewById(R.id.tv_local_deal_cat);
 
             itemView.setOnClickListener(this);

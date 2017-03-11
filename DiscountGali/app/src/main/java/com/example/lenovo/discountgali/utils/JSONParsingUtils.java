@@ -249,9 +249,10 @@ public class JSONParsingUtils {
                     FeaturedModel deal = new FeaturedModel();
                     JSONObject parent = listdata.getJSONObject(i);
                     MyJsonObject object = new MyJsonObject(parent);
+                    deal.icon = "http://discountgali.com" + getSubString(object.getString("ImageUrl"));
 
-                    deal.icon = object.getString("logo");
-
+//                    deal.icon = object.getString("ImageUrl");
+                    deal.redirect_url = object.getString("RedirectUrl");
                     featuredDeals.add(deal);
                 }
             }

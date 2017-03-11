@@ -13,9 +13,7 @@
         android:gravity="center"
         android:textSize="20sp"
         android:layout_marginTop="5dp"
-        android:textStyle="bold"
-        android:textColor="@color/black"
-        android:text="Coupons by 500+ stores"
+        android:text="@string/loading_data"
         android:id="@+id/tv_title"/>
         <TextView
             android:layout_width="match_parent"
@@ -23,14 +21,19 @@
             android:gravity="center"
             android:textSize="17sp"
             android:layout_margin="5dp"
+            android:visibility="gone"
             android:textColor="@color/black"
             android:layout_below="@+id/tv_title"
             android:text="plus extra cashback"
             android:id="@+id/tv_text"/>
     </RelativeLayout>
+
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/iv_icon"
-        android:layout_centerInParent="true"/>
+        android:scaleType="fitXY"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 </RelativeLayout>

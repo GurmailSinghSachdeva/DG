@@ -17,6 +17,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.android.volley.toolbox.ImageLoader;
 import com.example.lenovo.discountgali.R;
 import com.example.lenovo.discountgali.model.DealUrlModel;
 import com.example.lenovo.discountgali.model.ServerResponse;
@@ -45,6 +46,7 @@ public class OfferDetailActivity extends AppCompatActivity implements View.OnCli
     private TopOffers topOffer;
     private String coupon;
     private String url;
+    private ImageView ivLocalStoreImage;
     private boolean couponMode;
 
     @Override
@@ -75,6 +77,7 @@ public class OfferDetailActivity extends AppCompatActivity implements View.OnCli
         {
             ImageLoaderUtils.loadImage(topOffer.background, iv_logo);
 
+            ImageLoaderUtils.loadImage(topOffer.background, ivLocalStoreImage);
         }
         tv_brandName.setText(topOffer.BrandName);
         tv_title.setText(topOffer.OnlineDeal_Offer);
@@ -88,7 +91,7 @@ public class OfferDetailActivity extends AppCompatActivity implements View.OnCli
         tv_couponCode.setVisibility(View.GONE);
         tv_long_press.setVisibility(View.GONE);
 
-        coupon_layout.setVisibility(View.GONE);
+        coupon_layout.setVisibility(View.INVISIBLE);
         tv_description_fixed.setText(topOffer.OnlineDeal_Type == Constants.typeOnline?"DESCRIPTION":"ADDRESS");
     }
 
@@ -110,6 +113,7 @@ public class OfferDetailActivity extends AppCompatActivity implements View.OnCli
         ivClose = (ImageView) findViewById(R.id.iv_close);
         coupon_layout = findViewById(R.id.coupon_conatiner);
         tvCouponCode = (TextView) findViewById(R.id.tv_coupon);
+        ivLocalStoreImage = (ImageView) findViewById(R.id.ivLocalStoreImage);
     }
 //    private void setUpToolbar(String title, int navId) {
 ////        TextView tv = (TextView) mToolBar.findViewById(R.id.toolbar_title);
@@ -258,7 +262,7 @@ public class OfferDetailActivity extends AppCompatActivity implements View.OnCli
             tvCouponCode.setText(topOffer.OnlineDeal_CouponCode);
         }
         else {
-            coupon_layout.setVisibility(View.GONE);
+            coupon_layout.setVisibility(View.INVISIBLE);
         }
         couponMode = true;
         tv_grab_coupon.setText(R.string.tv_visit_store);

@@ -29,7 +29,7 @@ import java.net.UnknownHostException;
 
 public class BaseActivity extends AppCompatActivity {
     private final String TAG = ">>>>>BaseActivity";
-    Tracker mTracker;
+    static Tracker mTracker;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

@@ -32,16 +32,18 @@
                 <action android:name="com.android.vending.INSTALL_REFERRER" />
             </intent-filter>
         </receiver>
-        <service android:name="com.google.android.gms.analytics.CampaignTrackingService"
+        <receiver android:name=".activity.HomeActivity$CampaignTrackingReceiverCustom"
             android:enabled="true"
-            android:exported="false" />
-        <receiver
-            android:name=".receiver.CampaignTrackingReceiver"
             android:exported="true">
             <intent-filter>
                 <action android:name="com.android.vending.INSTALL_REFERRER" />
             </intent-filter>
         </receiver>
+
+        <service android:name="com.google.android.gms.analytics.CampaignTrackingService"
+            android:enabled="true"
+            android:exported="false" />
+
         <activity android:name=".activity.ChangePasswordActivity" />
         <activity
             android:name=".activity.SplashActivity"

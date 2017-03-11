@@ -57,18 +57,25 @@ TopOffers topOffers = topOfferslist.get(position);
         if(topOffers.OnlineDeal_Type == Constants.typeOffline){
             ImageLoaderUtils.loadImage(topOffers.background, viewHolder.ivBackOffer);
 
-            viewHolder.brandname.setVisibility(View.GONE);
+            viewHolder.brandname.setVisibility(View.VISIBLE);
+            viewHolder.brandname.setTextColor(context.getResources().getColor(R.color.white));
+            viewHolder.brandname.setText(topOffers.BrandName);
+            viewHolder.tvViewOffer.setVisibility(View.VISIBLE);
+            viewHolder.tvViewOffer.setTextColor(context.getResources().getColor(R.color.white));
+            viewHolder.tvViewOffer.setText(topOffers.OnlineDeal_Offer);
+
             viewHolder.offertitle.setVisibility(View.GONE);
             viewHolder.date.setVisibility(View.GONE);
-            viewHolder.tvViewOffer.setVisibility(View.GONE);
             viewHolder.tvLoadingIocn.setVisibility(View.VISIBLE);
 
         }
         else {
             viewHolder.brandname.setVisibility(View.VISIBLE);
+            viewHolder.brandname.setTextColor(context.getResources().getColor(R.color.colorAccent));
             viewHolder.offertitle.setVisibility(View.VISIBLE);
             viewHolder.date.setVisibility(View.VISIBLE);
             viewHolder.tvViewOffer.setVisibility(View.VISIBLE);
+            viewHolder.tvViewOffer.setTextColor(context.getResources().getColor(R.color.colorPrimary));
 
             viewHolder.tvLoadingIocn.setVisibility(View.GONE);
             viewHolder.brandname.setText(topOffers.BrandName);
