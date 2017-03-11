@@ -24,6 +24,7 @@ import java.io.InputStreamReader;
 public class ContactUsActivity extends BaseActivity {
     private Toolbar mToolBar;
     private View progress_bar_container;
+    private String url;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +32,7 @@ public class ContactUsActivity extends BaseActivity {
         setContentView(R.layout.activity_about_us);
         mToolBar = (Toolbar) findViewById(R.id.toolbar);
         progress_bar_container = findViewById(R.id.progress_bar_container);
+        parseArguments();
         setUpToolbar(R.drawable.signup_back_icon);
 
         WebView webView = (WebView) findViewById(R.id.web_view);
@@ -42,13 +44,18 @@ public class ContactUsActivity extends BaseActivity {
         settings.setCacheMode(WebSettings.LOAD_DEFAULT);
 
 
-        webView.loadUrl("http://discountgali.com/Contactus.aspx");
+//        webView.loadUrl("http://discountgali.com/Contactus.aspx");
+        webView.loadUrl(url);
         webView.setWebViewClient(new MyWebViewClient());
 
 //        webView.loadUrl("file:///android_asset/Contactus.html");
         //webView.loadDataWithBaseURL("file:///android_asset/mobile_privacy_policy.html", null, "text/html", "utf-8", null);
         //webView.loadData(loadAssetTextAsString(this, "mobile_privacy_policy.html"), "text/html; charset=utf-8", "utf-8");
         //webView.loadDataWithBaseURL(null, loadAssetTextAsString(this, "mobile_privacy_policy.html"), "text/html", "UTF-8", null);
+    }
+
+    private void parseArguments() {
+        url = getIntent().getStringExtra("url");
     }
 
     public static String loadAssetTextAsString(Context context, String name) {

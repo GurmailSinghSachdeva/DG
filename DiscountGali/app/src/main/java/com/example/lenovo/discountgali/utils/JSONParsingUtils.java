@@ -251,6 +251,7 @@ public class JSONParsingUtils {
                     MyJsonObject object = new MyJsonObject(parent);
                     deal.icon = "http://discountgali.com" + getSubString(object.getString("ImageUrl"));
 
+//                    ImageLoaderUtils.loadImageOnly(deal.icon, null);
 //                    deal.icon = object.getString("ImageUrl");
                     deal.redirect_url = object.getString("RedirectUrl");
                     featuredDeals.add(deal);

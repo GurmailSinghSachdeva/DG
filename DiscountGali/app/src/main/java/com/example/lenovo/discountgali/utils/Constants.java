@@ -9,6 +9,8 @@ public class Constants {
     public static final String COUPON_CODE = "coupon_code";
     public static boolean DEBUG = false; // TODO: should be false for final build
 
+    public static String urlContactUs = "http://discountgali.com/Contactus.aspx";
+    public static String urlMerchant = "http://www.discountgali.com/login.aspx";
 //    public static final String BASE_URL = "http://dev2.rapidsoft.in/Roast/Services/index";
 //    public static final String UPLOAD_PROFILE_PIC_URL = "http://dev2.rapidsoft.in/Roast/UploadServices/uploadUserProfileImage";
 

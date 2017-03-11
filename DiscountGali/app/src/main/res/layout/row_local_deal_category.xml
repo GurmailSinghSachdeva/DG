@@ -41,7 +41,10 @@
                 android:layout_height="wrap_content"
                 android:text="@string/loading_data"
                 android:textStyle="bold"
+                android:gravity="center"
+                android:textAppearance="@android:style/TextAppearance.DeviceDefault.Large"
                 android:id="@+id/tv_local_deal_cat"
+                android:layout_gravity="center"
                 android:textColor="@color/white"
                 android:layout_centerInParent="true"/>
         </RelativeLayout>

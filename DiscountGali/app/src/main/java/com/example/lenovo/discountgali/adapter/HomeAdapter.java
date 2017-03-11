@@ -58,14 +58,14 @@ TopOffers topOffers = topOfferslist.get(position);
             ImageLoaderUtils.loadImage(topOffers.background, viewHolder.ivBackOffer);
 
             viewHolder.brandname.setVisibility(View.VISIBLE);
-            viewHolder.brandname.setTextColor(context.getResources().getColor(R.color.white));
+            viewHolder.brandname.setTextColor(context.getResources().getColor(R.color.colorAccent));
             viewHolder.brandname.setText(topOffers.BrandName);
             viewHolder.tvViewOffer.setVisibility(View.VISIBLE);
             viewHolder.tvViewOffer.setTextColor(context.getResources().getColor(R.color.white));
             viewHolder.tvViewOffer.setText(topOffers.OnlineDeal_Offer);
 
-            viewHolder.offertitle.setVisibility(View.GONE);
-            viewHolder.date.setVisibility(View.GONE);
+            viewHolder.offertitle.setVisibility(View.INVISIBLE);
+            viewHolder.date.setVisibility(View.INVISIBLE);
             viewHolder.tvLoadingIocn.setVisibility(View.VISIBLE);
 
         }

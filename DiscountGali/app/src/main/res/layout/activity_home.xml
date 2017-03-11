@@ -80,7 +80,7 @@
     <android.support.design.widget.AppBarLayout
         android:id="@+id/appbar"
         android:layout_width="match_parent"
-        android:layout_height="190dp"
+        android:layout_height="200dp"
         android:fitsSystemWindows="true"
         >
 
@@ -96,12 +96,12 @@
         <include layout="@layout/layout_featured_deals"
             android:layout_below="@+id/toolbar_con"
             android:layout_width="wrap_content"
-            android:layout_height="140dp"
+            android:layout_height="160dp"
             android:id="@+id/layout_featured_deals"/>
         <android.support.design.widget.TabLayout
             android:id="@+id/tabs"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="40dp"
             android:fillViewport="true"
             app:tabTextAppearance="@style/TabLayoutTextStyle"
             android:background="@color/app_orange"

@@ -4,6 +4,8 @@ import android.app.ProgressDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.os.Handler;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
@@ -27,6 +29,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.toolbox.ImageLoader;
 import com.example.lenovo.discountgali.R;
 import com.example.lenovo.discountgali.adapter.FeaturedAdapter;
 import com.example.lenovo.discountgali.adapter.NavDrawerAdapter;
@@ -46,17 +49,23 @@ import com.example.lenovo.discountgali.network.apicall.GetBannerApiCall;
 import com.example.lenovo.discountgali.network.apicall.GetCityListApiCall;
 import com.example.lenovo.discountgali.utility.Syso;
 import com.example.lenovo.discountgali.utility.Utils;
+import com.example.lenovo.discountgali.utils.Constants;
 import com.example.lenovo.discountgali.utils.DialogUtils;
+import com.example.lenovo.discountgali.utils.ImageLoaderUtils;
 import com.example.lenovo.discountgali.widget.pageindicator.CirclePageIndicator;
 import com.google.android.gms.analytics.CampaignTrackingReceiver;
 import com.google.android.gms.analytics.HitBuilders;
 import com.google.android.gms.analytics.Tracker;
+import com.nostra13.universalimageloader.core.assist.FailReason;
+import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.Map;
+
+import cn.trinea.android.view.autoscrollviewpager.AutoScrollViewPager;
 
 import static com.example.lenovo.discountgali.R.id.DrawerLayout;
 import static com.example.lenovo.discountgali.R.id.cancel_action;
@@ -70,7 +79,7 @@ public class HomeActivity extends BaseActivity implements NavigationView.OnNavig
     private EditText etTextSearch;
     private ArrayList<BottomTab> bottomtab = new ArrayList<>();
     private View layout_featured;
-    private ViewPager vp_featured;
+    private AutoScrollViewPager vp_featured;
     private FeaturedAdapter pagerAdapter;
     private ArrayList<String> home_tabs_name = new ArrayList<>();
     private CirclePageIndicator vp_indicator;
@@ -79,8 +88,10 @@ public class HomeActivity extends BaseActivity implements NavigationView.OnNavig
     private Toolbar mToolBar;
     private ImageView ivNavDrawer;
     private ImageView ivSearch;
+    private Handler handler = new Handler();
     private static AppBarLayout appBarLayout;
     private android.support.v4.widget.DrawerLayout mDrawer;
+    private int count = 0;
 
     public static void appBarOpenClose()
     {
@@ -127,6 +138,7 @@ public class HomeActivity extends BaseActivity implements NavigationView.OnNavig
                 @Override
                 public void onComplete(Exception e) {
                     DialogUtils.hideProgressDialog(progressDialog);
+
                     if (e == null) { // Success
                         try {
                             ServerResponse<FeaturedModel> serverResponse = (ServerResponse<FeaturedModel>) apiCall.getResult();
@@ -134,16 +146,39 @@ public class HomeActivity extends BaseActivity implements NavigationView.OnNavig
                                 vp_featured.setVisibility(View.VISIBLE);
                                 featuredModellist.clear();
                                 featuredModellist.addAll(serverResponse.data);
+                                Syso.print("Wait started");
+//                                loadImages();
+
+//                                handler.postDelayed(new Runnable() {
+//                                    @Override
+//                                    public void run() {
+//                                        DialogUtils.hideProgressDialog(progressDialog);
+//                                    }
+//                                },1000);
+//                                try{
+//                                    wait(1000);
+//
+//                                }catch (InterruptedException i)
+//                                {
+//                                }
+//                                count = 0;
+                                Syso.print("Wait Notified");
                                 addFeatutedPager();
                             }
                             else {
+                                DialogUtils.hideProgressDialog(progressDialog);
+
                                 vp_featured.setVisibility(View.GONE);
                             }
                         } catch (Exception e1) {
 
+                            DialogUtils.hideProgressDialog(progressDialog);
+
                             Utils.handleError(e1, HomeActivity.this);
                         }
                     } else { // Failure
+                        DialogUtils.hideProgressDialog(progressDialog);
+
                         Utils.handleError(e, HomeActivity.this);
                     }
 
@@ -157,6 +192,32 @@ public class HomeActivity extends BaseActivity implements NavigationView.OnNavig
 
     }
 
+    private void loadImages() {
+        for(int i=featuredModellist.size()-1;i>=0;i--)
+            ImageLoaderUtils.loadImageOnly(featuredModellist.get(i).icon, new ImageLoadingListener() {
+                @Override
+                public void onLoadingStarted(String imageUri, View view) {
+
+                }
+
+                @Override
+                public void onLoadingFailed(String imageUri, View view, FailReason failReason) {
+
+                }
+
+                @Override
+                public void onLoadingComplete(String imageUri, View view, Bitmap loadedImage) {
+
+                    count++;
+
+                }
+
+                @Override
+                public void onLoadingCancelled(String imageUri, View view) {
+
+                }
+            });
+    }
 
 
     private void setListener()
@@ -212,6 +273,8 @@ public class HomeActivity extends BaseActivity implements NavigationView.OnNavig
         vp_featured.setOffscreenPageLimit(featuredModellist.size());
         vp_indicator.setViewPager(vp_featured);
 
+        vp_featured.startAutoScroll();
+        vp_featured.setInterval(1500);
         vp_indicator.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
@@ -266,7 +329,7 @@ public class HomeActivity extends BaseActivity implements NavigationView.OnNavig
         viewPager = (ViewPager) findViewById(R.id.viewpager);
         tabLayout = (TabLayout) findViewById(R.id.tabs);
         layout_featured = findViewById(R.id.layout_featured_deals);
-        vp_featured = (ViewPager) findViewById(R.id.vp_tutorial);
+        vp_featured = (AutoScrollViewPager) findViewById(R.id.vp_tutorial);
         vp_indicator = (CirclePageIndicator) findViewById(R.id.vp_indicator);
         mToolBar = (Toolbar) findViewById(R.id.toolbar);
         appBarLayout = (AppBarLayout) findViewById(R.id.appbar);
@@ -386,7 +449,7 @@ public class HomeActivity extends BaseActivity implements NavigationView.OnNavig
         navMenuItems.add(new NavDrawerAdapter.NavMenuItem("Rate us", R.drawable.rate_us));
         navMenuItems.add(new NavDrawerAdapter.NavMenuItem("Invite & Earn", R.drawable.invitation));
         navMenuItems.add(new NavDrawerAdapter.NavMenuItem("Deal of the day", R.drawable.deal_day));
-        navMenuItems.add(new NavDrawerAdapter.NavMenuItem("Help us Improve", R.drawable.help_us));
+//        navMenuItems.add(new NavDrawerAdapter.NavMenuItem("Help us Improve", R.drawable.help_us));
         navMenuItems.add(new NavDrawerAdapter.NavMenuItem("Merchant", R.drawable.file_image));
         navMenuItems.add(new NavDrawerAdapter.NavMenuItem("Contact us", R.drawable.contact_us));
 
@@ -420,9 +483,9 @@ public class HomeActivity extends BaseActivity implements NavigationView.OnNavig
                 }else if (navItem.equalsIgnoreCase("Help us Improve")) {
                     startActivity(new Intent(HomeActivity.this, HelpUsImproveActivity.class));
                 }else if (navItem.equalsIgnoreCase("Merchant")) {
-//                    clearSearchHistoryDialog(HomeActivity.this);
+                    startActivity(new Intent(HomeActivity.this, ContactUsActivity.class).putExtra("url", Constants.urlMerchant));
                 }else if (navItem.equalsIgnoreCase("Contact us")) {
-                    startActivity(new Intent(HomeActivity.this, ContactUsActivity.class));
+                    startActivity(new Intent(HomeActivity.this, ContactUsActivity.class).putExtra("url", Constants.urlContactUs));
                 }
 
                 mDrawer.closeDrawer(GravityCompat.START);

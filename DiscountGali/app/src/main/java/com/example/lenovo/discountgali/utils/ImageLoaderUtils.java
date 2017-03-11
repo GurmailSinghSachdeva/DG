@@ -40,7 +40,7 @@ public class ImageLoaderUtils {
             deafultDisplayImageOptions = new DisplayImageOptions.Builder()
                     .cacheOnDisk(true)
                     .cacheInMemory(true)
-                    .imageScaleType(ImageScaleType.IN_SAMPLE_POWER_OF_2)
+                    .imageScaleType(ImageScaleType.EXACTLY)
                     .bitmapConfig(Bitmap.Config.RGB_565)
                     .considerExifParams(true)
                             //.displayer(new FadeInBitmapDisplayer(300))
@@ -140,6 +140,47 @@ public class ImageLoaderUtils {
     public static DisplayImageOptions getDeafultDisplayImageOptions() {
         return deafultDisplayImageOptions;
     }
+    public static void loadImageOnly(final String url, ImageLoadingListener imageLoadingListener) {
+        try {
+
+
+            ImageLoader.getInstance().loadImage(url, imageLoadingListener);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+//    public static void loadImageSelective(final String url, final ImageView view) {
+//        try {
+//            /* 1 */
+//            if (!isValidURL(url))
+//                view.setImageResource(R.drawable.chat121_ic_bottom_smiley);
+//
+//            Object oldTag = view.getTag();
+//
+//            if (oldTag != null && oldTag.equals(url)) {
+//                return;
+//            }
+//            view.setTag(url);
+//
+//
+//            //ImageAware imageAware = new ImageViewAware(view, false);
+//            //ImageLoader.getInstance().displayImage(url, imageAware, deafultDisplayImageOptions);
+//            ImageLoader.getInstance().displayImage(url, view, deafultDisplayImageOptions, );
+//
+//            /* 2 */
+////            view.post(new Runnable() {
+////                @Override
+////                public void run() {
+////                    ImageLoader.getInstance().displayImage(url, view, deafultDisplayImageOptions);
+////                }
+////            });
+//        } catch (Exception e) {
+//            //e.printStackTrace();
+//        }
+//    }
+
 
     public static void loadImage(final String url, final ImageView view) {
         try {
