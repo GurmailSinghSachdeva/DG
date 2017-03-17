@@ -21,7 +21,7 @@ public class Constants {
 //    public static final String UPLOAD_PROFILE_PIC_URL = "http://test.rapidsoft.in/Roast/UploadServices/uploadUserProfileImage";
 //    public static final String UPLOAD_ROAST_PIC_URL = "http://test.rapidsoft.in/Roast/UploadServices/uploadRoastImage";
 
-    public static final String OTP_DELIMITER = ":";//for otp recognize
+    public static final String OTP_DELIMITER = " is ";//for otp recognize
     public static final String SMS_ORIGIN = "OTPROAST";
     public static final String OTP_PENDING = "pending";
     public static final String OTP_VERIFIED = "verified";
@@ -100,6 +100,9 @@ public class Constants {
     public final static int online = 2;
     public static int typeOffline = 2;
     public static int typeOnline = 1;
+    public static int phone_number_max_digits = 10;
+    public static int LoggedIn = 1;
+    public static int otp_sent_success = 1;
 
     public interface SocialPlatformIds {
         String FACEBOOK = "1";

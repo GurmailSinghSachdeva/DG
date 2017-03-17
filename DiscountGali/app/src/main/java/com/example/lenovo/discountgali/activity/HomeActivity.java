@@ -166,18 +166,18 @@ public class HomeActivity extends BaseActivity implements NavigationView.OnNavig
                                 addFeatutedPager();
                             }
                             else {
-                                DialogUtils.hideProgressDialog(progressDialog);
+//                                DialogUtils.hideProgressDialog(progressDialog);
 
                                 vp_featured.setVisibility(View.GONE);
                             }
                         } catch (Exception e1) {
 
-                            DialogUtils.hideProgressDialog(progressDialog);
+//                            DialogUtils.hideProgressDialog(progressDialog);
 
                             Utils.handleError(e1, HomeActivity.this);
                         }
                     } else { // Failure
-                        DialogUtils.hideProgressDialog(progressDialog);
+//                        DialogUtils.hideProgressDialog(progressDialog);
 
                         Utils.handleError(e, HomeActivity.this);
                     }
@@ -272,9 +272,9 @@ public class HomeActivity extends BaseActivity implements NavigationView.OnNavig
 
         vp_featured.setOffscreenPageLimit(featuredModellist.size());
         vp_indicator.setViewPager(vp_featured);
+        vp_featured.setInterval(3000);
 
         vp_featured.startAutoScroll();
-        vp_featured.setInterval(1500);
         vp_indicator.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
@@ -450,7 +450,7 @@ public class HomeActivity extends BaseActivity implements NavigationView.OnNavig
         navMenuItems.add(new NavDrawerAdapter.NavMenuItem("Invite & Earn", R.drawable.invitation));
         navMenuItems.add(new NavDrawerAdapter.NavMenuItem("Deal of the day", R.drawable.deal_day));
 //        navMenuItems.add(new NavDrawerAdapter.NavMenuItem("Help us Improve", R.drawable.help_us));
-        navMenuItems.add(new NavDrawerAdapter.NavMenuItem("Merchant", R.drawable.file_image));
+        navMenuItems.add(new NavDrawerAdapter.NavMenuItem("Merchant", R.drawable.shop));
         navMenuItems.add(new NavDrawerAdapter.NavMenuItem("Contact us", R.drawable.contact_us));
 
         NavDrawerAdapter mAdapter = new NavDrawerAdapter(navMenuItems, this);
@@ -479,6 +479,7 @@ public class HomeActivity extends BaseActivity implements NavigationView.OnNavig
                     invite();
 //                    clearSearchHistoryDialog(HomeActivity.this);
                 }else if (navItem.equalsIgnoreCase("Deal of the day")) {
+                    startActivity(new Intent(HomeActivity.this, DealOfTheDayActivity.class));
 //                    clearSearchHistoryDialog(HomeActivity.this);
                 }else if (navItem.equalsIgnoreCase("Help us Improve")) {
                     startActivity(new Intent(HomeActivity.this, HelpUsImproveActivity.class));
@@ -576,6 +577,8 @@ public class HomeActivity extends BaseActivity implements NavigationView.OnNavig
                 mTracker.send(new HitBuilders.ScreenViewBuilder()
                         .setCampaignParamsFromUrl(referrerString)
                         .build());
+
+//                    saveReferrerOnline();
                     new CampaignTrackingReceiver().onReceive(context, intent);
 
                 } catch (UnsupportedEncodingException e) {

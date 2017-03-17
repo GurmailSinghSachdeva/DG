@@ -861,7 +861,7 @@ public static void showSoftKeyboard(Activity context) {
 
     public static void handleError(String message, final Context context,Runnable runnable)
     {
-        DialogUtils.showAlert(context, message);
+        DialogUtils.showAlert(context, message, runnable);
     }
     public static void handleError(Exception e, final Context context, String alternateMsg, Runnable runnable) {
 

@@ -67,6 +67,7 @@
     <dimen name="margin_bottom_button_visibility">20dp</dimen>
     <dimen name="margine_top_form">14dp</dimen>
     <dimen name="padding_bottom_button">14dp</dimen>
+    <dimen name="size_20dp_keypad_padding">10dp</dimen>
 
 
 </resources>

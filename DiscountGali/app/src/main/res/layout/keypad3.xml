@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal" android:layout_width="match_parent"
+    android:layout_gravity="center"
+    android:gravity="center"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:layout_width="0dp"
+        android:id="@+id/tv_number_7"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="@string/number7"
+        android:textAppearance="@android:style/TextAppearance.DeviceDefault.Large"
+        android:textColor="@color/app_black"
+        android:textSize="40sp"
+        android:padding="@dimen/size_20dp_keypad_padding"
+        android:layout_gravity="center"
+        android:gravity="center"/>
+    <TextView
+        android:layout_width="0dp"
+        android:id="@+id/tv_number_8"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:textAppearance="@android:style/TextAppearance.DeviceDefault.Large"
+        android:text="@string/number8"
+        android:textSize="40sp"
+        android:padding="@dimen/size_20dp_keypad_padding"
+        android:textColor="@color/app_black"
+        android:layout_gravity="center"
+        android:gravity="center"/>
+    <TextView
+        android:layout_width="0dp"
+        android:id="@+id/tv_number_9"
+        android:padding="@dimen/size_20dp_keypad_padding"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:textSize="40sp"
+        android:textAppearance="@android:style/TextAppearance.DeviceDefault.Large"
+        android:text="@string/number9"
+        android:textColor="@color/app_black"
+        android:layout_gravity="center"
+        android:gravity="center"/>
+
+</LinearLayout>

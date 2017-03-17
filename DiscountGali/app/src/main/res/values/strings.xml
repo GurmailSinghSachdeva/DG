@@ -231,6 +231,25 @@
     <string name="tv_visit_store">VISIT STORE</string>
     <string name="alert_no_deals_availabale">No Deals Available</string>
     <string name="alert_please_select_city">Please select a acity</string>
+    <string name="banner_name">banner name</string>
+    <string name="enter_your_mobile">Enter  your mobile number</string>
+    <string name="fixed_code">+91</string>
+    <string name="ten_digit_number">10 digit number here</string>
+    <string name="never_share_your_number">We will never share your number with anyone ever!</string>
+    <string name="number1">1</string>
+    <string name="number3">3</string>
+    <string name="number2">2</string>
+    <string name="number6">6</string>
+    <string name="number5">5</string>
+    <string name="number4">4</string>
+    <string name="number9">9</string>
+    <string name="number8">8</string>
+    <string name="number7">7</string>
+    <string name="number0">0</string>
+    <string name="enter_otp">Enter OTP</string>
+    <string name="did_not_receive_otp">Didn\'t receive the OTP?</string>
+    <string name="alert_enter_10_digit_mobile_number">Enter 10 digit mobile number</string>
+    <string name="alert_wait_otp">OTP is not valid</string>
 
 
     <string-array name="categories">

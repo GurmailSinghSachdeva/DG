@@ -57,16 +57,20 @@ TopOffers topOffers = topOfferslist.get(position);
         if(topOffers.OnlineDeal_Type == Constants.typeOffline){
             ImageLoaderUtils.loadImage(topOffers.background, viewHolder.ivBackOffer);
 
-            viewHolder.brandname.setVisibility(View.VISIBLE);
+            viewHolder.brandname.setVisibility(View.INVISIBLE);
             viewHolder.brandname.setTextColor(context.getResources().getColor(R.color.colorAccent));
             viewHolder.brandname.setText(topOffers.BrandName);
-            viewHolder.tvViewOffer.setVisibility(View.VISIBLE);
+            viewHolder.tvViewOffer.setVisibility(View.INVISIBLE);
             viewHolder.tvViewOffer.setTextColor(context.getResources().getColor(R.color.white));
             viewHolder.tvViewOffer.setText(topOffers.OnlineDeal_Offer);
 
             viewHolder.offertitle.setVisibility(View.INVISIBLE);
             viewHolder.date.setVisibility(View.INVISIBLE);
             viewHolder.tvLoadingIocn.setVisibility(View.VISIBLE);
+
+            viewHolder.ll_offline_con.setVisibility(View.VISIBLE);
+            viewHolder.tvBrandNameOffline.setText(topOffers.BrandName);
+            viewHolder.tvOfferNameOffline.setText(topOffers.OnlineDeal_Offer);
 
         }
         else {
@@ -82,6 +86,8 @@ TopOffers topOffers = topOfferslist.get(position);
             viewHolder.offertitle.setText(topOffers.OnlineDeal_Offer);
             viewHolder.date.setText("Validity: " + topOffers.OnlineDeal_EndDate);
             ImageLoaderUtils.loadImage(topOffers.OnlineDeal_Logo, viewHolder.dealLogo);
+            viewHolder.ll_offline_con.setVisibility(View.GONE);
+
         }
 
 
@@ -105,9 +111,10 @@ TopOffers topOffers = topOfferslist.get(position);
     }
     public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
-        public TextView brandname,date, branddesc, offertitle, tvViewOffer, tvLoadingIocn;
+        public TextView brandname,date, branddesc, offertitle, tvViewOffer, tvLoadingIocn, tvBrandNameOffline, tvOfferNameOffline;
         public ImageView dealLogo, ivBackOffer;
         public RelativeLayout ll_offer_back;
+        public LinearLayout ll_offline_con;
         public MyViewHolder(View itemView) {
             super(itemView);
 
@@ -116,12 +123,15 @@ TopOffers topOffers = topOfferslist.get(position);
             date = (TextView) itemView.findViewById(R.id.date_exp);
             offertitle = (TextView) itemView.findViewById(R.id.offertitle);
             tvLoadingIocn = (TextView) itemView.findViewById(R.id.loadingIcon);
+            tvOfferNameOffline = (TextView) itemView.findViewById(R.id.offer_name);
+            tvBrandNameOffline = (TextView) itemView.findViewById(R.id.banner_name);
 
             dealLogo = (ImageView) itemView.findViewById(R.id.dealLogo);
             tvViewOffer = (TextView) itemView.findViewById(R.id.tv_view_offer);
 
             ivBackOffer = (ImageView) itemView.findViewById(R.id.iv_back_offer);
             ll_offer_back = (RelativeLayout) itemView.findViewById(R.id.layout_offer);
+            ll_offline_con = (LinearLayout) itemView.findViewById(R.id.offline_con);
             itemView.setOnClickListener(this);
         }
 

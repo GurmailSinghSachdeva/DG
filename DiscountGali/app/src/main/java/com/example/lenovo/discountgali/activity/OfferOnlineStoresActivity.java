@@ -157,6 +157,13 @@ public class OfferOnlineStoresActivity extends BaseActivity implements SwipeRefr
     private void getOffersOnline(int... pagingParams) {
         try {
 
+            final Runnable runnable = new Runnable() {
+                @Override
+                public void run() {
+                    finish();
+                }
+            };
+
             if (isApiRunning) {
                 if (pagingParams.length == 2) {
                     endlessScrollListener.decreasePagingCount();
@@ -192,13 +199,13 @@ public class OfferOnlineStoresActivity extends BaseActivity implements SwipeRefr
                                     break;
                                 default:
                                     if(!OfferOnlineStoresActivity.this.isFinishing())
-                                        DialogUtils.showAlert(OfferOnlineStoresActivity.this, getString(R.string.alert_no_deals_availabale));
+                                        Utils.handleError(getString(R.string.alert_no_deals_availabale), OfferOnlineStoresActivity.this, runnable);
                                     break;
                             }
                         }
 
                     } else {
-                        Utils.handleError(e, OfferOnlineStoresActivity.this);
+                        Utils.handleError(e, OfferOnlineStoresActivity.this, runnable);
                     }
                 }
             }, false);

@@ -5,6 +5,8 @@ import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
 import com.example.lenovo.discountgali.activity.SearchItemActivity;
+import com.example.lenovo.discountgali.utility.Utils;
+import com.nostra13.universalimageloader.utils.L;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -23,6 +25,7 @@ public class SharedPreference {
     private static final String ROAST_ID_DEFAULT = "shared_roast_id_default";
     private static final String NEWS_ID_DEFAULT = "shared_news_id_default";
     // Shared Pref Keys
+
     private static final String KEY_MY_PROFILE = "KEY_MY_PROFILE";
     private static final String KEY_MY_USER_ID = "KEY_MY_USER_ID";
     private static final String KEY_IS_PROFILE_SELECTION_DONE = "KEY_IS_PROFILE_SELECTION_DONE";
@@ -42,7 +45,59 @@ public class SharedPreference {
     private static final String KEY_DEFAULT_ROAST_ID = "KEY_DEFAULT_ROAST_ID";
     private static final String KEY_DEFAULT_NEWS_ID = "KEY_DEFAULT_NEWS_ID";
 
+    private static final String KEY_MOBILE_NUMBER = "KEY_MOBILE_NUMBER";
+    private static final String KEY_IS_LOGIN = "KEY_IS_LOGIN";
 
+    public static void saveMyMobileNumber(String mobileNUmber) {
+        try {
+            SharedPreferences sPreferences = Utils.getApplicationContext().getSharedPreferences(
+                    SHARED_PREF_NAME, 0);
+            SharedPreferences.Editor editor = sPreferences.edit();
+            if (mobileNUmber == null) {
+                editor.remove(KEY_MOBILE_NUMBER);
+            } else {
+                editor.putString(KEY_MOBILE_NUMBER, mobileNUmber);
+            }
+            editor.commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+    public static String getMyUserId() {
+        try {
+
+            SharedPreferences sPreferences = Utils.getApplicationContext().getSharedPreferences(
+                    SHARED_PREF_NAME, 0);
+            return sPreferences.getString(KEY_MOBILE_NUMBER, null);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+    public static void saveMyLoginStatus(int loginStatus) {
+        try {
+            SharedPreferences sPreferences = Utils.getApplicationContext().getSharedPreferences(
+                    SHARED_PREF_NAME, 0);
+            SharedPreferences.Editor editor = sPreferences.edit();
+                editor.putInt(KEY_IS_LOGIN, loginStatus);
+            editor.commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+    public static int getISLogin() {
+        try {
+
+            SharedPreferences sPreferences = Utils.getApplicationContext().getSharedPreferences(
+                    SHARED_PREF_NAME, 0);
+            return sPreferences.getInt(KEY_IS_LOGIN, 0);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return 0;
+    }
 
     //database utility
 //

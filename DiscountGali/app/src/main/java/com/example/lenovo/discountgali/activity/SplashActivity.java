@@ -9,6 +9,8 @@ import android.widget.ImageView;
 import com.daimajia.androidanimations.library.Techniques;
 import com.daimajia.androidanimations.library.YoYo;
 import com.example.lenovo.discountgali.R;
+import com.example.lenovo.discountgali.utils.Constants;
+import com.example.lenovo.discountgali.utils.SharedPreference;
 
 /**
  * Created by Gurmail Singh on 1/21/2017.
@@ -23,11 +25,13 @@ public class SplashActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
-
-
         ivLogo = (ImageView) findViewById(R.id.iv_logo);
 
-        animateCategoriesStrip();
+
+        if(SharedPreference.getISLogin() == Constants.LoggedIn)
+        {
+
+            animateCategoriesStrip();
             new Handler().postDelayed(new Runnable() {
 
             /*
@@ -44,6 +48,14 @@ public class SplashActivity extends AppCompatActivity {
                     finish();
                 }
             }, SPLASH_TIME_OUT);
+        }else {
+
+            Intent intent = new Intent(SplashActivity.this, LoginActivity.class);
+            startActivity(intent);
+            finish();
+        }
+
+
 
     }
     public void animateCategoriesStrip(){

@@ -77,7 +77,7 @@ public class OfferDetailActivity extends AppCompatActivity implements View.OnCli
         {
             ImageLoaderUtils.loadImage(topOffer.background, iv_logo);
 
-            ImageLoaderUtils.loadImage(topOffer.background, ivLocalStoreImage);
+//            ImageLoaderUtils.loadImage(topOffer.background, ivLocalStoreImage);
         }
         tv_brandName.setText(topOffer.BrandName);
         tv_title.setText(topOffer.OnlineDeal_Offer);
@@ -113,7 +113,7 @@ public class OfferDetailActivity extends AppCompatActivity implements View.OnCli
         ivClose = (ImageView) findViewById(R.id.iv_close);
         coupon_layout = findViewById(R.id.coupon_conatiner);
         tvCouponCode = (TextView) findViewById(R.id.tv_coupon);
-        ivLocalStoreImage = (ImageView) findViewById(R.id.ivLocalStoreImage);
+//        ivLocalStoreImage = (ImageView) findViewById(R.id.ivLocalStoreImage);
     }
 //    private void setUpToolbar(String title, int navId) {
 ////        TextView tv = (TextView) mToolBar.findViewById(R.id.toolbar_title);

@@ -1,6 +1,5 @@
 package com.example.lenovo.discountgali.activity;
 
-import android.app.Activity;
 import android.os.Handler;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -11,32 +10,30 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 
 import com.example.lenovo.discountgali.R;
+import com.example.lenovo.discountgali.adapter.DealOfTheDayAdapter;
 import com.example.lenovo.discountgali.adapter.HomeAdapter;
-import com.example.lenovo.discountgali.model.ModelTopStores;
+import com.example.lenovo.discountgali.model.FeaturedModel;
 import com.example.lenovo.discountgali.model.ServerResponse;
 import com.example.lenovo.discountgali.model.TopOffers;
 import com.example.lenovo.discountgali.network.Code;
 import com.example.lenovo.discountgali.network.HttpRequestHandler;
 import com.example.lenovo.discountgali.network.api.ApiCall;
+import com.example.lenovo.discountgali.network.apicall.GetDealOfTheDayApiCall;
 import com.example.lenovo.discountgali.network.apicall.GetLocalDeals;
-import com.example.lenovo.discountgali.network.apicall.GetOffersOnlineStoreWise;
-import com.example.lenovo.discountgali.utility.AlertUtils;
 import com.example.lenovo.discountgali.utility.Utils;
 import com.example.lenovo.discountgali.utils.DialogUtils;
 import com.example.lenovo.discountgali.utils.EndlessRecyclerOnScrollListener;
 
 import java.util.ArrayList;
 
-public class LocalDealsActivty extends BaseActivity implements SwipeRefreshLayout.OnRefreshListener{
+public class DealOfTheDayActivity extends BaseActivity implements SwipeRefreshLayout.OnRefreshListener{
 
     private RecyclerView mRecyclerView;
     private LinearLayoutManager linearLayoutManager;
     private EndlessRecyclerOnScrollListener endlessScrollListener;
     private SwipeRefreshLayout swipeRefreshLayout;
-    private HomeAdapter mAdapter;
-    private ArrayList<TopOffers> topOfferslist = new ArrayList<>();
-    private int categoryId = -1;
-    private String cityName = "";
+    private DealOfTheDayAdapter mAdapter;
+    private ArrayList<FeaturedModel> list = new ArrayList<>();
     private Handler handler = new Handler();
     private boolean isLastItemFound;
     private boolean isApiRunning;
@@ -48,7 +45,6 @@ public class LocalDealsActivty extends BaseActivity implements SwipeRefreshLayou
         setContentView(R.layout.activity_local_deals_activty);
 
         initUi();
-        parseArguments();
         setUpToolbar(R.drawable.signup_back_icon);
         setRecyclerView();
         setListener();
@@ -81,7 +77,7 @@ public class LocalDealsActivty extends BaseActivity implements SwipeRefreshLayou
 
     private void setRecyclerView() {
         mRecyclerView.setLayoutManager(getGridOrLinearLayoutManager());
-        mAdapter = new HomeAdapter(this, topOfferslist);
+        mAdapter = new DealOfTheDayAdapter(this, list, null);
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setAdapter(mAdapter);
 
@@ -94,14 +90,6 @@ public class LocalDealsActivty extends BaseActivity implements SwipeRefreshLayou
 
     }
 
-    private void parseArguments() {
-        try {
-            cityName = getIntent().getStringExtra("cityId");
-            categoryId = getIntent().getIntExtra("categoryId", -1);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
 
     private LinearLayoutManager getGridOrLinearLayoutManager() {
 
@@ -123,7 +111,7 @@ public class LocalDealsActivty extends BaseActivity implements SwipeRefreshLayou
 
     private void resetLoading() {
         isLastItemFound = false;
-        topOfferslist.clear();
+        list.clear();
         if (mAdapter != null && mRecyclerView != null)
             mAdapter.notifyDataSetChanged();
         endlessScrollListener.reset();
@@ -161,9 +149,6 @@ public class LocalDealsActivty extends BaseActivity implements SwipeRefreshLayou
             };
 
             if (isApiRunning) {
-                if (pagingParams.length == 2) {
-                    endlessScrollListener.decreasePagingCount();
-                }
                 return;
             }
             if (isLastItemFound) {
@@ -171,38 +156,35 @@ public class LocalDealsActivty extends BaseActivity implements SwipeRefreshLayou
             }
             isApiRunning = true;
             swipeRefreshLayout.setRefreshing(true);
-            final GetLocalDeals apiCall;
-            if (pagingParams.length == 2) {
-                apiCall = new GetLocalDeals(pagingParams[0], pagingParams[1], categoryId, cityName);
-            } else {
-                apiCall = new GetLocalDeals(categoryId, cityName);
-            }
+            final GetDealOfTheDayApiCall apiCall;
+            apiCall = new GetDealOfTheDayApiCall();
+
             HttpRequestHandler.getInstance(this).executeRequest(apiCall, new ApiCall.OnApiCallCompleteListener() {
                 @Override
                 public void onComplete(Exception e) {
                     isApiRunning = false;
                     swipeRefreshLayout.setRefreshing(false);
                     if (e == null) {
-                        ServerResponse<TopOffers> serverResponse = (ServerResponse<TopOffers>) apiCall.getResult();
+                        ServerResponse<FeaturedModel> serverResponse = (ServerResponse<FeaturedModel>) apiCall.getResult();
                         if (serverResponse != null) {
                             switch (serverResponse.baseModel.MessageCode) {
                                 case Code.SUCCESS_MESSAGE_CODE:
-                                    topOfferslist.addAll(serverResponse.data);
+                                    list.addAll(serverResponse.data);
                                     mAdapter.notifyDataSetChanged();
 
-                                    if (topOfferslist.size() == apiCall.getTotalRecords())
+                                    if (list.size() == apiCall.getTotalRecords())
                                         isLastItemFound = true;
                                     break;
                                 default:
 
-                                    if(!LocalDealsActivty.this.isFinishing())
-                                        Utils.handleError(getString(R.string.alert_no_deals_availabale), LocalDealsActivty.this, runnable);
+                                    if(!DealOfTheDayActivity.this.isFinishing())
+                                        Utils.handleError(getString(R.string.alert_no_deals_availabale), DealOfTheDayActivity.this, runnable);
                                     break;
                             }
                         }
 
                     } else {
-                        Utils.handleError(e, LocalDealsActivty.this, runnable);
+                        Utils.handleError(e, DealOfTheDayActivity.this, runnable);
                     }
                 }
             }, false);
