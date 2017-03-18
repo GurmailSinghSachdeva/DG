@@ -7,6 +7,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.database.Cursor;
+import android.graphics.Color;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
@@ -14,9 +15,12 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.provider.DocumentsContract;
 import android.provider.MediaStore;
+import android.provider.Settings;
 import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.AlertDialog;
 import android.telephony.SmsManager;
+import android.text.Spannable;
+import android.text.SpannableString;
 import android.text.TextUtils;
 import android.text.format.DateUtils;
 import android.util.Log;
@@ -201,6 +205,11 @@ public static void showSoftKeyboard(Activity context) {
         }
     }
 
+    public static String getDeviceID()
+    {
+        String unique_id = Settings.Secure.getString(getApplicationContext().getContentResolver(), Settings.Secure.ANDROID_ID);
+        return unique_id;
+    }
     public static void hideSoftKeyBoard2(Activity context) {
         try {
             InputMethodManager imm = (InputMethodManager) context.getSystemService(Activity.INPUT_METHOD_SERVICE);
@@ -227,6 +236,48 @@ public static void showSoftKeyboard(Activity context) {
                     WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
         } catch (Exception e) {
         }
+    }
+
+
+    public interface SpanClickListenerI {
+        void onClick(String name, int  pos);
+    }
+    public static Spannable getSpanString(String content, String[] roots, SpanClickListenerI hashUserClickListener) {
+
+        try {
+
+            Spannable sp = null;
+            if (content != null) {
+                String rootStr = "" + content + " ";
+                String roastStrSmallCases = "" + content.toLowerCase() + " ";
+                sp = new SpannableString(rootStr);
+
+                int fromIndex;
+                for (int i=0; i<roots.length; i++) {
+                    String rt = roots[i];
+                    fromIndex = 0;
+                    int index = roastStrSmallCases.indexOf(rt.toLowerCase(), fromIndex);
+
+                    while (index != -1) {
+                        fromIndex = index + rt.toLowerCase().length();
+                        // TODO: do whole word check
+                        UserHashClickableSpan span = new UserHashClickableSpan(Color.rgb(222, 95, 116), rt, i, hashUserClickListener);
+                        sp.setSpan(span, index, fromIndex, Spannable.SPAN_INCLUSIVE_INCLUSIVE);
+
+                        index = roastStrSmallCases.indexOf(rt.toLowerCase(), fromIndex);
+                    }
+
+                }
+
+
+            }
+
+            return sp;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return new SpannableString(content);
     }
 
 //    public static String getImgUrl(Contact contact) {
@@ -613,6 +664,8 @@ public static void showSoftKeyboard(Activity context) {
             AlertUtils.showToast(context, "SMS faild, please try again.");
         }
     }
+
+
 
     public static String checkPasswordStrength(String str) {
         int strLength = str.length();

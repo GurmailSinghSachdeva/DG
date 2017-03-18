@@ -49,9 +49,9 @@ public class ImageLoaderUtils {
 //                    .showImageOnLoading(R.drawable.file_image)
 //                    .showImageOnFail(R.drawable.file_image)
 //                    .showImageForEmptyUri(R.drawable.file_image)
-                    .showImageOnLoading(null)
-                    .showImageOnFail(null)
-                    .showImageForEmptyUri(null)
+                    .showImageOnLoading(R.drawable.ic_image_default)
+                    .showImageOnFail(R.drawable.ic_image_default)
+                    .showImageForEmptyUri(R.drawable.ic_image_default)
                     .build();
 
             defaultNew = new DisplayImageOptions.Builder()
@@ -63,9 +63,9 @@ public class ImageLoaderUtils {
                     //.displayer(new FadeInBitmapDisplayer(300))
                     //.resetViewBeforeLoading(true)
                     //.cacheInMemory(true)
-                    .showImageOnLoading(null)
-                    .showImageOnFail(null)
-                    .showImageForEmptyUri(null)
+                    .showImageOnLoading(R.drawable.ic_image_default)
+                    .showImageOnFail(R.drawable.ic_image_default)
+                    .showImageForEmptyUri(R.drawable.ic_image_default)
                     .build();
 
             com.nostra13.universalimageloader.utils.L.writeLogs(BuildConfig.DEBUG);
@@ -186,7 +186,7 @@ public class ImageLoaderUtils {
         try {
             /* 1 */
             if (!isValidURL(url))
-                view.setImageResource(R.drawable.chat121_ic_bottom_smiley);
+                view.setImageResource(R.drawable.ic_image_default);
 
             Object oldTag = view.getTag();
 
@@ -218,7 +218,7 @@ public class ImageLoaderUtils {
             {
                 view.setVisibility(View.GONE);
                 ImageViewDefault.setVisibility(View.VISIBLE);
-                ImageViewDefault.setImageResource(R.drawable.chat121_ic_bottom_smiley);
+                ImageViewDefault.setImageResource(R.drawable.ic_image_default);
             }
 
 

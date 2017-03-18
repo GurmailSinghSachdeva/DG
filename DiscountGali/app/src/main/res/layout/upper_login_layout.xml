@@ -3,62 +3,82 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_gravity="center"
     android:gravity="center"
-
     android:layout_height="match_parent">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textStyle="bold"
-        android:layout_margin="20dp"
-
-        android:textColor="@color/app_black"
-        android:textAppearance="@android:style/TextAppearance.DeviceDefault.Large"
-        android:text="@string/enter_your_mobile"/>
-
-    <LinearLayout
-        android:layout_width="230dp"
-        android:layout_gravity="bottom|center"
+    <ScrollView
+        android:layout_width="match_parent"
         android:layout_height="wrap_content">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textStyle="bold"
-            android:textColor="@color/app_black"
-            android:textSize="30sp"
-            android:textAppearance="@android:style/TextAppearance.DeviceDefault.Large"
-            android:text="@string/fixed_code"/>
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:orientation="vertical"
+            android:gravity="center"
             android:layout_height="wrap_content">
-            <EditText
-                android:layout_width="fill_parent"
+            <TextView
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/et_phone_number"
-                android:maxLength="10"
+                android:layout_margin="@dimen/size_20dp"
                 android:gravity="center"
+                android:textAppearance="@android:style/TextAppearance.DeviceDefault.Medium"
+                android:textColor="@color/app_black"
+                android:text="@string/enter_your_mobile"/>
+
+            <LinearLayout
+                android:layout_width="230dp"
+                android:layout_gravity="bottom|center"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/app_black"
+                    android:textSize="30sp"
+                    android:textAppearance="@android:style/TextAppearance.DeviceDefault.Large"
+                    android:text="@string/fixed_code"/>
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_height="wrap_content">
+                    <EditText
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/et_phone_number"
+                        android:maxLength="10"
+                        android:gravity="center"
+                        android:textColor="@color/dark_gray"
+                        android:textSize="25sp"
+                        android:background="@drawable/border_edittext_phone"
+                        android:inputType="phone"
+                        />
+
+                    <View
+                        android:layout_width="wrap_content"
+                        android:layout_height="1dp"
+                        android:layout_gravity="bottom"
+                        android:background="@color/app_black"
+                        />
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_margin="@dimen/size_20dp"
+                android:layout_height="wrap_content"
+                android:text="@string/have_a_ref_code"/>
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:textSize="20sp"
+                android:padding="@dimen/size_10dp"
+                android:background="@drawable/border_black"
                 android:textColor="@color/dark_gray"
-                android:textSize="25sp"
-                android:focusable="false"
-                android:background="@drawable/border_edittext_phone"
-                android:inputType="phone"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:id="@+id/et_ref"
+                android:hint="@string/default_ref_code"
                 />
 
-            <View
-                android:layout_width="wrap_content"
-                android:layout_height="1dp"
-                android:layout_gravity="bottom"
-                android:background="@color/app_black"
-                />
         </LinearLayout>
 
-    </LinearLayout>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_margin="20dp"
-        android:layout_height="wrap_content"
-        android:text="@string/never_share_your_number"/>
+    </ScrollView>
 
 </LinearLayout>

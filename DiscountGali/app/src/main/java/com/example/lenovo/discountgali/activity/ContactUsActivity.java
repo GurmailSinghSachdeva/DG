@@ -44,11 +44,11 @@ public class ContactUsActivity extends BaseActivity {
         webView.getSettings().setRenderPriority(WebSettings.RenderPriority.HIGH);
         webView.getSettings().setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK);
         webView.getSettings().setAppCacheEnabled(true);
-        webView.setScrollBarStyle(View.SCROLLBARS_INSIDE_OVERLAY);
+//        webView.setScrollBarStyle(View.SCROLLBARS_INSIDE_OVERLAY);
 
         settings.setDomStorageEnabled(true);
-        settings.setLayoutAlgorithm(WebSettings.LayoutAlgorithm.NARROW_COLUMNS);
-        settings.setUseWideViewPort(true);
+//        settings.setLayoutAlgorithm(WebSettings.LayoutAlgorithm.NARROW_COLUMNS);
+//        settings.setUseWideViewPort(true);
         settings.setSaveFormData(true);
         settings.setSavePassword(true);
 

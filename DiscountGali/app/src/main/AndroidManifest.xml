@@ -6,7 +6,7 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.RECEIVE_SMS"></uses-permission>
-    android:hardwareAccelerated="true"
+    <!--android:hardwareAccelerated="true"-->
     <application
         android:name=".DiscountGaliApplication"
         android:allowBackup="true"
@@ -89,14 +89,17 @@
         <activity
             android:name=".activity.SearchItemActivity"
             android:screenOrientation="portrait" />
-        <activity android:name=".activity.DealUrlActivity" />
-        <activity android:name=".activity.DealOfTheDayActivity" />
+        <activity android:name=".activity.DealUrlActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".activity.DealOfTheDayActivity"
+            android:screenOrientation="portrait"/>
         <activity android:name=".activity.LoginActivity"
-            android:windowSoftInputMode="stateAlwaysHidden"></activity>
+            android:windowSoftInputMode="stateAlwaysHidden"
+            android:screenOrientation="portrait"></activity>
         <receiver android:name=".activity.LoginActivity$SmsReceiver"
-            android:enabled="true"
             android:exported="true">
-            <intent-filter>
+            <intent-filter
+                android:priority="999">
                 <action android:name="android.provider.Telephony.SMS_RECEIVED" />
             </intent-filter>
         </receiver>

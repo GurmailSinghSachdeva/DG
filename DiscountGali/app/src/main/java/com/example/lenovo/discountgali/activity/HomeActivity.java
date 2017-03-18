@@ -18,6 +18,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.Menu;
@@ -39,19 +40,25 @@ import com.example.lenovo.discountgali.fragment.FeaturedFragment;
 import com.example.lenovo.discountgali.fragment.HomeFragment;
 import com.example.lenovo.discountgali.fragment.LocalDealCategoryFragment;
 import com.example.lenovo.discountgali.fragment.TopStoresFragment;
+import com.example.lenovo.discountgali.model.BaseModel;
 import com.example.lenovo.discountgali.model.BottomTab;
 import com.example.lenovo.discountgali.model.CityModel;
 import com.example.lenovo.discountgali.model.FeaturedModel;
 import com.example.lenovo.discountgali.model.ServerResponse;
+import com.example.lenovo.discountgali.network.Code;
 import com.example.lenovo.discountgali.network.HttpRequestHandler;
 import com.example.lenovo.discountgali.network.api.ApiCall;
 import com.example.lenovo.discountgali.network.apicall.GetBannerApiCall;
 import com.example.lenovo.discountgali.network.apicall.GetCityListApiCall;
+import com.example.lenovo.discountgali.network.apicall.InsertCampaignUrlApiCAll;
+import com.example.lenovo.discountgali.network.apicall.LoginApiCall;
+import com.example.lenovo.discountgali.utility.AlertUtils;
 import com.example.lenovo.discountgali.utility.Syso;
 import com.example.lenovo.discountgali.utility.Utils;
 import com.example.lenovo.discountgali.utils.Constants;
 import com.example.lenovo.discountgali.utils.DialogUtils;
 import com.example.lenovo.discountgali.utils.ImageLoaderUtils;
+import com.example.lenovo.discountgali.utils.SharedPreference;
 import com.example.lenovo.discountgali.widget.pageindicator.CirclePageIndicator;
 import com.google.android.gms.analytics.CampaignTrackingReceiver;
 import com.google.android.gms.analytics.HitBuilders;
@@ -447,7 +454,7 @@ public class HomeActivity extends BaseActivity implements NavigationView.OnNavig
 //        navMenuItems.add(new NavDrawerAdapter.NavMenuItem("Notifications", R.drawable.notifications));
         navMenuItems.add(new NavDrawerAdapter.NavMenuItem("About Us", R.drawable.about_us));
         navMenuItems.add(new NavDrawerAdapter.NavMenuItem("Rate us", R.drawable.rate_us));
-        navMenuItems.add(new NavDrawerAdapter.NavMenuItem("Invite & Earn", R.drawable.invitation));
+        navMenuItems.add(new NavDrawerAdapter.NavMenuItem("Refer a Friend", R.drawable.invitation));
         navMenuItems.add(new NavDrawerAdapter.NavMenuItem("Deal of the day", R.drawable.deal_day));
 //        navMenuItems.add(new NavDrawerAdapter.NavMenuItem("Help us Improve", R.drawable.help_us));
         navMenuItems.add(new NavDrawerAdapter.NavMenuItem("Merchant", R.drawable.shop));
@@ -475,7 +482,7 @@ public class HomeActivity extends BaseActivity implements NavigationView.OnNavig
                     startActivity(new Intent(HomeActivity.this, AboutUsActivity.class));
                 } else if (navItem.equalsIgnoreCase("Rate us")) {
                     Utils.navigatePlayStore();
-                }else if (navItem.equalsIgnoreCase("Invite & Earn")) {
+                }else if (navItem.equalsIgnoreCase("Refer a Friend")) {
                     invite();
 //                    clearSearchHistoryDialog(HomeActivity.this);
                 }else if (navItem.equalsIgnoreCase("Deal of the day")) {
@@ -578,7 +585,12 @@ public class HomeActivity extends BaseActivity implements NavigationView.OnNavig
                         .setCampaignParamsFromUrl(referrerString)
                         .build());
 
-//                    saveReferrerOnline();
+                    SharedPreference.saveCompaignTrackingUrl(context,referrerString);
+                    if(SharedPreference.getCampaignStatus() != 1){
+
+                        saveReferrerOnline(context, referrerString, Utils.getDeviceID());
+
+                    }
                     new CampaignTrackingReceiver().onReceive(context, intent);
 
                 } catch (UnsupportedEncodingException e) {
@@ -598,6 +610,42 @@ public class HomeActivity extends BaseActivity implements NavigationView.OnNavig
             } else {
                 Log.v(TAG, "-----referrer is not found-----");
 //            SharedPreference.saveCompaignTrackingUrl(context,"");
+            }
+
+        }
+
+        private void saveReferrerOnline(Context context, String referrerString, String deviceID) {
+
+            try{
+                final InsertCampaignUrlApiCAll apiCall;
+                apiCall = new InsertCampaignUrlApiCAll(referrerString, deviceID);
+                HttpRequestHandler.getInstance(context).executeRequest(apiCall, new ApiCall.OnApiCallCompleteListener() {
+                    @Override
+                    public void onComplete(Exception e) {
+
+                        if (e == null) {
+                            BaseModel baseModel = (BaseModel) apiCall.getResult();
+                            if(baseModel!=null)
+                            {
+                                switch (baseModel.MessageCode)
+                                {
+                                    case Code.SUCCESS_MESSAGE_CODE:
+
+                                        if(apiCall.getSuccessStatus() == Constants.otp_sent_success){
+                                            SharedPreference.saveMyCampaignStatus(Constants.otp_sent_success);
+                                        }
+                                        break;
+
+                                }
+                            }
+
+                        } else {
+
+                        }
+                    }
+                }, false);
+            }catch (Exception e)
+            {
             }
 
         }

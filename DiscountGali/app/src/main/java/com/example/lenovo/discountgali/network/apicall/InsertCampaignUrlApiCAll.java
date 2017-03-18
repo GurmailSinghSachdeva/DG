@@ -1,15 +1,10 @@
 package com.example.lenovo.discountgali.network.apicall;
 
 import com.example.lenovo.discountgali.model.BaseModel;
-import com.example.lenovo.discountgali.model.CityModel;
-import com.example.lenovo.discountgali.model.ServerResponse;
 import com.example.lenovo.discountgali.network.Code;
 import com.example.lenovo.discountgali.network.ServerRequests;
 import com.example.lenovo.discountgali.utility.Syso;
-import com.example.lenovo.discountgali.utils.Constants;
-import com.example.lenovo.discountgali.utils.JSONParsingUtils;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.w3c.dom.Document;
@@ -27,40 +22,30 @@ import javax.xml.parsers.ParserConfigurationException;
  * Created by lenovo on 18-03-2017.
  */
 
-public class LoginApiCall extends BaseApiCall{
+public class InsertCampaignUrlApiCAll extends BaseApiCall{
     private String result;
     private String outputjson;
-    private String mobile_no;
-    private String ref_no;
+    private String referrerString;
+    private String deviceID;
     private int success = 0;
-    private int isVerification = 0;
-    private String otp;
     private BaseModel serverResponse = new BaseModel();
 
-    public LoginApiCall(String mobile_no, String ref_no, int isVerification, String otp) {
-        this.mobile_no = mobile_no;
-        this.ref_no = ref_no;
-        this.isVerification = isVerification;
-        this.otp = otp;
+    public InsertCampaignUrlApiCAll(String referrerString, String deviceID) {
+        this.referrerString = referrerString;
+        this.deviceID = deviceID;
     }
 
 
     @Override
     protected String getRequestUrl() {
-        if(isVerification == 1)
-        {
-            return ServerRequests.REQUEST_LOGIN_VERIFY;
+        return ServerRequests.REQUEST_INSERT_CAMPAIGN;
 
-        }else {
-            return ServerRequests.REQUEST_LOGIN_DG;
-
-        }
     }
 
     public void populateFromResponse(Object response) throws JSONException {
         super.populateFromResponse(response);
         result = (String) response;
-        Syso.print("///////////////RESPONSE////////login" + result);
+        Syso.print("///////////////RESPONSE////////campaign" + result);
         if(result!=null && !result.isEmpty())
         {
             DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
@@ -71,7 +56,7 @@ public class LoginApiCall extends BaseApiCall{
                 is.setCharacterStream(new StringReader(result));
                 Document doc = db.parse(is);
                 outputjson = doc.getDocumentElement().getTextContent();
-                System.out.println("================Response login " + outputjson);
+                System.out.println("================Response campign " + outputjson);
                 parseData(outputjson.toString());
 
             } catch (SAXException e) {
@@ -131,34 +116,19 @@ public class LoginApiCall extends BaseApiCall{
 
     @Override
     public String getStringRequest() {
-        if(isVerification == 1){
-            String requestBody = "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n" +
-                    "<soap12:Envelope xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:soap12=\"http://www.w3.org/2003/05/soap-envelope\">\n" +
-                    "  <soap12:Body>\n" +
-                    "    <MobileLoginVerification xmlns=\"http://DiscountGali.com/\">\n" +
-                    "      <OTP>" + otp + "</OTP>\n" +
-                    "    </MobileLoginVerification>\n" +
-                    "  </soap12:Body>\n" +
-                    "</soap12:Envelope>";
-            Syso.print("!!!!!!!!!!!!!!Request Get Offers!!!!" + requestBody);
+        String requestBody = "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n" +
+                "<soap12:Envelope xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:soap12=\"http://www.w3.org/2003/05/soap-envelope\">\n" +
+                "  <soap12:Body>\n" +
+                "    <InsertCampaignRecords xmlns=\"http://DiscountGali.com/\">\n" +
+                "      <emiNo>" + deviceID + "</emiNo>\n" +
+                "      <Url>" + referrerString + "</Url>\n" +
+                "    </InsertCampaignRecords>\n" +
+                "  </soap12:Body>\n" +
+                "</soap12:Envelope>";
+        Syso.print("!!!!!!!!!!!!!!Request Get Offers!!!!" + requestBody);
 
-            Syso.print("=========APICALL===== LOGin " + requestBody);
-            return requestBody;
-        }else {
-            String requestBody = "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n" +
-                    "<soap12:Envelope xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:soap12=\"http://www.w3.org/2003/05/soap-envelope\">\n" +
-                    "  <soap12:Body>\n" +
-                    "    <MobileLogin xmlns=\"http://DiscountGali.com/\">\n" +
-                    "      <mobileNo>" + mobile_no + "</mobileNo>\n" +
-                    "      <referenceNo>" + ref_no + "</referenceNo>\n" +
-                    "    </MobileLogin>\n" +
-                    "  </soap12:Body>\n" +
-                    "</soap12:Envelope>";
-            Syso.print("!!!!!!!!!!!!!!Request Get Offers!!!!" + requestBody);
-
-            Syso.print("=========APICALL===== LOGin " + requestBody);
-            return requestBody;
-        }
+        Syso.print("=========APICALL===== LOGin " + requestBody);
+        return requestBody;}
 
     }
-}
+

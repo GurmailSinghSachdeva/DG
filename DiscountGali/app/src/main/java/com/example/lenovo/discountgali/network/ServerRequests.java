@@ -61,6 +61,8 @@ public class ServerRequests {
     public static final String REQUEST_BANNER = BASE_URL                                + "op=GetOnlineBanner" ;
     public static final String REQUEST_DEAL_OF_THE_DAY = BASE_URL                       + "op=GetDealofDay";
     public static final String REQUEST_LOGIN_DG = BASE_URL                              + "op=MobileLogin";
+    public static final String REQUEST_LOGIN_VERIFY = BASE_URL                          + "op=MobileLoginVerification";
+    public static final String REQUEST_INSERT_CAMPAIGN = BASE_URL                       + "op=InsertCampaignRecords";
 
 
     public static final String UPLOAD_USER_PROFILE_IMAGE = BASE_URL + SP_PROFILE + "iaUploadFile";

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:gravity="center"
+    android:layout_height="match_parent">
+    <TextView
+        android:id="@+id/tv_submit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/login_button_selector"
+        android:enabled="true"
+        android:padding="10dp"
+        android:text="@string/btn_submit"
+        android:textAllCaps="true"
+        android:textColor="@color/button_text_selector"
+        android:textStyle="bold"
+/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:textAppearance="@android:style/TextAppearance.DeviceDefault.Large"
+        android:layout_height="wrap_content"
+        android:textColor="@color/dark_gray"
+        android:layout_marginTop="@dimen/size_15dp"
+        android:text="@string/tv_or" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/size_15dp"
+        android:id="@+id/tv_skip"
+        android:textColor="@color/app_orange"
+        android:textAppearance="@android:style/TextAppearance.DeviceDefault.Medium"
+        android:text="@string/tv_skip_sign_in" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/size_15dp"
+        android:id="@+id/tv_span"
+        android:textColor="@color/app_black"
+        android:text="@string/tc_and_privacy" />
+
+</LinearLayout>

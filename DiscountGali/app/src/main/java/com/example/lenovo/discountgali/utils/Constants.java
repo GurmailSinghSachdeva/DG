@@ -11,6 +11,9 @@ public class Constants {
 
     public static String urlContactUs = "http://discountgali.com/Contactus.aspx";
     public static String urlMerchant = "http://www.discountgali.com/login.aspx";
+    public static String urlPrivacyPolicy = "file:///android_asset/aboutus.html";
+    public static String urlTandC = "file:///android_asset/aboutus.html";
+
 //    public static final String BASE_URL = "http://dev2.rapidsoft.in/Roast/Services/index";
 //    public static final String UPLOAD_PROFILE_PIC_URL = "http://dev2.rapidsoft.in/Roast/UploadServices/uploadUserProfileImage";
 
@@ -21,7 +24,7 @@ public class Constants {
 //    public static final String UPLOAD_PROFILE_PIC_URL = "http://test.rapidsoft.in/Roast/UploadServices/uploadUserProfileImage";
 //    public static final String UPLOAD_ROAST_PIC_URL = "http://test.rapidsoft.in/Roast/UploadServices/uploadRoastImage";
 
-    public static final String OTP_DELIMITER = " is ";//for otp recognize
+    public static final String OTP_DELIMITER = ":";//for otp recognize
     public static final String SMS_ORIGIN = "OTPROAST";
     public static final String OTP_PENDING = "pending";
     public static final String OTP_VERIFIED = "verified";

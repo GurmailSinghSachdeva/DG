@@ -26,35 +26,32 @@ public class SplashActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
         ivLogo = (ImageView) findViewById(R.id.iv_logo);
+        animateCategoriesStrip();
 
-
-        if(SharedPreference.getISLogin() == Constants.LoggedIn)
-        {
-
-            animateCategoriesStrip();
-            new Handler().postDelayed(new Runnable() {
+        new Handler().postDelayed(new Runnable() {
 
             /*
              * Showing splash screen with a timer. This will be useful when you
              * want to show case your app logo / company
              */
 
-                @Override
-                public void run() {
-                    // This method will be executed once the timer is over
-                    // Start your app main activity
+            @Override
+            public void run() {
+                // This method will be executed once the timer is over
+                // Start your app main activity
+                if(SharedPreference.getISLogin() == 1 || SharedPreference.getSkipStatus() == 1){
                     Intent intent = new Intent(SplashActivity.this, HomeActivity.class);
                     startActivity(intent);
                     finish();
                 }
-            }, SPLASH_TIME_OUT);
-        }else {
+                else {
+                    Intent intent = new Intent(SplashActivity.this, LoginActivity.class);
+                    startActivity(intent);
+                    finish();
+                }
 
-            Intent intent = new Intent(SplashActivity.this, LoginActivity.class);
-            startActivity(intent);
-            finish();
-        }
-
+            }
+        }, SPLASH_TIME_OUT);
 
 
     }

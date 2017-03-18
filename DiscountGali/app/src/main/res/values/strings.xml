@@ -232,7 +232,7 @@
     <string name="alert_no_deals_availabale">No Deals Available</string>
     <string name="alert_please_select_city">Please select a acity</string>
     <string name="banner_name">banner name</string>
-    <string name="enter_your_mobile">Enter  your mobile number</string>
+    <string name="enter_your_mobile">Enter  your mobile number to get best deals</string>
     <string name="fixed_code">+91</string>
     <string name="ten_digit_number">10 digit number here</string>
     <string name="never_share_your_number">We will never share your number with anyone ever!</string>
@@ -250,6 +250,12 @@
     <string name="did_not_receive_otp">Didn\'t receive the OTP?</string>
     <string name="alert_enter_10_digit_mobile_number">Enter 10 digit mobile number</string>
     <string name="alert_wait_otp">OTP is not valid</string>
+    <string name="send_another_code">Want to get another otp?</string>
+    <string name="have_a_ref_code">Reference code (if any)</string>
+    <string name="default_ref_code">YKQA</string>
+    <string name="tv_or">or</string>
+    <string name="tv_skip_sign_in">Skip to Enter</string>
+    <string name="tc_and_privacy"><![CDATA[By logging in you agree to our T&C and Privacy Policy]]></string>
 
 
     <string-array name="categories">

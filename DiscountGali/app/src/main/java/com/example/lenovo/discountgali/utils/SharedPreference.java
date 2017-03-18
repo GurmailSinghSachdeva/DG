@@ -47,6 +47,9 @@ public class SharedPreference {
 
     private static final String KEY_MOBILE_NUMBER = "KEY_MOBILE_NUMBER";
     private static final String KEY_IS_LOGIN = "KEY_IS_LOGIN";
+    private static final String KEY_IS_SKIP = "KEY_IS_SKIP";
+    private static final String KEY_IS_CAMPAIGN = "KEY_IS_CAMPAIGN";
+
 
     public static void saveMyMobileNumber(String mobileNUmber) {
         try {
@@ -64,7 +67,7 @@ public class SharedPreference {
         }
 
     }
-    public static String getMyUserId() {
+    public static String getMyMobileNo() {
         try {
 
             SharedPreferences sPreferences = Utils.getApplicationContext().getSharedPreferences(
@@ -75,6 +78,19 @@ public class SharedPreference {
         }
         return null;
     }
+    public static void saveSkipStatus(int skipStatus) {
+        try {
+            SharedPreferences sPreferences = Utils.getApplicationContext().getSharedPreferences(
+                    SHARED_PREF_NAME, 0);
+            SharedPreferences.Editor editor = sPreferences.edit();
+            editor.putInt(KEY_IS_SKIP, skipStatus);
+            editor.commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+
     public static void saveMyLoginStatus(int loginStatus) {
         try {
             SharedPreferences sPreferences = Utils.getApplicationContext().getSharedPreferences(
@@ -87,6 +103,29 @@ public class SharedPreference {
         }
 
     }
+    public static int getCampaignStatus() {
+        try {
+
+            SharedPreferences sPreferences = Utils.getApplicationContext().getSharedPreferences(
+                    SHARED_PREF_NAME, 0);
+            return sPreferences.getInt(KEY_IS_CAMPAIGN, 0);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return 0;
+    }
+    public static int getSkipStatus() {
+        try {
+
+            SharedPreferences sPreferences = Utils.getApplicationContext().getSharedPreferences(
+                    SHARED_PREF_NAME, 0);
+            return sPreferences.getInt(KEY_IS_SKIP, 0);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return 0;
+    }
+
     public static int getISLogin() {
         try {
 
@@ -507,23 +546,36 @@ public class SharedPreference {
 //        return sPreferences.getInt(KEY_SERVER_VERSION_CODE, 0);
 //    }
 //
-//    public static void saveCompaignTrackingUrl(Context context,String url) {
-//        try
-//        {
-//            SharedPreferences sPreferences=context.getSharedPreferences(SHARED_PREF_NAME,0);
-//            SharedPreferences.Editor editor=sPreferences.edit();
-//            editor.putString(KEY_COMPAIGN_TRACKING_URL,url);
-//            editor.commit();
-//        }catch (Exception e)
-//        {
-//            e.printStackTrace();
-//        }
-//    }
-//
-//    public static String getCompaignTrackingUrl() {
-//        SharedPreferences sPreferences = Utils.getApplicationContext().getSharedPreferences(SHARED_PREF_NAME, 0);
-//        return sPreferences.getString(KEY_COMPAIGN_TRACKING_URL, "");
-//    }
+    public static void saveCompaignTrackingUrl(Context context,String url) {
+        try
+        {
+            SharedPreferences sPreferences=context.getSharedPreferences(SHARED_PREF_NAME,0);
+            SharedPreferences.Editor editor=sPreferences.edit();
+            editor.putString(KEY_COMPAIGN_TRACKING_URL,url);
+            editor.commit();
+        }catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+    }
+
+    public static String getCompaignTrackingUrl() {
+        SharedPreferences sPreferences = Utils.getApplicationContext().getSharedPreferences(SHARED_PREF_NAME, 0);
+        return sPreferences.getString(KEY_COMPAIGN_TRACKING_URL, "");
+    }
+
+    public static void saveMyCampaignStatus(int otp_sent_success) {
+        try {
+            SharedPreferences sPreferences = Utils.getApplicationContext().getSharedPreferences(
+                    SHARED_PREF_NAME, 0);
+            SharedPreferences.Editor editor = sPreferences.edit();
+            editor.putInt(KEY_IS_CAMPAIGN, otp_sent_success);
+            editor.commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
 //
 //    public static void saveHashTagList(ArrayList<String> listHashTag)
 //    {
