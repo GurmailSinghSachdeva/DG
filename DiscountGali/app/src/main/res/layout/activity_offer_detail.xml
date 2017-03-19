@@ -91,7 +91,7 @@
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="12/23/2017 Mon"
+                                    android:text=""
                                     android:id="@+id/tv_validity"
                                     android:textColor="@color/app_black"
                                     android:layout_marginLeft="20dp"
@@ -142,7 +142,7 @@
                     android:id="@+id/iv_close"
                     android:padding="@dimen/size_20dp"
                     android:layout_alignParentRight="true"
-                    android:src="@drawable/write_a_roast_cross_icon"
+                    android:src="@drawable/close"
                     android:layout_margin="5dp"/>
                 <TextView
                     android:layout_width="wrap_content"

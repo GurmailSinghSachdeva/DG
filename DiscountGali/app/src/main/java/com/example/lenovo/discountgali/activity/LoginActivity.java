@@ -1,9 +1,12 @@
 package com.example.lenovo.discountgali.activity;
 
+import android.Manifest;
 import android.app.ProgressDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.telephony.SmsMessage;
@@ -52,6 +55,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
 
         initUi();
         setListener();
+        checkSmsPermission();
 
     }
     private void initUi() {
@@ -82,6 +86,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         tv_skip = (TextView) findViewById(R.id.tv_skip);
         tv_submit = (TextView) findViewById(R.id.tv_submit);
 
+        et_phone_number.requestFocus();
 
         spannablePath = getString(R.string.tc_and_privacy);
                     spannableContent = Utils.getSpanString(spannablePath, roots, hashUserClickListener);
@@ -159,7 +164,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                 if(view_upper_otp.getVisibility() == View.VISIBLE){
 
                     if(et_otp!=null && !TextUtils.isEmpty(et_otp.getText()) &&
-                            et_otp.getText().toString().trim().length() > 4){
+                            et_otp.getText().toString().trim().length() > 0){
                         verificationApiCall(et_otp.getText().toString().trim());
                     }
                     else {
@@ -177,7 +182,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                 }
                 break;
             case R.id.tv_resend:
-                DialogUtils.showAlert(LoginActivity.this, getString(R.string.send_another_code), runnable);
+                DialogUtils.showAlertOk(LoginActivity.this, getString(R.string.send_another_code), runnable);
                 break;
             case R.id.iv_edit:
                 et_otp.setText("");
@@ -186,9 +191,9 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
 
                 break;
             case R.id.et_otp:
-            case R.id.et_phone_number:
-                Utils.hidKeyBoard(this);
-                break;
+//            case R.id.et_phone_number:
+//                Utils.hidKeyBoard(this);
+//                break;
             case R.id.tv_skip:
                 SharedPreference.saveSkipStatus(1);
                 startActivity(new Intent(LoginActivity.this, HomeActivity.class));
@@ -401,5 +406,27 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
             }
         }
     };
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+//        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        switch (requestCode) {
+            case Constants.REQUEST_FOR_SMS_PERMISIION:
+                if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                } else {
+                }
+                break;
+        }
+    }
+
+    private void checkSmsPermission(){
+        //Check External storage permission in Android 6
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M ) {
+            if (checkSelfPermission(Manifest.permission.READ_SMS) != PackageManager.PERMISSION_GRANTED) {
+                requestPermissions(new String[]{Manifest.permission.READ_SMS}, Constants.REQUEST_FOR_SMS_PERMISIION);
+            }
+        }
+
+    }
 
 }

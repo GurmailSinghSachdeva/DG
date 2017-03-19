@@ -28,7 +28,6 @@
                 android:id="@+id/iv_badge"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_person_add_black_24dp"
                 />
             <TextView
                 android:id="@+id/text_home_tab"

@@ -22,6 +22,35 @@ public class DialogUtils {
     public static void showAlert(Context context, String message) {
         showAlert(context, message, null);
     }
+    public static void showAlertOk(Context context, String message,
+                                 final Runnable handler) {
+        if (context != null) {
+            AlertDialog.Builder dialog = new AlertDialog.Builder(context);
+            dialog.setTitle(context.getString(R.string.app_name));
+            dialog.setMessage(message);
+            dialog.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    if (handler != null) {
+                        handler.run();
+                    }
+                }
+            });
+
+            dialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
+
+                @Override
+                public void onCancel(DialogInterface arg0) {
+                    if (handler != null) {
+//                        handler.run();
+                    }
+
+                }
+            });
+            dialog.show();
+        }
+    }
 
     public static void showAlert(Context context, String message,
                                  final Runnable handler) {

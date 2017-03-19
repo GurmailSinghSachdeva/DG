@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
     android:background="@color/white"
     android:layout_height="match_parent">
-
     <include layout="@layout/toolbar_layout_inside"/>
 
     <LinearLayout
@@ -13,8 +13,8 @@
         <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_weight="1"
+            android:layout_margin="@dimen/size_5dp"
             android:layout_gravity="center"
-            android:gravity="center"
             android:layout_height="0dp">
             <include layout="@layout/upper_login_layout"
                 android:id="@+id/view_upper_phone"
@@ -28,16 +28,23 @@
                 android:layout_width="match_parent"/>
         </RelativeLayout>
 
-        <include layout="@layout/layout_submit_login"
+        <RelativeLayout
+            android:layout_width="wrap_content"
             android:layout_height="0dp"
-            android:layout_width="match_parent"
+            android:gravity="bottom"
+            android:layout_weight="0.3">
+            <include layout="@layout/layout_submit_login"
+                android:layout_height="wrap_content"
+                android:gravity="bottom"
+                android:layout_width="match_parent"
+                />
+            <include layout="@layout/keypad_login"
+                android:layout_height="0dp"
+                android:visibility="gone"
 
-            android:layout_weight="1"/>
-        <include layout="@layout/keypad_login"
-            android:layout_height="0dp"
-            android:visibility="gone"
-            android:layout_weight="1.6"
-            android:layout_width="match_parent"/>
+                android:layout_width="match_parent"/>
+
+        </RelativeLayout>
 
     </LinearLayout>
 

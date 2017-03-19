@@ -66,15 +66,22 @@
                 android:text="@string/have_a_ref_code"/>
 
             <EditText
-                android:layout_width="wrap_content"
+                android:layout_width="100dp"
                 android:textSize="20sp"
                 android:padding="@dimen/size_10dp"
-                android:background="@drawable/border_black"
+                android:background="@drawable/border_edittext_phone"
                 android:textColor="@color/dark_gray"
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:id="@+id/et_ref"
                 android:hint="@string/default_ref_code"
+                />
+
+            <View
+                android:layout_width="100dp"
+                android:layout_height="1dp"
+                android:layout_gravity="center"
+                android:background="@color/app_black"
                 />
 
         </LinearLayout>

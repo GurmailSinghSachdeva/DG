@@ -46,7 +46,7 @@
             android:paddingTop="8dp"
             android:paddingBottom="8dp"
             android:paddingRight="8dp"
-            android:src="@drawable/write_a_roast_cross_icon" />
+            android:src="@drawable/close" />
 
     </LinearLayout>
 

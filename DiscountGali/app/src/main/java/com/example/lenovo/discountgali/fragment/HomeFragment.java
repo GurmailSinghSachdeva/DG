@@ -1,36 +1,26 @@
 package com.example.lenovo.discountgali.fragment;
 
 import android.app.ProgressDialog;
-import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
-import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
-import android.support.v4.view.ViewPager;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.example.lenovo.discountgali.R;
-import com.example.lenovo.discountgali.activity.ChangePasswordActivity;
 import com.example.lenovo.discountgali.activity.HomeActivity;
-import com.example.lenovo.discountgali.activity.OfferDetailActivity;
 import com.example.lenovo.discountgali.adapter.HomeAdapter;
 import com.example.lenovo.discountgali.model.ServerResponse;
 import com.example.lenovo.discountgali.model.TopOffers;
 import com.example.lenovo.discountgali.network.Code;
 import com.example.lenovo.discountgali.network.HttpRequestHandler;
 import com.example.lenovo.discountgali.network.api.ApiCall;
-import com.example.lenovo.discountgali.network.apicall.GetOffersOnlineStoreWise;
 import com.example.lenovo.discountgali.network.apicall.GetRecentMessageApiCall;
-import com.example.lenovo.discountgali.utility.AlertUtils;
 import com.example.lenovo.discountgali.utility.Syso;
 import com.example.lenovo.discountgali.utility.Utils;
 import com.example.lenovo.discountgali.utils.DialogUtils;

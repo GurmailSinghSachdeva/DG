@@ -2,14 +2,17 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:gravity="center"
-    android:layout_height="match_parent">
+    android:layout_gravity="bottom"
+    android:layout_height="wrap_content">
     <TextView
         android:id="@+id/tv_submit"
-        android:layout_width="wrap_content"
+        android:layout_width="100dp"
         android:layout_height="wrap_content"
-        android:background="@drawable/login_button_selector"
+        android:background="@drawable/submit_button_selector"
         android:enabled="true"
         android:padding="10dp"
+        android:gravity="center"
+        android:layout_margin="@dimen/size_10dp"
         android:text="@string/btn_submit"
         android:textAllCaps="true"
         android:textColor="@color/button_text_selector"
@@ -20,12 +23,14 @@
         android:textAppearance="@android:style/TextAppearance.DeviceDefault.Large"
         android:layout_height="wrap_content"
         android:textColor="@color/dark_gray"
+        android:visibility="gone"
         android:layout_marginTop="@dimen/size_15dp"
         android:text="@string/tv_or" />
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:padding="@dimen/size_15dp"
+        android:visibility="gone"
         android:id="@+id/tv_skip"
         android:textColor="@color/app_orange"
         android:textAppearance="@android:style/TextAppearance.DeviceDefault.Medium"
@@ -34,8 +39,9 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:padding="@dimen/size_15dp"
+        android:padding="@dimen/size_10dp"
         android:id="@+id/tv_span"
+        android:textSize="@dimen/size_Sp_tc_privacy"
         android:textColor="@color/app_black"
         android:text="@string/tc_and_privacy" />
 
