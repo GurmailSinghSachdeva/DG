@@ -18,7 +18,7 @@ import com.example.lenovo.discountgali.utils.SharedPreference;
 
 public class SplashActivity extends AppCompatActivity {
 
-    private static int SPLASH_TIME_OUT = 1000; /**< Splash screen timer*/
+    private static int SPLASH_TIME_OUT = 3000; /**< Splash screen timer*/
     private ImageView ivLogo;
 
     @Override

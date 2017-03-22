@@ -6,6 +6,7 @@ import com.example.lenovo.discountgali.model.ServerResponse;
 import com.example.lenovo.discountgali.network.Code;
 import com.example.lenovo.discountgali.network.ServerRequests;
 import com.example.lenovo.discountgali.utility.Syso;
+import com.example.lenovo.discountgali.utility.Utils;
 import com.example.lenovo.discountgali.utils.Constants;
 import com.example.lenovo.discountgali.utils.JSONParsingUtils;
 
@@ -145,12 +146,24 @@ public class LoginApiCall extends BaseApiCall{
             Syso.print("=========APICALL===== LOGin " + requestBody);
             return requestBody;
         }else {
+//            String requestBody = "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n" +
+//                    "<soap12:Envelope xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:soap12=\"http://www.w3.org/2003/05/soap-envelope\">\n" +
+//                    "  <soap12:Body>\n" +
+//                    "    <MobileLogin xmlns=\"http://DiscountGali.com/\">\n" +
+//                    "      <mobileNo>" + mobile_no + "</mobileNo>\n" +
+//                    "      <referenceNo>" + ref_no + "</referenceNo>\n" +
+//                    "    </MobileLogin>\n" +
+//                    "  </soap12:Body>\n" +
+//                    "</soap12:Envelope>";
+
+
             String requestBody = "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n" +
                     "<soap12:Envelope xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:soap12=\"http://www.w3.org/2003/05/soap-envelope\">\n" +
                     "  <soap12:Body>\n" +
                     "    <MobileLogin xmlns=\"http://DiscountGali.com/\">\n" +
                     "      <mobileNo>" + mobile_no + "</mobileNo>\n" +
                     "      <referenceNo>" + ref_no + "</referenceNo>\n" +
+//                    "      <deviceId>" + Utils.getDeviceID() + "</deviceId>\n" +
                     "    </MobileLogin>\n" +
                     "  </soap12:Body>\n" +
                     "</soap12:Envelope>";

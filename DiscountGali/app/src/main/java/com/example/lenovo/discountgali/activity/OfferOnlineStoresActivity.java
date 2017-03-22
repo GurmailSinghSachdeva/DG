@@ -30,7 +30,6 @@ import com.example.lenovo.discountgali.utils.EndlessRecyclerOnScrollListener;
 
 import java.util.ArrayList;
 
-import static com.example.lenovo.discountgali.R.id.view;
 
 public class OfferOnlineStoresActivity extends BaseActivity implements SwipeRefreshLayout.OnRefreshListener {
 

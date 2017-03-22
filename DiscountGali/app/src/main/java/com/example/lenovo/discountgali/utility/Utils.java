@@ -1019,14 +1019,6 @@ public static void showSoftKeyboard(Activity context) {
         }
     }
 
-    public static void showDealUrlActivity(Activity context, String coupon, String url) {
-        if (context != null) {
-            Intent intent = new Intent(context, DealUrlActivity.class);
-            intent.putExtra(Constants.REDIRECT_URL, url);
-            intent.putExtra(Constants.COUPON_CODE, coupon);
-            context.startActivity(intent);
-        }
-    }
 
     public static void openUrl(Context context, String url) {
         if (context != null && url != null) {

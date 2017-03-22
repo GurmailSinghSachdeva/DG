@@ -190,7 +190,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                 view_upper_phone.setVisibility(View.VISIBLE);
 
                 break;
-            case R.id.et_otp:
+//            case R.id.et_otp:
 //            case R.id.et_phone_number:
 //                Utils.hidKeyBoard(this);
 //                break;
