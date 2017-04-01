@@ -1,18 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical">
+    >
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:id="@+id/toolBarCon"
+        android:layout_height="wrap_content">
+        <include layout="@layout/toolbar_layout_inside"
+            />
+    </RelativeLayout>
 
-    <include layout="@layout/toolbar_layout_inside"/>
 
-    <include layout="@layout/progressbar_layout"
-        android:id="@+id/progress_bar_container"/>
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_below="@+id/toolBarCon"
+        android:id="@+id/progress_bar_container_temp"
+        android:background="@color/white"
+        android:layout_height="wrap_content">
+        <include layout="@layout/progressbar_layout"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:id="@+id/progress_bar_container"/>
+
+    </RelativeLayout>
     <WebView
         android:id="@+id/web_view"
+        android:layout_below="@+id/progress_bar_container_temp"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="fill_parent"
+        />
 
     <!--<TextView
         android:layout_width="wrap_content"
@@ -21,4 +38,4 @@
         android:padding="@dimen/activity_horizontal_margin"
         android:text="simply dummy text simply dummy text simply dummy text simply dummy text simply dummy text simply dummy text simply dummy text simply dummy text simply dummy text simply dummy text simply dummy text simply dummy text simply dummy text simply dummy text simply dummy text simply dummy text"
         android:textColor="@color/black" />-->
-</LinearLayout>
+</RelativeLayout>

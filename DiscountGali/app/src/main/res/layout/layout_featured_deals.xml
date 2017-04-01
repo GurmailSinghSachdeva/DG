@@ -18,7 +18,7 @@
         android:orientation="vertical"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true">
-        <com.example.lenovo.discountgali.widget.pageindicator.CirclePageIndicator
+        <com.gurmail.singh.discountgali.widget.pageindicator.CirclePageIndicator
             android:id="@+id/vp_indicator"
             android:layout_width="150dip"
             android:layout_height="wrap_content"

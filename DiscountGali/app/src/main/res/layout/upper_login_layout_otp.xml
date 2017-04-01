@@ -59,6 +59,8 @@
                     android:id="@+id/et_otp"
                     android:background="@drawable/border_edittext_phone"
                     android:gravity="center"
+                    android:inputType="phone"
+                    android:digits="0123456789"
                     />
 
                 <View

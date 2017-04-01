@@ -256,6 +256,7 @@
     <string name="tv_or">or</string>
     <string name="tv_skip_sign_in">Skip to Enter</string>
     <string name="tc_and_privacy"><![CDATA[By logging in you agree to our T&C and Privacy Policy]]></string>
+    <string name="alert_deal_not_available_expired">Deal has expired</string>
 
 
     <string-array name="categories">

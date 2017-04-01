@@ -5,11 +5,11 @@ android {
     buildToolsVersion "23.0.2"
     useLibrary 'org.apache.http.legacy'
     defaultConfig {
-        applicationId "com.example.lenovo.discountgali"
+        applicationId "com.gurmail.singh.discountgali"
         minSdkVersion 15
         targetSdkVersion 22
         versionCode 1
-        versionName "1.6"
+        versionName "1.8"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     signingConfigs {
