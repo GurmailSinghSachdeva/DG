@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.gurmail.singh.discountgali.widget.pageindicator.SquareLayout android:layout_height="wrap_content"
+<com.discount.coupons.discountgali.widget.pageindicator.SquareLayout android:layout_height="wrap_content"
     android:layout_width="match_parent"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
@@ -50,4 +50,4 @@
         </RelativeLayout>
     </android.support.v7.widget.CardView>
 </LinearLayout>
-</com.gurmail.singh.discountgali.widget.pageindicator.SquareLayout>
+</com.discount.coupons.discountgali.widget.pageindicator.SquareLayout>

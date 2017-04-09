@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.gurmail.singh.discountgali">
+    package="com.discount.coupons.discountgali">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -10,7 +10,7 @@
 
     <!--android:hardwareAccelerated="true"-->
     <application
-        android:name="com.gurmail.singh.discountgali.DiscountGaliApplication"
+        android:name="com.discount.coupons.discountgali.DiscountGaliApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic"
         android:label="@string/app_name"
@@ -38,7 +38,7 @@
             </intent-filter>
         </receiver>
         <receiver
-            android:name="com.gurmail.singh.discountgali.activity.HomeActivity$CampaignTrackingReceiverCustom"
+            android:name="com.discount.coupons.discountgali.activity.HomeActivity$CampaignTrackingReceiverCustom"
             android:enabled="true"
             android:exported="true">
             <intent-filter>
@@ -52,7 +52,7 @@
             android:exported="false" />
 
         <activity
-            android:name="com.gurmail.singh.discountgali.activity.SplashActivity"
+            android:name="com.discount.coupons.discountgali.activity.SplashActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -61,41 +61,41 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.gurmail.singh.discountgali.activity.HomeActivity"
+            android:name="com.discount.coupons.discountgali.activity.HomeActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
         <activity
-            android:name="com.gurmail.singh.discountgali.activity.OfferDetailActivity"
+            android:name="com.discount.coupons.discountgali.activity.OfferDetailActivity"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Translucent"
             android:windowSoftInputMode="adjustResize" />
         <activity
-            android:name="com.gurmail.singh.discountgali.activity.OfferOnlineStoresActivity"
+            android:name="com.discount.coupons.discountgali.activity.OfferOnlineStoresActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.gurmail.singh.discountgali.activity.LocalDealsActivty"
+            android:name="com.discount.coupons.discountgali.activity.LocalDealsActivty"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.gurmail.singh.discountgali.activity.AboutUsActivity"
+            android:name="com.discount.coupons.discountgali.activity.AboutUsActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.gurmail.singh.discountgali.activity.ContactUsActivity"
+            android:name="com.discount.coupons.discountgali.activity.ContactUsActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.gurmail.singh.discountgali.activity.ContestActivity"
+            android:name="com.discount.coupons.discountgali.activity.ContestActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.gurmail.singh.discountgali.activity.HelpUsImproveActivity"
+            android:name="com.discount.coupons.discountgali.activity.HelpUsImproveActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.gurmail.singh.discountgali.activity.SearchItemActivity"
+            android:name="com.discount.coupons.discountgali.activity.SearchItemActivity"
             android:screenOrientation="portrait" />
-        <activity android:name="com.gurmail.singh.discountgali.activity.DealOfTheDayActivity"
+        <activity android:name="com.discount.coupons.discountgali.activity.DealOfTheDayActivity"
             android:screenOrientation="portrait"/>
-        <activity android:name="com.gurmail.singh.discountgali.activity.LoginActivity"
+        <activity android:name="com.discount.coupons.discountgali.activity.LoginActivity"
             android:windowSoftInputMode="stateAlwaysHidden"
             android:screenOrientation="portrait"></activity>
-        <receiver android:name="com.gurmail.singh.discountgali.activity.LoginActivity$SmsReceiver"
+        <receiver android:name="com.discount.coupons.discountgali.activity.LoginActivity$SmsReceiver"
             android:exported="true">
             <intent-filter
                 android:priority="999">
