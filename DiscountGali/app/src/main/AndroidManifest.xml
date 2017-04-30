@@ -38,10 +38,11 @@
             </intent-filter>
         </receiver>
         <receiver
-            android:name="com.discount.coupons.discountgali.activity.HomeActivity$CampaignTrackingReceiverCustom"
+            android:name=".MyRefReceiver"
             android:enabled="true"
-            android:exported="true">
-            <intent-filter>
+            android:exported="true"
+            >
+            <intent-filter android:priority="999">
                 <action android:name="com.android.vending.INSTALL_REFERRER" />
             </intent-filter>
         </receiver>

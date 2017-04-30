@@ -1,9 +1,12 @@
 package com.discount.coupons.discountgali.network.apicall;
 
+import android.util.Base64;
+
 import com.discount.coupons.discountgali.model.BaseModel;
 import com.discount.coupons.discountgali.network.Code;
 import com.discount.coupons.discountgali.network.ServerRequests;
 import com.discount.coupons.discountgali.utility.Syso;
+import com.discount.coupons.discountgali.utility.Utils;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -121,7 +124,7 @@ public class InsertCampaignUrlApiCAll extends BaseApiCall{
                 "  <soap12:Body>\n" +
                 "    <InsertCampaignRecords xmlns=\"http://DiscountGali.com/\">\n" +
                 "      <emiNo>" + deviceID + "</emiNo>\n" +
-                "      <Url>" + referrerString + "</Url>\n" +
+                "      <Url>" + Base64.encodeToString(referrerString.getBytes(),Base64.DEFAULT) + "</Url>\n" +
                 "    </InsertCampaignRecords>\n" +
                 "  </soap12:Body>\n" +
                 "</soap12:Envelope>";
