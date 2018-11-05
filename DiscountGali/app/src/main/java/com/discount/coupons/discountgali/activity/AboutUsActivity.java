@@ -26,6 +26,7 @@ public class AboutUsActivity extends BaseActivity {
         setContentView(R.layout.activity_about_us);
         progressConatiner = findViewById(R.id.progress_bar_container);
         progressConatiner.setVisibility(View.GONE);
+
         mToolBar = (Toolbar) findViewById(R.id.toolbar);
         setUpToolbar(R.drawable.signup_back_icon);
 

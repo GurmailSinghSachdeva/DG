@@ -26,7 +26,6 @@ public class SquareLayout extends FrameLayout {
 
 		//Log.d("SquareLayout", "SquareLayout size= " + size + " width= " + width + " height= " + height);
 
-		super.onMeasure(MeasureSpec.makeMeasureSpec(size, MeasureSpec.EXACTLY),
-				MeasureSpec.makeMeasureSpec(size, MeasureSpec.EXACTLY));
+		super.onMeasure(MeasureSpec.makeMeasureSpec(size, MeasureSpec.EXACTLY), MeasureSpec.makeMeasureSpec(size, MeasureSpec.EXACTLY));
 	}
 }
